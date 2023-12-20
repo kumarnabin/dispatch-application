@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity BranchCircuit.
+    -->
+    <changeSet id="20231220110518-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="master_circuit_id"
+                                 baseTableName="branch_circuit"
+                                 constraintName="fk_branch_circuit__master_circuit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="master_circuit"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="branch_circuit_id"
+                                 baseTableName="rel_branch_circuit__branch"
+                                 constraintName="fk_rel_branch_circuit__branch__branch_circuit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="branch_circuit"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="branch_id"
+                                 baseTableName="rel_branch_circuit__branch"
+                                 constraintName="fk_rel_branch_circuit__branch__branch_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="branch"
+                                 />
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,30 @@
+{
+  "annotations": {
+    "changelogDate": "20231220110517"
+  },
+  "applications": ["DispatchApplication"],
+  "dto": "mapstruct",
+  "entityTableName": "master_circuit",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    }
+  ],
+  "name": "MasterCircuit",
+  "relationships": [
+    {
+      "otherEntityName": "serviceProvider",
+      "otherEntityRelationshipName": "masterCircuit",
+      "relationshipName": "serviceProvider",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

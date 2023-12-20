@@ -1,0 +1,54 @@
+application {
+    config {
+        baseName DispatchApplication
+        applicationType monolith
+        packageName com.konnect.app
+        authenticationType jwt
+        prodDatabaseType mysql
+        clientFramework react
+    }
+    entities *
+}
+
+// Define the Author entity
+entity ServiceProvider {
+    name String,
+    address String,
+}
+
+// Define the Book entity with a many-to-one relationship to Author
+entity Branch {
+    name String,
+    publicationDate Instant
+}
+
+// Define the Author entity
+entity MasterCircuit {
+    name String,
+    address String,
+}
+
+// Define the Book entity with a many-to-one relationship to Author
+entity BranchCircuit {
+    title String,
+    publicationDate Instant
+}
+
+
+
+// Create a many-to-one relationship from Book to Author
+relationship ManyToOne {
+    Branch{serviceProvider} to ServiceProvider
+    BranchCircuit{masterCircuit} to MasterCircuit
+}
+relationship ManyToMany {
+    MasterCircuit to ServiceProvider
+    BranchCircuit to Branch
+}
+
+// Specify the DTO (Data Transfer Object) for the Book entity
+dto * with mapstruct
+
+// Specify the service for the ServiceProvider entity
+service ServiceProvider, Branch, MasterCircuit, BranchCircuit with serviceClass
+

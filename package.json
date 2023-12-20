@@ -1,8 +1,8 @@
 {
-  "name": "jhipster-sample-application",
+  "name": "dispatch-application",
   "version": "0.0.1-SNAPSHOT",
   "private": true,
-  "description": "Description for Jhipster Sample Application",
+  "description": "Description for Dispatch Application",
   "license": "UNLICENSED",
   "scripts": {
     "app:start": "./mvnw",

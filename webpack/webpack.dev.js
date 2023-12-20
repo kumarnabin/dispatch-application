@@ -99,7 +99,7 @@ module.exports = async options =>
         },
       ),
       new WebpackNotifierPlugin({
-        title: 'Jhipster Sample Application',
+        title: 'Dispatch Application',
         contentImage: path.join(__dirname, 'logo-jhipster.png'),
       }),
     ].filter(Boolean),

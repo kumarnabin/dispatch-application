@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.konnect.app</groupId>
-    <artifactId>jhipster-sample-application</artifactId>
+    <artifactId>dispatch-application</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>Jhipster Sample Application</name>
-    <description>Description for Jhipster Sample Application</description>
+    <name>Dispatch Application</name>
+    <description>Description for Dispatch Application</description>
 
     <properties>
         <!--
@@ -388,7 +388,7 @@
                             </platforms>
                         </from>
                         <to>
-                            <image>jhipstersampleapplication:latest</image>
+                            <image>dispatchapplication:latest</image>
                         </to>
                         <container>
                             <entrypoint>
@@ -814,7 +814,7 @@
                 <!-- default Spring profiles -->
                 <spring.profiles.active>dev${profile.tls}${profile.no-liquibase}</spring.profiles.active>
                 <profile.test>testdev</profile.test>
-                <liquibase-plugin.url>jdbc:mysql://localhost:3306/jhipsterSampleApplication</liquibase-plugin.url>
+                <liquibase-plugin.url>jdbc:mysql://localhost:3306/DispatchApplication</liquibase-plugin.url>
                 <liquibase-plugin.username>root</liquibase-plugin.username>
                 <liquibase-plugin.password/>
             </properties>
@@ -922,7 +922,7 @@
                 <!-- default Spring profiles -->
                 <spring.profiles.active>prod${profile.api-docs}${profile.tls}${profile.e2e}${profile.no-liquibase}</spring.profiles.active>
                 <profile.test>testprod</profile.test>
-                <liquibase-plugin.url>jdbc:mysql://localhost:3306/jhipsterSampleApplication</liquibase-plugin.url>
+                <liquibase-plugin.url>jdbc:mysql://localhost:3306/DispatchApplication</liquibase-plugin.url>
                 <liquibase-plugin.username>root</liquibase-plugin.username>
                 <liquibase-plugin.password/>
             </properties>

@@ -32,7 +32,7 @@ public class DispatchApplicationApp {
     }
 
     /**
-     * Initializes jhipsterSampleApplication.
+     * Initializes DispatchApplication.
      * <p>
      * Spring profiles can be configured with a program argument --spring.profiles.active=your-active-profile
      * <p>

@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20231220110516"
+  },
+  "applications": ["DispatchApplication"],
+  "dto": "mapstruct",
+  "entityTableName": "branch",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "publicationDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "Branch",
+  "relationships": [
+    {
+      "otherEntityName": "serviceProvider",
+      "relationshipName": "serviceProvider",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "branchCircuit",
+      "otherEntityRelationshipName": "branch",
+      "relationshipName": "branchCircuit",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}
