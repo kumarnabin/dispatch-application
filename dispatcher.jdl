@@ -34,12 +34,72 @@ entity BranchCircuit {
     publicationDate Instant
 }
 
+entity ExcelData {
+    column1 String,
+    column2 String,
+    column3 String,
+    column4 String,
+    column5 String,
+    column6 String,
+    column7 String,
+    column8 String,
+    column9 String,
+    column10 String,
+    column11 String,
+    column12 String,
+    column13 String,
+    column14 String,
+    column15 String,
+    column16 String,
+    column17 String,
+    column18 String,
+    column19 String,
+    column20 String,
+    column21 String,
+    column22 String,
+    column23 String,
+    column24 String,
+    column25 String,
+    column26 String,
+    column27 String,
+
+    publicationDate Instant
+}
+
+entity Team {
+    teamNo String,
+    supervisor String,
+    supervisorPhoneNo String,
+    teamLeader String,
+    teamLeaderPhone String,
+    publicationDate Instant
+}
+entity Customer {
+    voice String,
+    data String,
+    iptv String,
+    customerName String,
+    contactNo String,
+    oltPort String,
+    regDate String,
+    fapPort String,
+    cpeSn String,
+    cpeRx String,
+    complain String,
+    remark String,
+    status String,
+    location String,
+    printDate LocalDate,
+
+    publicationDate Instant
+}
 
 
 // Create a many-to-one relationship from Book to Author
 relationship ManyToOne {
     Branch{serviceProvider} to ServiceProvider
     BranchCircuit{masterCircuit} to MasterCircuit
+    Customer{team} to Team
 }
 relationship ManyToMany {
     MasterCircuit to ServiceProvider

@@ -1,0 +1,85 @@
+{
+  "annotations": {
+    "changelogDate": "20231221090250"
+  },
+  "applications": ["DispatchApplication"],
+  "dto": "mapstruct",
+  "entityTableName": "customer",
+  "fields": [
+    {
+      "fieldName": "voice",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "data",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "iptv",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "customerName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contactNo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "oltPort",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "regDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fapPort",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "cpeSn",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "cpeRx",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "complain",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "remark",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "location",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "printDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "publicationDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "Customer",
+  "relationships": [
+    {
+      "otherEntityName": "team",
+      "relationshipName": "team",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

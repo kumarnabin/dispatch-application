@@ -1,0 +1,38 @@
+{
+  "annotations": {
+    "changelogDate": "20231221090249"
+  },
+  "applications": ["DispatchApplication"],
+  "dto": "mapstruct",
+  "entityTableName": "team",
+  "fields": [
+    {
+      "fieldName": "teamNo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "supervisor",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "supervisorPhoneNo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "teamLeader",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "teamLeaderPhone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "publicationDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "Team",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

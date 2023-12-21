@@ -15,10 +15,14 @@
     <include file="config/liquibase/changelog/20231220110516_added_entity_Branch.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20231220110517_added_entity_MasterCircuit.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20231220110518_added_entity_BranchCircuit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231221050300_added_entity_ExcelData.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231221090249_added_entity_Team.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231221090250_added_entity_Customer.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20231220110516_added_entity_constraints_Branch.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20231220110517_added_entity_constraints_MasterCircuit.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20231220110518_added_entity_constraints_BranchCircuit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231221090250_added_entity_constraints_Customer.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>
