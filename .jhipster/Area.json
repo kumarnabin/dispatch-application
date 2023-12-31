@@ -1,0 +1,27 @@
+{
+  "annotations": {
+    "changelogDate": "20231229023936"
+  },
+  "applications": ["DispatchApplication"],
+  "dto": "mapstruct",
+  "entityTableName": "area",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "detail",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "publicationDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "Area",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

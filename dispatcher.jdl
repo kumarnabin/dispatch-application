@@ -74,7 +74,15 @@ entity Team {
     teamLeaderPhone String,
     publicationDate Instant
 }
-entity Customer {
+
+entity Area {
+    code String unique,
+    detail String,
+    publicationDate Instant
+
+}
+
+entity Dispatch {
     voice String,
     data String,
     iptv String,
@@ -90,7 +98,12 @@ entity Customer {
     status String,
     location String,
     printDate LocalDate,
+    publicationDate Instant
+}
 
+entity Employee {
+    name String,
+    detail String,
     publicationDate Instant
 }
 
@@ -99,11 +112,13 @@ entity Customer {
 relationship ManyToOne {
     Branch{serviceProvider} to ServiceProvider
     BranchCircuit{masterCircuit} to MasterCircuit
-    Customer{team} to Team
+    Dispatch{team} to Team
+    Employee{user} to User with builtInEntity
 }
 relationship ManyToMany {
     MasterCircuit to ServiceProvider
     BranchCircuit to Branch
+    Employee to Area
 }
 
 // Specify the DTO (Data Transfer Object) for the Book entity

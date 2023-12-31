@@ -5,6 +5,9 @@ import branchCircuit from 'app/entities/branch-circuit/branch-circuit.reducer';
 import excelData from 'app/entities/excel-data/excel-data.reducer';
 import team from 'app/entities/team/team.reducer';
 import customer from 'app/entities/customer/customer.reducer';
+import area from 'app/entities/area/area.reducer';
+import dispatch from 'app/entities/dispatch/dispatch.reducer';
+import employee from 'app/entities/employee/employee.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 const entitiesReducers = {
@@ -15,6 +18,9 @@ const entitiesReducers = {
   excelData,
   team,
   customer,
+  area,
+  dispatch,
+  employee,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
 };
 

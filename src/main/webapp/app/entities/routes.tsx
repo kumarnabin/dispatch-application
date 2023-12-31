@@ -10,6 +10,9 @@ import BranchCircuit from './branch-circuit';
 import ExcelData from './excel-data';
 import Team from './team';
 import Customer from './customer';
+import Area from './area';
+import Dispatch from './dispatch';
+import Employee from './employee';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default () => {
@@ -24,6 +27,9 @@ export default () => {
         <Route path="excel-data/*" element={<ExcelData />} />
         <Route path="team/*" element={<Team />} />
         <Route path="customer/*" element={<Customer />} />
+        <Route path="area/*" element={<Area />} />
+        <Route path="dispatch/*" element={<Dispatch />} />
+        <Route path="employee/*" element={<Employee />} />
         {/* jhipster-needle-add-route-path - JHipster will add routes here */}
       </ErrorBoundaryRoutes>
     </div>
