@@ -1,11 +1,33 @@
 application {
     config {
-        baseName DispatchApplication
         applicationType monolith
-        packageName com.konnect.app
         authenticationType jwt
-        prodDatabaseType mysql
+        baseName DispatchApplication
+        blueprints []
+        buildTool maven
+        cacheProvider no
         clientFramework react
+        clientPackageManager npm
+        creationTimestamp 1703063485871
+        databaseType sql
+        devDatabaseType mysql
+        enableHibernateCache false
+        enableSwaggerCodegen false
+        enableTranslation false
+        jhiPrefix jhi
+        jhipsterVersion "8.1.0"
+        jwtSecretKey "NzI3NDZiOGMzYTgwODY0NWQyYzhhZmYwNzUzNWEzMTI0ZGVkY2M3MDU2Y2EwNDNlMzY0OGVmODI1YzI5NTAzZDhhYTAyZjUyOGY5ZjM1MWM2YTk4NzRhZjE1YTMxYWEwYjU3NmZjOWM0NDhmY2M2MjJjN2E1Njg3NGMzZTlkMDY="
+        languages [en]
+        messageBroker false
+        nativeLanguage en
+        packageName com.konnect.app
+        prodDatabaseType mysql
+        searchEngine false
+        serverPort 8080
+        serviceDiscoveryType false
+        testFrameworks []
+        websocket false
+        withAdminUi true
     }
     entities *
 }
