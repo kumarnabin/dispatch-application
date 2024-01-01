@@ -10,6 +10,8 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IUser } from 'app/shared/model/user.model';
 import { getUsers } from 'app/modules/administration/user-management/user-management.reducer';
+import { IArea } from 'app/shared/model/area.model';
+import { getEntities as getAreas } from 'app/entities/area/area.reducer';
 import { IEmployee } from 'app/shared/model/employee.model';
 import { getEntity, updateEntity, createEntity, reset } from './employee.reducer';
 
@@ -22,6 +24,7 @@ export const EmployeeUpdate = () => {
   const isNew = id === undefined;
 
   const users = useAppSelector(state => state.userManagement.users);
+  const areas = useAppSelector(state => state.area.entities);
   const employeeEntity = useAppSelector(state => state.employee.entity);
   const loading = useAppSelector(state => state.employee.loading);
   const updating = useAppSelector(state => state.employee.updating);
@@ -39,6 +42,7 @@ export const EmployeeUpdate = () => {
     }
 
     dispatch(getUsers({}));
+    dispatch(getAreas({}));
   }, []);
 
   useEffect(() => {

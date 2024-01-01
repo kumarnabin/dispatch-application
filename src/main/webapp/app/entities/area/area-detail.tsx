@@ -42,6 +42,17 @@ export const AreaDetail = () => {
           <dd>
             {areaEntity.publicationDate ? <TextFormat value={areaEntity.publicationDate} type="date" format={APP_DATE_FORMAT} /> : null}
           </dd>
+          <dt>Employee</dt>
+          <dd>
+            {areaEntity.employees
+              ? areaEntity.employees.map((val, i) => (
+                  <span key={val.id}>
+                    <a>{val.id}</a>
+                    {areaEntity.employees && i === areaEntity.employees.length - 1 ? '' : ', '}
+                  </span>
+                ))
+              : null}
+          </dd>
         </dl>
         <Button tag={Link} to="/area" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

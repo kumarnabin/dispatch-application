@@ -140,7 +140,7 @@ relationship ManyToOne {
 relationship ManyToMany {
     MasterCircuit to ServiceProvider
     BranchCircuit to Branch
-    Employee to Area
+    Area to Employee
 }
 
 // Specify the DTO (Data Transfer Object) for the Book entity

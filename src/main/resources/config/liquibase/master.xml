@@ -26,6 +26,7 @@
     <include file="config/liquibase/changelog/20231220110517_added_entity_constraints_MasterCircuit.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20231220110518_added_entity_constraints_BranchCircuit.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20231221090250_added_entity_constraints_Customer.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231229023936_added_entity_constraints_Area.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20231229023937_added_entity_constraints_Dispatch.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20231229023938_added_entity_constraints_Employee.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->

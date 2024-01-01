@@ -95,6 +95,9 @@ export const Area = () => {
                 <th className="hand" onClick={sort('publicationDate')}>
                   Publication Date <FontAwesomeIcon icon={getSortIconByFieldName('publicationDate')} />
                 </th>
+                <th>
+                  Employee <FontAwesomeIcon icon="sort" />
+                </th>
                 <th />
               </tr>
             </thead>
@@ -109,6 +112,16 @@ export const Area = () => {
                   <td>{area.code}</td>
                   <td>{area.detail}</td>
                   <td>{area.publicationDate ? <TextFormat type="date" value={area.publicationDate} format={APP_DATE_FORMAT} /> : null}</td>
+                  <td>
+                    {area.employees
+                      ? area.employees.map((val, j) => (
+                          <span key={j}>
+                            <Link to={`/employee/${val.id}`}>{val.id}</Link>
+                            {j === area.employees.length - 1 ? '' : ', '}
+                          </span>
+                        ))
+                      : null}
+                  </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/area/${area.id}`} color="info" size="sm" data-cy="entityDetailsButton">

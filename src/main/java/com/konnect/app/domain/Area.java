@@ -1,9 +1,12 @@
 package com.konnect.app.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Area.
@@ -28,6 +31,15 @@ public class Area implements Serializable {
 
     @Column(name = "publication_date")
     private Instant publicationDate;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_area__employee",
+        joinColumns = @JoinColumn(name = "area_id"),
+        inverseJoinColumns = @JoinColumn(name = "employee_id")
+    )
+    @JsonIgnoreProperties(value = { "user", "areas" }, allowSetters = true)
+    private Set<Employee> employees = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -81,6 +93,29 @@ public class Area implements Serializable {
 
     public void setPublicationDate(Instant publicationDate) {
         this.publicationDate = publicationDate;
+    }
+
+    public Set<Employee> getEmployees() {
+        return this.employees;
+    }
+
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
+    }
+
+    public Area employees(Set<Employee> employees) {
+        this.setEmployees(employees);
+        return this;
+    }
+
+    public Area addEmployee(Employee employee) {
+        this.employees.add(employee);
+        return this;
+    }
+
+    public Area removeEmployee(Employee employee) {
+        this.employees.remove(employee);
+        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

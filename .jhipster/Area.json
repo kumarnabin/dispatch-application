@@ -21,7 +21,15 @@
     }
   ],
   "name": "Area",
-  "relationships": [],
+  "relationships": [
+    {
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "area",
+      "relationshipName": "employee",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
   "searchEngine": "no",
   "service": "serviceClass"
 }

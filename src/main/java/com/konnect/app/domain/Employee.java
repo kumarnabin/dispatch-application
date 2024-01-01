@@ -1,8 +1,11 @@
 package com.konnect.app.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Employee.
@@ -30,6 +33,10 @@ public class Employee implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "employees")
+    @JsonIgnoreProperties(value = { "employees" }, allowSetters = true)
+    private Set<Area> areas = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -95,6 +102,37 @@ public class Employee implements Serializable {
 
     public Employee user(User user) {
         this.setUser(user);
+        return this;
+    }
+
+    public Set<Area> getAreas() {
+        return this.areas;
+    }
+
+    public void setAreas(Set<Area> areas) {
+        if (this.areas != null) {
+            this.areas.forEach(i -> i.removeEmployee(this));
+        }
+        if (areas != null) {
+            areas.forEach(i -> i.addEmployee(this));
+        }
+        this.areas = areas;
+    }
+
+    public Employee areas(Set<Area> areas) {
+        this.setAreas(areas);
+        return this;
+    }
+
+    public Employee addArea(Area area) {
+        this.areas.add(area);
+        area.getEmployees().add(this);
+        return this;
+    }
+
+    public Employee removeArea(Area area) {
+        this.areas.remove(area);
+        area.getEmployees().remove(this);
         return this;
     }
 

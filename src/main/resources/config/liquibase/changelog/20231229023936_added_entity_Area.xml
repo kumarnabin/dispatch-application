@@ -28,6 +28,20 @@
         <dropDefaultValue tableName="area" columnName="publication_date" columnDataType="${datetimeType}"/>
     </changeSet>
 
+    <changeSet id="20231229023936-1-relations" author="jhipster">
+
+        <createTable tableName="rel_area__employee">
+            <column name="employee_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="area_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="area_id, employee_id" tableName="rel_area__employee"/>
+    </changeSet>
+
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 
     <!--

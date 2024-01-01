@@ -3,7 +3,9 @@ package com.konnect.app.service.dto;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the {@link com.konnect.app.domain.Area} entity.
@@ -18,6 +20,8 @@ public class AreaDTO implements Serializable {
     private String detail;
 
     private Instant publicationDate;
+
+    private Set<EmployeeDTO> employees = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -51,6 +55,14 @@ public class AreaDTO implements Serializable {
         this.publicationDate = publicationDate;
     }
 
+    public Set<EmployeeDTO> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<EmployeeDTO> employees) {
+        this.employees = employees;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -80,6 +92,7 @@ public class AreaDTO implements Serializable {
             ", code='" + getCode() + "'" +
             ", detail='" + getDetail() + "'" +
             ", publicationDate='" + getPublicationDate() + "'" +
+            ", employees=" + getEmployees() +
             "}";
     }
 }

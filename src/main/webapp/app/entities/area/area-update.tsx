@@ -8,6 +8,8 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
+import { IEmployee } from 'app/shared/model/employee.model';
+import { getEntities as getEmployees } from 'app/entities/employee/employee.reducer';
 import { IArea } from 'app/shared/model/area.model';
 import { getEntity, updateEntity, createEntity, reset } from './area.reducer';
 
@@ -19,6 +21,7 @@ export const AreaUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
+  const employees = useAppSelector(state => state.employee.entities);
   const areaEntity = useAppSelector(state => state.area.entity);
   const loading = useAppSelector(state => state.area.loading);
   const updating = useAppSelector(state => state.area.updating);
@@ -34,6 +37,8 @@ export const AreaUpdate = () => {
     } else {
       dispatch(getEntity(id));
     }
+
+    dispatch(getEmployees({}));
   }, []);
 
   useEffect(() => {
@@ -52,6 +57,7 @@ export const AreaUpdate = () => {
     const entity = {
       ...areaEntity,
       ...values,
+      employees: mapIdList(values.employees),
     };
 
     if (isNew) {
@@ -69,6 +75,7 @@ export const AreaUpdate = () => {
       : {
           ...areaEntity,
           publicationDate: convertDateTimeFromServer(areaEntity.publicationDate),
+          employees: areaEntity?.employees?.map(e => e.id.toString()),
         };
 
   return (
@@ -97,6 +104,16 @@ export const AreaUpdate = () => {
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
               />
+              <ValidatedField label="Employee" id="area-employee" data-cy="employee" type="select" multiple name="employees">
+                <option value="" key="0" />
+                {employees
+                  ? employees.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/area" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
