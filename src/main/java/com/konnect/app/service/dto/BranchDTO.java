@@ -1,7 +1,7 @@
 package com.konnect.app.service.dto;
 
+import com.konnect.app.domain.enumeration.Status;
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.Objects;
 
 /**
@@ -14,7 +14,9 @@ public class BranchDTO implements Serializable {
 
     private String name;
 
-    private Instant publicationDate;
+    private String code;
+
+    private Status status;
 
     private ServiceProviderDTO serviceProvider;
 
@@ -34,12 +36,20 @@ public class BranchDTO implements Serializable {
         this.name = name;
     }
 
-    public Instant getPublicationDate() {
-        return publicationDate;
+    public String getCode() {
+        return code;
     }
 
-    public void setPublicationDate(Instant publicationDate) {
-        this.publicationDate = publicationDate;
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public ServiceProviderDTO getServiceProvider() {
@@ -77,7 +87,8 @@ public class BranchDTO implements Serializable {
         return "BranchDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", publicationDate='" + getPublicationDate() + "'" +
+            ", code='" + getCode() + "'" +
+            ", status='" + getStatus() + "'" +
             ", serviceProvider=" + getServiceProvider() +
             "}";
     }

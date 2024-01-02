@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Table } from 'reactstrap';
-import { Translate, TextFormat, getSortState } from 'react-jhipster';
+import { Translate, getSortState } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSort, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
-import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { ASC, DESC, SORT } from 'app/shared/util/pagination.constants';
 import { overrideSortStateWithQueryParams } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
@@ -89,8 +88,11 @@ export const Branch = () => {
                 <th className="hand" onClick={sort('name')}>
                   Name <FontAwesomeIcon icon={getSortIconByFieldName('name')} />
                 </th>
-                <th className="hand" onClick={sort('publicationDate')}>
-                  Publication Date <FontAwesomeIcon icon={getSortIconByFieldName('publicationDate')} />
+                <th className="hand" onClick={sort('code')}>
+                  Code <FontAwesomeIcon icon={getSortIconByFieldName('code')} />
+                </th>
+                <th className="hand" onClick={sort('status')}>
+                  Status <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
                 </th>
                 <th>
                   Service Provider <FontAwesomeIcon icon="sort" />
@@ -107,9 +109,8 @@ export const Branch = () => {
                     </Button>
                   </td>
                   <td>{branch.name}</td>
-                  <td>
-                    {branch.publicationDate ? <TextFormat type="date" value={branch.publicationDate} format={APP_DATE_FORMAT} /> : null}
-                  </td>
+                  <td>{branch.code}</td>
+                  <td>{branch.status}</td>
                   <td>
                     {branch.serviceProvider ? (
                       <Link to={`/service-provider/${branch.serviceProvider.id}`}>{branch.serviceProvider.id}</Link>

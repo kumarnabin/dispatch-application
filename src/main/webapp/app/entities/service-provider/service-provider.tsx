@@ -88,8 +88,17 @@ export const ServiceProvider = () => {
                 <th className="hand" onClick={sort('name')}>
                   Name <FontAwesomeIcon icon={getSortIconByFieldName('name')} />
                 </th>
+                <th className="hand" onClick={sort('code')}>
+                  Code <FontAwesomeIcon icon={getSortIconByFieldName('code')} />
+                </th>
+                <th className="hand" onClick={sort('phone')}>
+                  Phone <FontAwesomeIcon icon={getSortIconByFieldName('phone')} />
+                </th>
                 <th className="hand" onClick={sort('address')}>
                   Address <FontAwesomeIcon icon={getSortIconByFieldName('address')} />
+                </th>
+                <th className="hand" onClick={sort('status')}>
+                  Status <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
                 </th>
                 <th />
               </tr>
@@ -103,7 +112,10 @@ export const ServiceProvider = () => {
                     </Button>
                   </td>
                   <td>{serviceProvider.name}</td>
+                  <td>{serviceProvider.code}</td>
+                  <td>{serviceProvider.phone}</td>
                   <td>{serviceProvider.address}</td>
+                  <td>{serviceProvider.status}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button

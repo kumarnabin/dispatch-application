@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Table } from 'reactstrap';
-import { Translate, TextFormat, getSortState } from 'react-jhipster';
+import { Translate, getSortState } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSort, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
-import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { ASC, DESC, SORT } from 'app/shared/util/pagination.constants';
 import { overrideSortStateWithQueryParams } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
@@ -101,9 +100,6 @@ export const Team = () => {
                 <th className="hand" onClick={sort('teamLeaderPhone')}>
                   Team Leader Phone <FontAwesomeIcon icon={getSortIconByFieldName('teamLeaderPhone')} />
                 </th>
-                <th className="hand" onClick={sort('publicationDate')}>
-                  Publication Date <FontAwesomeIcon icon={getSortIconByFieldName('publicationDate')} />
-                </th>
                 <th />
               </tr>
             </thead>
@@ -120,7 +116,6 @@ export const Team = () => {
                   <td>{team.supervisorPhoneNo}</td>
                   <td>{team.teamLeader}</td>
                   <td>{team.teamLeaderPhone}</td>
-                  <td>{team.publicationDate ? <TextFormat type="date" value={team.publicationDate} format={APP_DATE_FORMAT} /> : null}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/team/${team.id}`} color="info" size="sm" data-cy="entityDetailsButton">

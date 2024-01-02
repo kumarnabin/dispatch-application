@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import { ITeam } from 'app/shared/model/team.model';
+import { Status } from 'app/shared/model/enumerations/status.model';
 
 export interface IDispatch {
   id?: number;
@@ -15,7 +16,7 @@ export interface IDispatch {
   cpeRx?: string | null;
   complain?: string | null;
   remark?: string | null;
-  status?: string | null;
+  status?: keyof typeof Status | null;
   location?: string | null;
   printDate?: dayjs.Dayjs | null;
   publicationDate?: dayjs.Dayjs | null;

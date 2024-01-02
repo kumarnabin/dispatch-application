@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.konnect.app.IntegrationTest;
 import com.konnect.app.domain.ServiceProvider;
+import com.konnect.app.domain.enumeration.Status;
 import com.konnect.app.repository.ServiceProviderRepository;
 import com.konnect.app.service.dto.ServiceProviderDTO;
 import com.konnect.app.service.mapper.ServiceProviderMapper;
@@ -34,8 +35,17 @@ class ServiceProviderResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_CODE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_PHONE = "AAAAAAAAAA";
+    private static final String UPDATED_PHONE = "BBBBBBBBBB";
+
     private static final String DEFAULT_ADDRESS = "AAAAAAAAAA";
     private static final String UPDATED_ADDRESS = "BBBBBBBBBB";
+
+    private static final Status DEFAULT_STATUS = Status.OPEN;
+    private static final Status UPDATED_STATUS = Status.WAITING_FOR_RESPONSE;
 
     private static final String ENTITY_API_URL = "/api/service-providers";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -64,7 +74,12 @@ class ServiceProviderResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static ServiceProvider createEntity(EntityManager em) {
-        ServiceProvider serviceProvider = new ServiceProvider().name(DEFAULT_NAME).address(DEFAULT_ADDRESS);
+        ServiceProvider serviceProvider = new ServiceProvider()
+            .name(DEFAULT_NAME)
+            .code(DEFAULT_CODE)
+            .phone(DEFAULT_PHONE)
+            .address(DEFAULT_ADDRESS)
+            .status(DEFAULT_STATUS);
         return serviceProvider;
     }
 
@@ -75,7 +90,12 @@ class ServiceProviderResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static ServiceProvider createUpdatedEntity(EntityManager em) {
-        ServiceProvider serviceProvider = new ServiceProvider().name(UPDATED_NAME).address(UPDATED_ADDRESS);
+        ServiceProvider serviceProvider = new ServiceProvider()
+            .name(UPDATED_NAME)
+            .code(UPDATED_CODE)
+            .phone(UPDATED_PHONE)
+            .address(UPDATED_ADDRESS)
+            .status(UPDATED_STATUS);
         return serviceProvider;
     }
 
@@ -101,7 +121,10 @@ class ServiceProviderResourceIT {
         assertThat(serviceProviderList).hasSize(databaseSizeBeforeCreate + 1);
         ServiceProvider testServiceProvider = serviceProviderList.get(serviceProviderList.size() - 1);
         assertThat(testServiceProvider.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testServiceProvider.getCode()).isEqualTo(DEFAULT_CODE);
+        assertThat(testServiceProvider.getPhone()).isEqualTo(DEFAULT_PHONE);
         assertThat(testServiceProvider.getAddress()).isEqualTo(DEFAULT_ADDRESS);
+        assertThat(testServiceProvider.getStatus()).isEqualTo(DEFAULT_STATUS);
     }
 
     @Test
@@ -138,7 +161,10 @@ class ServiceProviderResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(serviceProvider.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)));
+            .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
+            .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)))
+            .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
     }
 
     @Test
@@ -154,7 +180,10 @@ class ServiceProviderResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(serviceProvider.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.address").value(DEFAULT_ADDRESS));
+            .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
+            .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE))
+            .andExpect(jsonPath("$.address").value(DEFAULT_ADDRESS))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
     }
 
     @Test
@@ -176,7 +205,7 @@ class ServiceProviderResourceIT {
         ServiceProvider updatedServiceProvider = serviceProviderRepository.findById(serviceProvider.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedServiceProvider are not directly saved in db
         em.detach(updatedServiceProvider);
-        updatedServiceProvider.name(UPDATED_NAME).address(UPDATED_ADDRESS);
+        updatedServiceProvider.name(UPDATED_NAME).code(UPDATED_CODE).phone(UPDATED_PHONE).address(UPDATED_ADDRESS).status(UPDATED_STATUS);
         ServiceProviderDTO serviceProviderDTO = serviceProviderMapper.toDto(updatedServiceProvider);
 
         restServiceProviderMockMvc
@@ -192,7 +221,10 @@ class ServiceProviderResourceIT {
         assertThat(serviceProviderList).hasSize(databaseSizeBeforeUpdate);
         ServiceProvider testServiceProvider = serviceProviderList.get(serviceProviderList.size() - 1);
         assertThat(testServiceProvider.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testServiceProvider.getCode()).isEqualTo(UPDATED_CODE);
+        assertThat(testServiceProvider.getPhone()).isEqualTo(UPDATED_PHONE);
         assertThat(testServiceProvider.getAddress()).isEqualTo(UPDATED_ADDRESS);
+        assertThat(testServiceProvider.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 
     @Test
@@ -274,7 +306,7 @@ class ServiceProviderResourceIT {
         ServiceProvider partialUpdatedServiceProvider = new ServiceProvider();
         partialUpdatedServiceProvider.setId(serviceProvider.getId());
 
-        partialUpdatedServiceProvider.address(UPDATED_ADDRESS);
+        partialUpdatedServiceProvider.code(UPDATED_CODE).address(UPDATED_ADDRESS);
 
         restServiceProviderMockMvc
             .perform(
@@ -289,7 +321,10 @@ class ServiceProviderResourceIT {
         assertThat(serviceProviderList).hasSize(databaseSizeBeforeUpdate);
         ServiceProvider testServiceProvider = serviceProviderList.get(serviceProviderList.size() - 1);
         assertThat(testServiceProvider.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testServiceProvider.getCode()).isEqualTo(UPDATED_CODE);
+        assertThat(testServiceProvider.getPhone()).isEqualTo(DEFAULT_PHONE);
         assertThat(testServiceProvider.getAddress()).isEqualTo(UPDATED_ADDRESS);
+        assertThat(testServiceProvider.getStatus()).isEqualTo(DEFAULT_STATUS);
     }
 
     @Test
@@ -304,7 +339,12 @@ class ServiceProviderResourceIT {
         ServiceProvider partialUpdatedServiceProvider = new ServiceProvider();
         partialUpdatedServiceProvider.setId(serviceProvider.getId());
 
-        partialUpdatedServiceProvider.name(UPDATED_NAME).address(UPDATED_ADDRESS);
+        partialUpdatedServiceProvider
+            .name(UPDATED_NAME)
+            .code(UPDATED_CODE)
+            .phone(UPDATED_PHONE)
+            .address(UPDATED_ADDRESS)
+            .status(UPDATED_STATUS);
 
         restServiceProviderMockMvc
             .perform(
@@ -319,7 +359,10 @@ class ServiceProviderResourceIT {
         assertThat(serviceProviderList).hasSize(databaseSizeBeforeUpdate);
         ServiceProvider testServiceProvider = serviceProviderList.get(serviceProviderList.size() - 1);
         assertThat(testServiceProvider.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testServiceProvider.getCode()).isEqualTo(UPDATED_CODE);
+        assertThat(testServiceProvider.getPhone()).isEqualTo(UPDATED_PHONE);
         assertThat(testServiceProvider.getAddress()).isEqualTo(UPDATED_ADDRESS);
+        assertThat(testServiceProvider.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 
     @Test

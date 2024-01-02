@@ -1,5 +1,6 @@
 package com.konnect.app.service.dto;
 
+import com.konnect.app.domain.enumeration.Status;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -37,7 +38,7 @@ public class DispatchDTO implements Serializable {
 
     private String remark;
 
-    private String status;
+    private Status status;
 
     private String location;
 
@@ -151,11 +152,11 @@ public class DispatchDTO implements Serializable {
         this.remark = remark;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

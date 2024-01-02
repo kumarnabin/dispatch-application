@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
-import { TextFormat } from 'react-jhipster';
+import { openFile, byteSize, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
@@ -29,21 +29,58 @@ export const EmployeeDetail = () => {
           </dt>
           <dd>{employeeEntity.id}</dd>
           <dt>
-            <span id="name">Name</span>
+            <span id="fullName">Full Name</span>
           </dt>
-          <dd>{employeeEntity.name}</dd>
+          <dd>{employeeEntity.fullName}</dd>
+          <dt>
+            <span id="dob">Dob</span>
+          </dt>
+          <dd>{employeeEntity.dob ? <TextFormat value={employeeEntity.dob} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
+          <dt>
+            <span id="gender">Gender</span>
+          </dt>
+          <dd>{employeeEntity.gender}</dd>
+          <dt>
+            <span id="mobile">Mobile</span>
+          </dt>
+          <dd>{employeeEntity.mobile}</dd>
+          <dt>
+            <span id="photo">Photo</span>
+          </dt>
+          <dd>
+            {employeeEntity.photo ? (
+              <div>
+                {employeeEntity.photoContentType ? (
+                  <a onClick={openFile(employeeEntity.photoContentType, employeeEntity.photo)}>
+                    <img src={`data:${employeeEntity.photoContentType};base64,${employeeEntity.photo}`} style={{ maxHeight: '30px' }} />
+                  </a>
+                ) : null}
+                <span>
+                  {employeeEntity.photoContentType}, {byteSize(employeeEntity.photo)}
+                </span>
+              </div>
+            ) : null}
+          </dd>
+          <dt>
+            <span id="citizenshipNo">Citizenship No</span>
+          </dt>
+          <dd>{employeeEntity.citizenshipNo}</dd>
+          <dt>
+            <span id="panNo">Pan No</span>
+          </dt>
+          <dd>{employeeEntity.panNo}</dd>
+          <dt>
+            <span id="category">Category</span>
+          </dt>
+          <dd>{employeeEntity.category}</dd>
           <dt>
             <span id="detail">Detail</span>
           </dt>
           <dd>{employeeEntity.detail}</dd>
           <dt>
-            <span id="publicationDate">Publication Date</span>
+            <span id="status">Status</span>
           </dt>
-          <dd>
-            {employeeEntity.publicationDate ? (
-              <TextFormat value={employeeEntity.publicationDate} type="date" format={APP_DATE_FORMAT} />
-            ) : null}
-          </dd>
+          <dd>{employeeEntity.status}</dd>
           <dt>User</dt>
           <dd>{employeeEntity.user ? employeeEntity.user.id : ''}</dd>
         </dl>

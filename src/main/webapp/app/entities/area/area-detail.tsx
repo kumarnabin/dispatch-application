@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
-import { TextFormat } from 'react-jhipster';
+import {} from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { getEntity } from './area.reducer';
@@ -29,6 +28,10 @@ export const AreaDetail = () => {
           </dt>
           <dd>{areaEntity.id}</dd>
           <dt>
+            <span id="name">Name</span>
+          </dt>
+          <dd>{areaEntity.name}</dd>
+          <dt>
             <span id="code">Code</span>
           </dt>
           <dd>{areaEntity.code}</dd>
@@ -37,22 +40,11 @@ export const AreaDetail = () => {
           </dt>
           <dd>{areaEntity.detail}</dd>
           <dt>
-            <span id="publicationDate">Publication Date</span>
+            <span id="status">Status</span>
           </dt>
-          <dd>
-            {areaEntity.publicationDate ? <TextFormat value={areaEntity.publicationDate} type="date" format={APP_DATE_FORMAT} /> : null}
-          </dd>
+          <dd>{areaEntity.status}</dd>
           <dt>Employee</dt>
-          <dd>
-            {areaEntity.employees
-              ? areaEntity.employees.map((val, i) => (
-                  <span key={val.id}>
-                    <a>{val.id}</a>
-                    {areaEntity.employees && i === areaEntity.employees.length - 1 ? '' : ', '}
-                  </span>
-                ))
-              : null}
-          </dd>
+          <dd>{areaEntity.employee ? areaEntity.employee.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/area" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

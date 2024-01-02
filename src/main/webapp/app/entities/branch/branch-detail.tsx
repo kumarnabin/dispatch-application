@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
-import { TextFormat } from 'react-jhipster';
+import {} from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { getEntity } from './branch.reducer';
@@ -33,11 +32,13 @@ export const BranchDetail = () => {
           </dt>
           <dd>{branchEntity.name}</dd>
           <dt>
-            <span id="publicationDate">Publication Date</span>
+            <span id="code">Code</span>
           </dt>
-          <dd>
-            {branchEntity.publicationDate ? <TextFormat value={branchEntity.publicationDate} type="date" format={APP_DATE_FORMAT} /> : null}
-          </dd>
+          <dd>{branchEntity.code}</dd>
+          <dt>
+            <span id="status">Status</span>
+          </dt>
+          <dd>{branchEntity.status}</dd>
           <dt>Service Provider</dt>
           <dd>{branchEntity.serviceProvider ? branchEntity.serviceProvider.id : ''}</dd>
         </dl>

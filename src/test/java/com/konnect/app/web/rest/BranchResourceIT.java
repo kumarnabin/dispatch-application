@@ -7,12 +7,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.konnect.app.IntegrationTest;
 import com.konnect.app.domain.Branch;
+import com.konnect.app.domain.enumeration.Status;
 import com.konnect.app.repository.BranchRepository;
 import com.konnect.app.service.dto.BranchDTO;
 import com.konnect.app.service.mapper.BranchMapper;
 import jakarta.persistence.EntityManager;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
@@ -36,8 +35,11 @@ class BranchResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_PUBLICATION_DATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_PUBLICATION_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final String DEFAULT_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_CODE = "BBBBBBBBBB";
+
+    private static final Status DEFAULT_STATUS = Status.OPEN;
+    private static final Status UPDATED_STATUS = Status.WAITING_FOR_RESPONSE;
 
     private static final String ENTITY_API_URL = "/api/branches";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -66,7 +68,7 @@ class BranchResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Branch createEntity(EntityManager em) {
-        Branch branch = new Branch().name(DEFAULT_NAME).publicationDate(DEFAULT_PUBLICATION_DATE);
+        Branch branch = new Branch().name(DEFAULT_NAME).code(DEFAULT_CODE).status(DEFAULT_STATUS);
         return branch;
     }
 
@@ -77,7 +79,7 @@ class BranchResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Branch createUpdatedEntity(EntityManager em) {
-        Branch branch = new Branch().name(UPDATED_NAME).publicationDate(UPDATED_PUBLICATION_DATE);
+        Branch branch = new Branch().name(UPDATED_NAME).code(UPDATED_CODE).status(UPDATED_STATUS);
         return branch;
     }
 
@@ -101,7 +103,8 @@ class BranchResourceIT {
         assertThat(branchList).hasSize(databaseSizeBeforeCreate + 1);
         Branch testBranch = branchList.get(branchList.size() - 1);
         assertThat(testBranch.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testBranch.getPublicationDate()).isEqualTo(DEFAULT_PUBLICATION_DATE);
+        assertThat(testBranch.getCode()).isEqualTo(DEFAULT_CODE);
+        assertThat(testBranch.getStatus()).isEqualTo(DEFAULT_STATUS);
     }
 
     @Test
@@ -136,7 +139,8 @@ class BranchResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(branch.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].publicationDate").value(hasItem(DEFAULT_PUBLICATION_DATE.toString())));
+            .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
     }
 
     @Test
@@ -152,7 +156,8 @@ class BranchResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(branch.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.publicationDate").value(DEFAULT_PUBLICATION_DATE.toString()));
+            .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
     }
 
     @Test
@@ -174,7 +179,7 @@ class BranchResourceIT {
         Branch updatedBranch = branchRepository.findById(branch.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedBranch are not directly saved in db
         em.detach(updatedBranch);
-        updatedBranch.name(UPDATED_NAME).publicationDate(UPDATED_PUBLICATION_DATE);
+        updatedBranch.name(UPDATED_NAME).code(UPDATED_CODE).status(UPDATED_STATUS);
         BranchDTO branchDTO = branchMapper.toDto(updatedBranch);
 
         restBranchMockMvc
@@ -190,7 +195,8 @@ class BranchResourceIT {
         assertThat(branchList).hasSize(databaseSizeBeforeUpdate);
         Branch testBranch = branchList.get(branchList.size() - 1);
         assertThat(testBranch.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testBranch.getPublicationDate()).isEqualTo(UPDATED_PUBLICATION_DATE);
+        assertThat(testBranch.getCode()).isEqualTo(UPDATED_CODE);
+        assertThat(testBranch.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 
     @Test
@@ -270,7 +276,7 @@ class BranchResourceIT {
         Branch partialUpdatedBranch = new Branch();
         partialUpdatedBranch.setId(branch.getId());
 
-        partialUpdatedBranch.publicationDate(UPDATED_PUBLICATION_DATE);
+        partialUpdatedBranch.code(UPDATED_CODE);
 
         restBranchMockMvc
             .perform(
@@ -285,7 +291,8 @@ class BranchResourceIT {
         assertThat(branchList).hasSize(databaseSizeBeforeUpdate);
         Branch testBranch = branchList.get(branchList.size() - 1);
         assertThat(testBranch.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testBranch.getPublicationDate()).isEqualTo(UPDATED_PUBLICATION_DATE);
+        assertThat(testBranch.getCode()).isEqualTo(UPDATED_CODE);
+        assertThat(testBranch.getStatus()).isEqualTo(DEFAULT_STATUS);
     }
 
     @Test
@@ -300,7 +307,7 @@ class BranchResourceIT {
         Branch partialUpdatedBranch = new Branch();
         partialUpdatedBranch.setId(branch.getId());
 
-        partialUpdatedBranch.name(UPDATED_NAME).publicationDate(UPDATED_PUBLICATION_DATE);
+        partialUpdatedBranch.name(UPDATED_NAME).code(UPDATED_CODE).status(UPDATED_STATUS);
 
         restBranchMockMvc
             .perform(
@@ -315,7 +322,8 @@ class BranchResourceIT {
         assertThat(branchList).hasSize(databaseSizeBeforeUpdate);
         Branch testBranch = branchList.get(branchList.size() - 1);
         assertThat(testBranch.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testBranch.getPublicationDate()).isEqualTo(UPDATED_PUBLICATION_DATE);
+        assertThat(testBranch.getCode()).isEqualTo(UPDATED_CODE);
+        assertThat(testBranch.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 
     @Test

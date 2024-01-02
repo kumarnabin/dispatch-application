@@ -25,10 +25,6 @@
     {
       "fieldName": "teamLeaderPhone",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "publicationDate",
-      "fieldType": "Instant"
     }
   ],
   "name": "Team",

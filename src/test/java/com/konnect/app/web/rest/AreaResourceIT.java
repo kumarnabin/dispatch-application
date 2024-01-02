@@ -2,32 +2,23 @@ package com.konnect.app.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.konnect.app.IntegrationTest;
 import com.konnect.app.domain.Area;
+import com.konnect.app.domain.enumeration.Status;
 import com.konnect.app.repository.AreaRepository;
-import com.konnect.app.service.AreaService;
 import com.konnect.app.service.dto.AreaDTO;
 import com.konnect.app.service.mapper.AreaMapper;
 import jakarta.persistence.EntityManager;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -37,10 +28,12 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link AreaResource} REST controller.
  */
 @IntegrationTest
-@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class AreaResourceIT {
+
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     private static final String DEFAULT_CODE = "AAAAAAAAAA";
     private static final String UPDATED_CODE = "BBBBBBBBBB";
@@ -48,8 +41,8 @@ class AreaResourceIT {
     private static final String DEFAULT_DETAIL = "AAAAAAAAAA";
     private static final String UPDATED_DETAIL = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_PUBLICATION_DATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_PUBLICATION_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Status DEFAULT_STATUS = Status.OPEN;
+    private static final Status UPDATED_STATUS = Status.WAITING_FOR_RESPONSE;
 
     private static final String ENTITY_API_URL = "/api/areas";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -60,14 +53,8 @@ class AreaResourceIT {
     @Autowired
     private AreaRepository areaRepository;
 
-    @Mock
-    private AreaRepository areaRepositoryMock;
-
     @Autowired
     private AreaMapper areaMapper;
-
-    @Mock
-    private AreaService areaServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -84,7 +71,7 @@ class AreaResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Area createEntity(EntityManager em) {
-        Area area = new Area().code(DEFAULT_CODE).detail(DEFAULT_DETAIL).publicationDate(DEFAULT_PUBLICATION_DATE);
+        Area area = new Area().name(DEFAULT_NAME).code(DEFAULT_CODE).detail(DEFAULT_DETAIL).status(DEFAULT_STATUS);
         return area;
     }
 
@@ -95,7 +82,7 @@ class AreaResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Area createUpdatedEntity(EntityManager em) {
-        Area area = new Area().code(UPDATED_CODE).detail(UPDATED_DETAIL).publicationDate(UPDATED_PUBLICATION_DATE);
+        Area area = new Area().name(UPDATED_NAME).code(UPDATED_CODE).detail(UPDATED_DETAIL).status(UPDATED_STATUS);
         return area;
     }
 
@@ -118,9 +105,10 @@ class AreaResourceIT {
         List<Area> areaList = areaRepository.findAll();
         assertThat(areaList).hasSize(databaseSizeBeforeCreate + 1);
         Area testArea = areaList.get(areaList.size() - 1);
+        assertThat(testArea.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testArea.getCode()).isEqualTo(DEFAULT_CODE);
         assertThat(testArea.getDetail()).isEqualTo(DEFAULT_DETAIL);
-        assertThat(testArea.getPublicationDate()).isEqualTo(DEFAULT_PUBLICATION_DATE);
+        assertThat(testArea.getStatus()).isEqualTo(DEFAULT_STATUS);
     }
 
     @Test
@@ -154,26 +142,10 @@ class AreaResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(area.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
             .andExpect(jsonPath("$.[*].detail").value(hasItem(DEFAULT_DETAIL)))
-            .andExpect(jsonPath("$.[*].publicationDate").value(hasItem(DEFAULT_PUBLICATION_DATE.toString())));
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllAreasWithEagerRelationshipsIsEnabled() throws Exception {
-        when(areaServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restAreaMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
-
-        verify(areaServiceMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllAreasWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(areaServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restAreaMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
-        verify(areaRepositoryMock, times(1)).findAll(any(Pageable.class));
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
     }
 
     @Test
@@ -188,9 +160,10 @@ class AreaResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(area.getId().intValue()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
             .andExpect(jsonPath("$.detail").value(DEFAULT_DETAIL))
-            .andExpect(jsonPath("$.publicationDate").value(DEFAULT_PUBLICATION_DATE.toString()));
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
     }
 
     @Test
@@ -212,7 +185,7 @@ class AreaResourceIT {
         Area updatedArea = areaRepository.findById(area.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedArea are not directly saved in db
         em.detach(updatedArea);
-        updatedArea.code(UPDATED_CODE).detail(UPDATED_DETAIL).publicationDate(UPDATED_PUBLICATION_DATE);
+        updatedArea.name(UPDATED_NAME).code(UPDATED_CODE).detail(UPDATED_DETAIL).status(UPDATED_STATUS);
         AreaDTO areaDTO = areaMapper.toDto(updatedArea);
 
         restAreaMockMvc
@@ -227,9 +200,10 @@ class AreaResourceIT {
         List<Area> areaList = areaRepository.findAll();
         assertThat(areaList).hasSize(databaseSizeBeforeUpdate);
         Area testArea = areaList.get(areaList.size() - 1);
+        assertThat(testArea.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testArea.getCode()).isEqualTo(UPDATED_CODE);
         assertThat(testArea.getDetail()).isEqualTo(UPDATED_DETAIL);
-        assertThat(testArea.getPublicationDate()).isEqualTo(UPDATED_PUBLICATION_DATE);
+        assertThat(testArea.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 
     @Test
@@ -309,7 +283,7 @@ class AreaResourceIT {
         Area partialUpdatedArea = new Area();
         partialUpdatedArea.setId(area.getId());
 
-        partialUpdatedArea.code(UPDATED_CODE).publicationDate(UPDATED_PUBLICATION_DATE);
+        partialUpdatedArea.name(UPDATED_NAME).detail(UPDATED_DETAIL).status(UPDATED_STATUS);
 
         restAreaMockMvc
             .perform(
@@ -323,9 +297,10 @@ class AreaResourceIT {
         List<Area> areaList = areaRepository.findAll();
         assertThat(areaList).hasSize(databaseSizeBeforeUpdate);
         Area testArea = areaList.get(areaList.size() - 1);
-        assertThat(testArea.getCode()).isEqualTo(UPDATED_CODE);
-        assertThat(testArea.getDetail()).isEqualTo(DEFAULT_DETAIL);
-        assertThat(testArea.getPublicationDate()).isEqualTo(UPDATED_PUBLICATION_DATE);
+        assertThat(testArea.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testArea.getCode()).isEqualTo(DEFAULT_CODE);
+        assertThat(testArea.getDetail()).isEqualTo(UPDATED_DETAIL);
+        assertThat(testArea.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 
     @Test
@@ -340,7 +315,7 @@ class AreaResourceIT {
         Area partialUpdatedArea = new Area();
         partialUpdatedArea.setId(area.getId());
 
-        partialUpdatedArea.code(UPDATED_CODE).detail(UPDATED_DETAIL).publicationDate(UPDATED_PUBLICATION_DATE);
+        partialUpdatedArea.name(UPDATED_NAME).code(UPDATED_CODE).detail(UPDATED_DETAIL).status(UPDATED_STATUS);
 
         restAreaMockMvc
             .perform(
@@ -354,9 +329,10 @@ class AreaResourceIT {
         List<Area> areaList = areaRepository.findAll();
         assertThat(areaList).hasSize(databaseSizeBeforeUpdate);
         Area testArea = areaList.get(areaList.size() - 1);
+        assertThat(testArea.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testArea.getCode()).isEqualTo(UPDATED_CODE);
         assertThat(testArea.getDetail()).isEqualTo(UPDATED_DETAIL);
-        assertThat(testArea.getPublicationDate()).isEqualTo(UPDATED_PUBLICATION_DATE);
+        assertThat(testArea.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 
     @Test

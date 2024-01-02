@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { isNumber, ValidatedField, ValidatedForm, ValidatedBlobField } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -10,9 +10,8 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IUser } from 'app/shared/model/user.model';
 import { getUsers } from 'app/modules/administration/user-management/user-management.reducer';
-import { IArea } from 'app/shared/model/area.model';
-import { getEntities as getAreas } from 'app/entities/area/area.reducer';
 import { IEmployee } from 'app/shared/model/employee.model';
+import { Status } from 'app/shared/model/enumerations/status.model';
 import { getEntity, updateEntity, createEntity, reset } from './employee.reducer';
 
 export const EmployeeUpdate = () => {
@@ -24,11 +23,11 @@ export const EmployeeUpdate = () => {
   const isNew = id === undefined;
 
   const users = useAppSelector(state => state.userManagement.users);
-  const areas = useAppSelector(state => state.area.entities);
   const employeeEntity = useAppSelector(state => state.employee.entity);
   const loading = useAppSelector(state => state.employee.loading);
   const updating = useAppSelector(state => state.employee.updating);
   const updateSuccess = useAppSelector(state => state.employee.updateSuccess);
+  const statusValues = Object.keys(Status);
 
   const handleClose = () => {
     navigate('/employee');
@@ -42,7 +41,6 @@ export const EmployeeUpdate = () => {
     }
 
     dispatch(getUsers({}));
-    dispatch(getAreas({}));
   }, []);
 
   useEffect(() => {
@@ -56,7 +54,7 @@ export const EmployeeUpdate = () => {
     if (values.id !== undefined && typeof values.id !== 'number') {
       values.id = Number(values.id);
     }
-    values.publicationDate = convertDateTimeToServer(values.publicationDate);
+    values.dob = convertDateTimeToServer(values.dob);
 
     const entity = {
       ...employeeEntity,
@@ -74,11 +72,12 @@ export const EmployeeUpdate = () => {
   const defaultValues = () =>
     isNew
       ? {
-          publicationDate: displayDefaultDateTime(),
+          dob: displayDefaultDateTime(),
         }
       : {
+          status: 'OPEN',
           ...employeeEntity,
-          publicationDate: convertDateTimeFromServer(employeeEntity.publicationDate),
+          dob: convertDateTimeFromServer(employeeEntity.dob),
           user: employeeEntity?.user?.id,
         };
 
@@ -98,16 +97,22 @@ export const EmployeeUpdate = () => {
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
               {!isNew ? <ValidatedField name="id" required readOnly id="employee-id" label="ID" validate={{ required: true }} /> : null}
-              <ValidatedField label="Name" id="employee-name" name="name" data-cy="name" type="text" />
+              <ValidatedField label="Full Name" id="employee-fullName" name="fullName" data-cy="fullName" type="text" />
+              <ValidatedField label="Dob" id="employee-dob" name="dob" data-cy="dob" type="datetime-local" placeholder="YYYY-MM-DD HH:mm" />
+              <ValidatedField label="Gender" id="employee-gender" name="gender" data-cy="gender" type="text" />
+              <ValidatedField label="Mobile" id="employee-mobile" name="mobile" data-cy="mobile" type="text" />
+              <ValidatedBlobField label="Photo" id="employee-photo" name="photo" data-cy="photo" isImage accept="image/*" />
+              <ValidatedField label="Citizenship No" id="employee-citizenshipNo" name="citizenshipNo" data-cy="citizenshipNo" type="text" />
+              <ValidatedField label="Pan No" id="employee-panNo" name="panNo" data-cy="panNo" type="text" />
+              <ValidatedField label="Category" id="employee-category" name="category" data-cy="category" type="text" />
               <ValidatedField label="Detail" id="employee-detail" name="detail" data-cy="detail" type="text" />
-              <ValidatedField
-                label="Publication Date"
-                id="employee-publicationDate"
-                name="publicationDate"
-                data-cy="publicationDate"
-                type="datetime-local"
-                placeholder="YYYY-MM-DD HH:mm"
-              />
+              <ValidatedField label="Status" id="employee-status" name="status" data-cy="status" type="select">
+                {statusValues.map(status => (
+                  <option value={status} key={status}>
+                    {status}
+                  </option>
+                ))}
+              </ValidatedField>
               <ValidatedField id="employee-user" name="user" data-cy="user" label="User" type="select">
                 <option value="" key="0" />
                 {users

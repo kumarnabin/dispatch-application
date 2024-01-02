@@ -47,7 +47,6 @@ export const TeamUpdate = () => {
     if (values.id !== undefined && typeof values.id !== 'number') {
       values.id = Number(values.id);
     }
-    values.publicationDate = convertDateTimeToServer(values.publicationDate);
 
     const entity = {
       ...teamEntity,
@@ -63,12 +62,9 @@ export const TeamUpdate = () => {
 
   const defaultValues = () =>
     isNew
-      ? {
-          publicationDate: displayDefaultDateTime(),
-        }
+      ? {}
       : {
           ...teamEntity,
-          publicationDate: convertDateTimeFromServer(teamEntity.publicationDate),
         };
 
   return (
@@ -103,14 +99,6 @@ export const TeamUpdate = () => {
                 name="teamLeaderPhone"
                 data-cy="teamLeaderPhone"
                 type="text"
-              />
-              <ValidatedField
-                label="Publication Date"
-                id="team-publicationDate"
-                name="publicationDate"
-                data-cy="publicationDate"
-                type="datetime-local"
-                placeholder="YYYY-MM-DD HH:mm"
               />
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/team" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />

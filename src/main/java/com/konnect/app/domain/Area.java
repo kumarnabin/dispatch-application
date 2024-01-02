@@ -1,12 +1,10 @@
 package com.konnect.app.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.konnect.app.domain.enumeration.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
-import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * A Area.
@@ -23,23 +21,22 @@ public class Area implements Serializable {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "name")
+    private String name;
+
     @Column(name = "code", unique = true)
     private String code;
 
     @Column(name = "detail")
     private String detail;
 
-    @Column(name = "publication_date")
-    private Instant publicationDate;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private Status status;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "rel_area__employee",
-        joinColumns = @JoinColumn(name = "area_id"),
-        inverseJoinColumns = @JoinColumn(name = "employee_id")
-    )
-    @JsonIgnoreProperties(value = { "user", "areas" }, allowSetters = true)
-    private Set<Employee> employees = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "user" }, allowSetters = true)
+    private Employee employee;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -54,6 +51,19 @@ public class Area implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public Area name(String name) {
+        this.setName(name);
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCode() {
@@ -82,39 +92,29 @@ public class Area implements Serializable {
         this.detail = detail;
     }
 
-    public Instant getPublicationDate() {
-        return this.publicationDate;
+    public Status getStatus() {
+        return this.status;
     }
 
-    public Area publicationDate(Instant publicationDate) {
-        this.setPublicationDate(publicationDate);
+    public Area status(Status status) {
+        this.setStatus(status);
         return this;
     }
 
-    public void setPublicationDate(Instant publicationDate) {
-        this.publicationDate = publicationDate;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
-    public Set<Employee> getEmployees() {
-        return this.employees;
+    public Employee getEmployee() {
+        return this.employee;
     }
 
-    public void setEmployees(Set<Employee> employees) {
-        this.employees = employees;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
-    public Area employees(Set<Employee> employees) {
-        this.setEmployees(employees);
-        return this;
-    }
-
-    public Area addEmployee(Employee employee) {
-        this.employees.add(employee);
-        return this;
-    }
-
-    public Area removeEmployee(Employee employee) {
-        this.employees.remove(employee);
+    public Area employee(Employee employee) {
+        this.setEmployee(employee);
         return this;
     }
 
@@ -142,9 +142,10 @@ public class Area implements Serializable {
     public String toString() {
         return "Area{" +
             "id=" + getId() +
+            ", name='" + getName() + "'" +
             ", code='" + getCode() + "'" +
             ", detail='" + getDetail() + "'" +
-            ", publicationDate='" + getPublicationDate() + "'" +
+            ", status='" + getStatus() + "'" +
             "}";
     }
 }

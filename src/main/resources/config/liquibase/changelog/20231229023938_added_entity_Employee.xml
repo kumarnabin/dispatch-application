@@ -14,13 +14,37 @@
             <column name="id" type="bigint" autoIncrement="true" startWith="1500">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="varchar(255)">
+            <column name="full_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="dob" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="gender" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="mobile" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="photo" type="${blobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="photo_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="citizenship_no" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="pan_no" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="category" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="detail" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="publication_date" type="${datetimeType}">
+            <column name="status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="user_id" type="bigint">
@@ -28,7 +52,7 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-        <dropDefaultValue tableName="employee" columnName="publication_date" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="employee" columnName="dob" columnDataType="${datetimeType}"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -48,9 +72,17 @@
                   tableName="employee"
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
-            <column name="name" type="string"/>
+            <column name="full_name" type="string"/>
+            <column name="dob" type="date"/>
+            <column name="gender" type="string"/>
+            <column name="mobile" type="string"/>
+            <column name="photo" type="blob"/>
+            <column name="photo_content_type" type="string"/>
+            <column name="citizenship_no" type="string"/>
+            <column name="pan_no" type="string"/>
+            <column name="category" type="string"/>
             <column name="detail" type="string"/>
-            <column name="publication_date" type="date"/>
+            <column name="status" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

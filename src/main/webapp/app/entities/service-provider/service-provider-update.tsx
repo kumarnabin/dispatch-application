@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { IMasterCircuit } from 'app/shared/model/master-circuit.model';
 import { getEntities as getMasterCircuits } from 'app/entities/master-circuit/master-circuit.reducer';
 import { IServiceProvider } from 'app/shared/model/service-provider.model';
+import { Status } from 'app/shared/model/enumerations/status.model';
 import { getEntity, updateEntity, createEntity, reset } from './service-provider.reducer';
 
 export const ServiceProviderUpdate = () => {
@@ -26,6 +27,7 @@ export const ServiceProviderUpdate = () => {
   const loading = useAppSelector(state => state.serviceProvider.loading);
   const updating = useAppSelector(state => state.serviceProvider.updating);
   const updateSuccess = useAppSelector(state => state.serviceProvider.updateSuccess);
+  const statusValues = Object.keys(Status);
 
   const handleClose = () => {
     navigate('/service-provider');
@@ -69,6 +71,7 @@ export const ServiceProviderUpdate = () => {
     isNew
       ? {}
       : {
+          status: 'OPEN',
           ...serviceProviderEntity,
         };
 
@@ -91,7 +94,16 @@ export const ServiceProviderUpdate = () => {
                 <ValidatedField name="id" required readOnly id="service-provider-id" label="ID" validate={{ required: true }} />
               ) : null}
               <ValidatedField label="Name" id="service-provider-name" name="name" data-cy="name" type="text" />
+              <ValidatedField label="Code" id="service-provider-code" name="code" data-cy="code" type="text" />
+              <ValidatedField label="Phone" id="service-provider-phone" name="phone" data-cy="phone" type="text" />
               <ValidatedField label="Address" id="service-provider-address" name="address" data-cy="address" type="text" />
+              <ValidatedField label="Status" id="service-provider-status" name="status" data-cy="status" type="select">
+                {statusValues.map(status => (
+                  <option value={status} key={status}>
+                    {status}
+                  </option>
+                ))}
+              </ValidatedField>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/service-provider" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

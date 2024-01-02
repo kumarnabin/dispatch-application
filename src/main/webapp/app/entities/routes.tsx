@@ -13,6 +13,10 @@ import Customer from './customer';
 import Area from './area';
 import Dispatch from './dispatch';
 import Employee from './employee';
+import EmployeeArea from './employee-area';
+import Attendance from './attendance';
+import Document from './document';
+import DispatchRecord from './dispatch-record';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default () => {
@@ -30,6 +34,10 @@ export default () => {
         <Route path="area/*" element={<Area />} />
         <Route path="dispatch/*" element={<Dispatch />} />
         <Route path="employee/*" element={<Employee />} />
+        <Route path="employee-area/*" element={<EmployeeArea />} />
+        <Route path="attendance/*" element={<Attendance />} />
+        <Route path="document/*" element={<Document />} />
+        <Route path="dispatch-record/*" element={<DispatchRecord />} />
         {/* jhipster-needle-add-route-path - JHipster will add routes here */}
       </ErrorBoundaryRoutes>
     </div>

@@ -24,7 +24,6 @@ public class DispatchTestSamples {
             .cpeRx("cpeRx1")
             .complain("complain1")
             .remark("remark1")
-            .status("status1")
             .location("location1");
     }
 
@@ -43,7 +42,6 @@ public class DispatchTestSamples {
             .cpeRx("cpeRx2")
             .complain("complain2")
             .remark("remark2")
-            .status("status2")
             .location("location2");
     }
 
@@ -62,7 +60,6 @@ public class DispatchTestSamples {
             .cpeRx(UUID.randomUUID().toString())
             .complain(UUID.randomUUID().toString())
             .remark(UUID.randomUUID().toString())
-            .status(UUID.randomUUID().toString())
             .location(UUID.randomUUID().toString());
     }
 }

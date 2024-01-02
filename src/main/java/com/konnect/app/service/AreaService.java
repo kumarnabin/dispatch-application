@@ -10,8 +10,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -91,15 +89,6 @@ public class AreaService {
     }
 
     /**
-     * Get all the areas with eager load of many-to-many relationships.
-     *
-     * @return the list of entities.
-     */
-    public Page<AreaDTO> findAllWithEagerRelationships(Pageable pageable) {
-        return areaRepository.findAllWithEagerRelationships(pageable).map(areaMapper::toDto);
-    }
-
-    /**
      * Get one area by id.
      *
      * @param id the id of the entity.
@@ -108,7 +97,7 @@ public class AreaService {
     @Transactional(readOnly = true)
     public Optional<AreaDTO> findOne(Long id) {
         log.debug("Request to get Area : {}", id);
-        return areaRepository.findOneWithEagerRelationships(id).map(areaMapper::toDto);
+        return areaRepository.findById(id).map(areaMapper::toDto);
     }
 
     /**

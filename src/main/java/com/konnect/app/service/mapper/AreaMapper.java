@@ -4,8 +4,6 @@ import com.konnect.app.domain.Area;
 import com.konnect.app.domain.Employee;
 import com.konnect.app.service.dto.AreaDTO;
 import com.konnect.app.service.dto.EmployeeDTO;
-import java.util.Set;
-import java.util.stream.Collectors;
 import org.mapstruct.*;
 
 /**
@@ -13,19 +11,11 @@ import org.mapstruct.*;
  */
 @Mapper(componentModel = "spring")
 public interface AreaMapper extends EntityMapper<AreaDTO, Area> {
-    @Mapping(target = "employees", source = "employees", qualifiedByName = "employeeIdSet")
+    @Mapping(target = "employee", source = "employee", qualifiedByName = "employeeId")
     AreaDTO toDto(Area s);
-
-    @Mapping(target = "removeEmployee", ignore = true)
-    Area toEntity(AreaDTO areaDTO);
 
     @Named("employeeId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     EmployeeDTO toDtoEmployeeId(Employee employee);
-
-    @Named("employeeIdSet")
-    default Set<EmployeeDTO> toDtoEmployeeIdSet(Set<Employee> employee) {
-        return employee.stream().map(this::toDtoEmployeeId).collect(Collectors.toSet());
-    }
 }

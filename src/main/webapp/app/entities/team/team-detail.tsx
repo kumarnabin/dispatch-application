@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
-import { TextFormat } from 'react-jhipster';
+import {} from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { getEntity } from './team.reducer';
@@ -48,12 +47,6 @@ export const TeamDetail = () => {
             <span id="teamLeaderPhone">Team Leader Phone</span>
           </dt>
           <dd>{teamEntity.teamLeaderPhone}</dd>
-          <dt>
-            <span id="publicationDate">Publication Date</span>
-          </dt>
-          <dd>
-            {teamEntity.publicationDate ? <TextFormat value={teamEntity.publicationDate} type="date" format={APP_DATE_FORMAT} /> : null}
-          </dd>
         </dl>
         <Button tag={Link} to="/team" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

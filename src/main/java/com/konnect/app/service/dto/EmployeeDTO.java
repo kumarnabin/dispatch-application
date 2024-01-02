@@ -1,5 +1,7 @@
 package com.konnect.app.service.dto;
 
+import com.konnect.app.domain.enumeration.Status;
+import jakarta.persistence.Lob;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
@@ -12,11 +14,27 @@ public class EmployeeDTO implements Serializable {
 
     private Long id;
 
-    private String name;
+    private String fullName;
+
+    private Instant dob;
+
+    private String gender;
+
+    private String mobile;
+
+    @Lob
+    private byte[] photo;
+
+    private String photoContentType;
+    private String citizenshipNo;
+
+    private String panNo;
+
+    private String category;
 
     private String detail;
 
-    private Instant publicationDate;
+    private Status status;
 
     private UserDTO user;
 
@@ -28,12 +46,76 @@ public class EmployeeDTO implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public Instant getDob() {
+        return dob;
+    }
+
+    public void setDob(Instant dob) {
+        this.dob = dob;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public String getPhotoContentType() {
+        return photoContentType;
+    }
+
+    public void setPhotoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
+    }
+
+    public String getCitizenshipNo() {
+        return citizenshipNo;
+    }
+
+    public void setCitizenshipNo(String citizenshipNo) {
+        this.citizenshipNo = citizenshipNo;
+    }
+
+    public String getPanNo() {
+        return panNo;
+    }
+
+    public void setPanNo(String panNo) {
+        this.panNo = panNo;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getDetail() {
@@ -44,12 +126,12 @@ public class EmployeeDTO implements Serializable {
         this.detail = detail;
     }
 
-    public Instant getPublicationDate() {
-        return publicationDate;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setPublicationDate(Instant publicationDate) {
-        this.publicationDate = publicationDate;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public UserDTO getUser() {
@@ -86,9 +168,16 @@ public class EmployeeDTO implements Serializable {
     public String toString() {
         return "EmployeeDTO{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
+            ", fullName='" + getFullName() + "'" +
+            ", dob='" + getDob() + "'" +
+            ", gender='" + getGender() + "'" +
+            ", mobile='" + getMobile() + "'" +
+            ", photo='" + getPhoto() + "'" +
+            ", citizenshipNo='" + getCitizenshipNo() + "'" +
+            ", panNo='" + getPanNo() + "'" +
+            ", category='" + getCategory() + "'" +
             ", detail='" + getDetail() + "'" +
-            ", publicationDate='" + getPublicationDate() + "'" +
+            ", status='" + getStatus() + "'" +
             ", user=" + getUser() +
             "}";
     }

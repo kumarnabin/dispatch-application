@@ -1,6 +1,7 @@
 package com.konnect.app.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.konnect.app.domain.enumeration.Status;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -24,8 +25,18 @@ public class ServiceProvider implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "code")
+    private String code;
+
+    @Column(name = "phone")
+    private String phone;
+
     @Column(name = "address")
     private String address;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private Status status;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "serviceProviders")
     @JsonIgnoreProperties(value = { "serviceProviders" }, allowSetters = true)
@@ -59,6 +70,32 @@ public class ServiceProvider implements Serializable {
         this.name = name;
     }
 
+    public String getCode() {
+        return this.code;
+    }
+
+    public ServiceProvider code(String code) {
+        this.setCode(code);
+        return this;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getPhone() {
+        return this.phone;
+    }
+
+    public ServiceProvider phone(String phone) {
+        this.setPhone(phone);
+        return this;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getAddress() {
         return this.address;
     }
@@ -70,6 +107,19 @@ public class ServiceProvider implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Status getStatus() {
+        return this.status;
+    }
+
+    public ServiceProvider status(Status status) {
+        this.setStatus(status);
+        return this;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public Set<MasterCircuit> getMasterCircuits() {
@@ -128,7 +178,10 @@ public class ServiceProvider implements Serializable {
         return "ServiceProvider{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", code='" + getCode() + "'" +
+            ", phone='" + getPhone() + "'" +
             ", address='" + getAddress() + "'" +
+            ", status='" + getStatus() + "'" +
             "}";
     }
 }

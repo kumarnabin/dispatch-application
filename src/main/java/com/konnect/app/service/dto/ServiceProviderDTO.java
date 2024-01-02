@@ -1,5 +1,6 @@
 package com.konnect.app.service.dto;
 
+import com.konnect.app.domain.enumeration.Status;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -13,7 +14,13 @@ public class ServiceProviderDTO implements Serializable {
 
     private String name;
 
+    private String code;
+
+    private String phone;
+
     private String address;
+
+    private Status status;
 
     public Long getId() {
         return id;
@@ -31,12 +38,36 @@ public class ServiceProviderDTO implements Serializable {
         this.name = name;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @Override
@@ -66,7 +97,10 @@ public class ServiceProviderDTO implements Serializable {
         return "ServiceProviderDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", code='" + getCode() + "'" +
+            ", phone='" + getPhone() + "'" +
             ", address='" + getAddress() + "'" +
+            ", status='" + getStatus() + "'" +
             "}";
     }
 }

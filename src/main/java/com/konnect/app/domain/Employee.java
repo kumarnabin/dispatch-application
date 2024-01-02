@@ -1,11 +1,9 @@
 package com.konnect.app.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.konnect.app.domain.enumeration.Status;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * A Employee.
@@ -22,21 +20,43 @@ public class Employee implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "full_name")
+    private String fullName;
+
+    @Column(name = "dob")
+    private Instant dob;
+
+    @Column(name = "gender")
+    private String gender;
+
+    @Column(name = "mobile")
+    private String mobile;
+
+    @Lob
+    @Column(name = "photo")
+    private byte[] photo;
+
+    @Column(name = "photo_content_type")
+    private String photoContentType;
+
+    @Column(name = "citizenship_no")
+    private String citizenshipNo;
+
+    @Column(name = "pan_no")
+    private String panNo;
+
+    @Column(name = "category")
+    private String category;
 
     @Column(name = "detail")
     private String detail;
 
-    @Column(name = "publication_date")
-    private Instant publicationDate;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private Status status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "employees")
-    @JsonIgnoreProperties(value = { "employees" }, allowSetters = true)
-    private Set<Area> areas = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -53,17 +73,121 @@ public class Employee implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return this.name;
+    public String getFullName() {
+        return this.fullName;
     }
 
-    public Employee name(String name) {
-        this.setName(name);
+    public Employee fullName(String fullName) {
+        this.setFullName(fullName);
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public Instant getDob() {
+        return this.dob;
+    }
+
+    public Employee dob(Instant dob) {
+        this.setDob(dob);
+        return this;
+    }
+
+    public void setDob(Instant dob) {
+        this.dob = dob;
+    }
+
+    public String getGender() {
+        return this.gender;
+    }
+
+    public Employee gender(String gender) {
+        this.setGender(gender);
+        return this;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getMobile() {
+        return this.mobile;
+    }
+
+    public Employee mobile(String mobile) {
+        this.setMobile(mobile);
+        return this;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public byte[] getPhoto() {
+        return this.photo;
+    }
+
+    public Employee photo(byte[] photo) {
+        this.setPhoto(photo);
+        return this;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public String getPhotoContentType() {
+        return this.photoContentType;
+    }
+
+    public Employee photoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
+        return this;
+    }
+
+    public void setPhotoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
+    }
+
+    public String getCitizenshipNo() {
+        return this.citizenshipNo;
+    }
+
+    public Employee citizenshipNo(String citizenshipNo) {
+        this.setCitizenshipNo(citizenshipNo);
+        return this;
+    }
+
+    public void setCitizenshipNo(String citizenshipNo) {
+        this.citizenshipNo = citizenshipNo;
+    }
+
+    public String getPanNo() {
+        return this.panNo;
+    }
+
+    public Employee panNo(String panNo) {
+        this.setPanNo(panNo);
+        return this;
+    }
+
+    public void setPanNo(String panNo) {
+        this.panNo = panNo;
+    }
+
+    public String getCategory() {
+        return this.category;
+    }
+
+    public Employee category(String category) {
+        this.setCategory(category);
+        return this;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getDetail() {
@@ -79,17 +203,17 @@ public class Employee implements Serializable {
         this.detail = detail;
     }
 
-    public Instant getPublicationDate() {
-        return this.publicationDate;
+    public Status getStatus() {
+        return this.status;
     }
 
-    public Employee publicationDate(Instant publicationDate) {
-        this.setPublicationDate(publicationDate);
+    public Employee status(Status status) {
+        this.setStatus(status);
         return this;
     }
 
-    public void setPublicationDate(Instant publicationDate) {
-        this.publicationDate = publicationDate;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public User getUser() {
@@ -102,37 +226,6 @@ public class Employee implements Serializable {
 
     public Employee user(User user) {
         this.setUser(user);
-        return this;
-    }
-
-    public Set<Area> getAreas() {
-        return this.areas;
-    }
-
-    public void setAreas(Set<Area> areas) {
-        if (this.areas != null) {
-            this.areas.forEach(i -> i.removeEmployee(this));
-        }
-        if (areas != null) {
-            areas.forEach(i -> i.addEmployee(this));
-        }
-        this.areas = areas;
-    }
-
-    public Employee areas(Set<Area> areas) {
-        this.setAreas(areas);
-        return this;
-    }
-
-    public Employee addArea(Area area) {
-        this.areas.add(area);
-        area.getEmployees().add(this);
-        return this;
-    }
-
-    public Employee removeArea(Area area) {
-        this.areas.remove(area);
-        area.getEmployees().remove(this);
         return this;
     }
 
@@ -160,9 +253,17 @@ public class Employee implements Serializable {
     public String toString() {
         return "Employee{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
+            ", fullName='" + getFullName() + "'" +
+            ", dob='" + getDob() + "'" +
+            ", gender='" + getGender() + "'" +
+            ", mobile='" + getMobile() + "'" +
+            ", photo='" + getPhoto() + "'" +
+            ", photoContentType='" + getPhotoContentType() + "'" +
+            ", citizenshipNo='" + getCitizenshipNo() + "'" +
+            ", panNo='" + getPanNo() + "'" +
+            ", category='" + getCategory() + "'" +
             ", detail='" + getDetail() + "'" +
-            ", publicationDate='" + getPublicationDate() + "'" +
+            ", status='" + getStatus() + "'" +
             "}";
     }
 }

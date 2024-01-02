@@ -1,7 +1,6 @@
 package com.konnect.app.service.dto;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.Objects;
 
 /**
@@ -21,8 +20,6 @@ public class TeamDTO implements Serializable {
     private String teamLeader;
 
     private String teamLeaderPhone;
-
-    private Instant publicationDate;
 
     public Long getId() {
         return id;
@@ -72,14 +69,6 @@ public class TeamDTO implements Serializable {
         this.teamLeaderPhone = teamLeaderPhone;
     }
 
-    public Instant getPublicationDate() {
-        return publicationDate;
-    }
-
-    public void setPublicationDate(Instant publicationDate) {
-        this.publicationDate = publicationDate;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -111,7 +100,6 @@ public class TeamDTO implements Serializable {
             ", supervisorPhoneNo='" + getSupervisorPhoneNo() + "'" +
             ", teamLeader='" + getTeamLeader() + "'" +
             ", teamLeaderPhone='" + getTeamLeaderPhone() + "'" +
-            ", publicationDate='" + getPublicationDate() + "'" +
             "}";
     }
 }

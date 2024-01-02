@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Table } from 'reactstrap';
-import { Translate, TextFormat, getSortState } from 'react-jhipster';
+import { openFile, byteSize, Translate, TextFormat, getSortState } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSort, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
@@ -86,14 +86,35 @@ export const Employee = () => {
                 <th className="hand" onClick={sort('id')}>
                   ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
-                <th className="hand" onClick={sort('name')}>
-                  Name <FontAwesomeIcon icon={getSortIconByFieldName('name')} />
+                <th className="hand" onClick={sort('fullName')}>
+                  Full Name <FontAwesomeIcon icon={getSortIconByFieldName('fullName')} />
+                </th>
+                <th className="hand" onClick={sort('dob')}>
+                  Dob <FontAwesomeIcon icon={getSortIconByFieldName('dob')} />
+                </th>
+                <th className="hand" onClick={sort('gender')}>
+                  Gender <FontAwesomeIcon icon={getSortIconByFieldName('gender')} />
+                </th>
+                <th className="hand" onClick={sort('mobile')}>
+                  Mobile <FontAwesomeIcon icon={getSortIconByFieldName('mobile')} />
+                </th>
+                <th className="hand" onClick={sort('photo')}>
+                  Photo <FontAwesomeIcon icon={getSortIconByFieldName('photo')} />
+                </th>
+                <th className="hand" onClick={sort('citizenshipNo')}>
+                  Citizenship No <FontAwesomeIcon icon={getSortIconByFieldName('citizenshipNo')} />
+                </th>
+                <th className="hand" onClick={sort('panNo')}>
+                  Pan No <FontAwesomeIcon icon={getSortIconByFieldName('panNo')} />
+                </th>
+                <th className="hand" onClick={sort('category')}>
+                  Category <FontAwesomeIcon icon={getSortIconByFieldName('category')} />
                 </th>
                 <th className="hand" onClick={sort('detail')}>
                   Detail <FontAwesomeIcon icon={getSortIconByFieldName('detail')} />
                 </th>
-                <th className="hand" onClick={sort('publicationDate')}>
-                  Publication Date <FontAwesomeIcon icon={getSortIconByFieldName('publicationDate')} />
+                <th className="hand" onClick={sort('status')}>
+                  Status <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
                 </th>
                 <th>
                   User <FontAwesomeIcon icon="sort" />
@@ -109,11 +130,30 @@ export const Employee = () => {
                       {employee.id}
                     </Button>
                   </td>
-                  <td>{employee.name}</td>
-                  <td>{employee.detail}</td>
+                  <td>{employee.fullName}</td>
+                  <td>{employee.dob ? <TextFormat type="date" value={employee.dob} format={APP_DATE_FORMAT} /> : null}</td>
+                  <td>{employee.gender}</td>
+                  <td>{employee.mobile}</td>
                   <td>
-                    {employee.publicationDate ? <TextFormat type="date" value={employee.publicationDate} format={APP_DATE_FORMAT} /> : null}
+                    {employee.photo ? (
+                      <div>
+                        {employee.photoContentType ? (
+                          <a onClick={openFile(employee.photoContentType, employee.photo)}>
+                            <img src={`data:${employee.photoContentType};base64,${employee.photo}`} style={{ maxHeight: '30px' }} />
+                            &nbsp;
+                          </a>
+                        ) : null}
+                        <span>
+                          {employee.photoContentType}, {byteSize(employee.photo)}
+                        </span>
+                      </div>
+                    ) : null}
                   </td>
+                  <td>{employee.citizenshipNo}</td>
+                  <td>{employee.panNo}</td>
+                  <td>{employee.category}</td>
+                  <td>{employee.detail}</td>
+                  <td>{employee.status}</td>
                   <td>{employee.user ? employee.user.id : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">

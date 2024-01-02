@@ -7,12 +7,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.konnect.app.IntegrationTest;
 import com.konnect.app.domain.Employee;
+import com.konnect.app.domain.enumeration.Status;
 import com.konnect.app.repository.EmployeeRepository;
 import com.konnect.app.service.dto.EmployeeDTO;
 import com.konnect.app.service.mapper.EmployeeMapper;
 import jakarta.persistence.EntityManager;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Base64;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
@@ -33,14 +35,37 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class EmployeeResourceIT {
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_FULL_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_FULL_NAME = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_DOB = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_DOB = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final String DEFAULT_GENDER = "AAAAAAAAAA";
+    private static final String UPDATED_GENDER = "BBBBBBBBBB";
+
+    private static final String DEFAULT_MOBILE = "AAAAAAAAAA";
+    private static final String UPDATED_MOBILE = "BBBBBBBBBB";
+
+    private static final byte[] DEFAULT_PHOTO = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_PHOTO = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_PHOTO_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_PHOTO_CONTENT_TYPE = "image/png";
+
+    private static final String DEFAULT_CITIZENSHIP_NO = "AAAAAAAAAA";
+    private static final String UPDATED_CITIZENSHIP_NO = "BBBBBBBBBB";
+
+    private static final String DEFAULT_PAN_NO = "AAAAAAAAAA";
+    private static final String UPDATED_PAN_NO = "BBBBBBBBBB";
+
+    private static final String DEFAULT_CATEGORY = "AAAAAAAAAA";
+    private static final String UPDATED_CATEGORY = "BBBBBBBBBB";
 
     private static final String DEFAULT_DETAIL = "AAAAAAAAAA";
     private static final String UPDATED_DETAIL = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_PUBLICATION_DATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_PUBLICATION_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Status DEFAULT_STATUS = Status.OPEN;
+    private static final Status UPDATED_STATUS = Status.WAITING_FOR_RESPONSE;
 
     private static final String ENTITY_API_URL = "/api/employees";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -69,7 +94,18 @@ class EmployeeResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Employee createEntity(EntityManager em) {
-        Employee employee = new Employee().name(DEFAULT_NAME).detail(DEFAULT_DETAIL).publicationDate(DEFAULT_PUBLICATION_DATE);
+        Employee employee = new Employee()
+            .fullName(DEFAULT_FULL_NAME)
+            .dob(DEFAULT_DOB)
+            .gender(DEFAULT_GENDER)
+            .mobile(DEFAULT_MOBILE)
+            .photo(DEFAULT_PHOTO)
+            .photoContentType(DEFAULT_PHOTO_CONTENT_TYPE)
+            .citizenshipNo(DEFAULT_CITIZENSHIP_NO)
+            .panNo(DEFAULT_PAN_NO)
+            .category(DEFAULT_CATEGORY)
+            .detail(DEFAULT_DETAIL)
+            .status(DEFAULT_STATUS);
         return employee;
     }
 
@@ -80,7 +116,18 @@ class EmployeeResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Employee createUpdatedEntity(EntityManager em) {
-        Employee employee = new Employee().name(UPDATED_NAME).detail(UPDATED_DETAIL).publicationDate(UPDATED_PUBLICATION_DATE);
+        Employee employee = new Employee()
+            .fullName(UPDATED_FULL_NAME)
+            .dob(UPDATED_DOB)
+            .gender(UPDATED_GENDER)
+            .mobile(UPDATED_MOBILE)
+            .photo(UPDATED_PHOTO)
+            .photoContentType(UPDATED_PHOTO_CONTENT_TYPE)
+            .citizenshipNo(UPDATED_CITIZENSHIP_NO)
+            .panNo(UPDATED_PAN_NO)
+            .category(UPDATED_CATEGORY)
+            .detail(UPDATED_DETAIL)
+            .status(UPDATED_STATUS);
         return employee;
     }
 
@@ -103,9 +150,17 @@ class EmployeeResourceIT {
         List<Employee> employeeList = employeeRepository.findAll();
         assertThat(employeeList).hasSize(databaseSizeBeforeCreate + 1);
         Employee testEmployee = employeeList.get(employeeList.size() - 1);
-        assertThat(testEmployee.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testEmployee.getFullName()).isEqualTo(DEFAULT_FULL_NAME);
+        assertThat(testEmployee.getDob()).isEqualTo(DEFAULT_DOB);
+        assertThat(testEmployee.getGender()).isEqualTo(DEFAULT_GENDER);
+        assertThat(testEmployee.getMobile()).isEqualTo(DEFAULT_MOBILE);
+        assertThat(testEmployee.getPhoto()).isEqualTo(DEFAULT_PHOTO);
+        assertThat(testEmployee.getPhotoContentType()).isEqualTo(DEFAULT_PHOTO_CONTENT_TYPE);
+        assertThat(testEmployee.getCitizenshipNo()).isEqualTo(DEFAULT_CITIZENSHIP_NO);
+        assertThat(testEmployee.getPanNo()).isEqualTo(DEFAULT_PAN_NO);
+        assertThat(testEmployee.getCategory()).isEqualTo(DEFAULT_CATEGORY);
         assertThat(testEmployee.getDetail()).isEqualTo(DEFAULT_DETAIL);
-        assertThat(testEmployee.getPublicationDate()).isEqualTo(DEFAULT_PUBLICATION_DATE);
+        assertThat(testEmployee.getStatus()).isEqualTo(DEFAULT_STATUS);
     }
 
     @Test
@@ -139,9 +194,17 @@ class EmployeeResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(employee.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].fullName").value(hasItem(DEFAULT_FULL_NAME)))
+            .andExpect(jsonPath("$.[*].dob").value(hasItem(DEFAULT_DOB.toString())))
+            .andExpect(jsonPath("$.[*].gender").value(hasItem(DEFAULT_GENDER)))
+            .andExpect(jsonPath("$.[*].mobile").value(hasItem(DEFAULT_MOBILE)))
+            .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64.getEncoder().encodeToString(DEFAULT_PHOTO))))
+            .andExpect(jsonPath("$.[*].citizenshipNo").value(hasItem(DEFAULT_CITIZENSHIP_NO)))
+            .andExpect(jsonPath("$.[*].panNo").value(hasItem(DEFAULT_PAN_NO)))
+            .andExpect(jsonPath("$.[*].category").value(hasItem(DEFAULT_CATEGORY)))
             .andExpect(jsonPath("$.[*].detail").value(hasItem(DEFAULT_DETAIL)))
-            .andExpect(jsonPath("$.[*].publicationDate").value(hasItem(DEFAULT_PUBLICATION_DATE.toString())));
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
     }
 
     @Test
@@ -156,9 +219,17 @@ class EmployeeResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(employee.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.fullName").value(DEFAULT_FULL_NAME))
+            .andExpect(jsonPath("$.dob").value(DEFAULT_DOB.toString()))
+            .andExpect(jsonPath("$.gender").value(DEFAULT_GENDER))
+            .andExpect(jsonPath("$.mobile").value(DEFAULT_MOBILE))
+            .andExpect(jsonPath("$.photoContentType").value(DEFAULT_PHOTO_CONTENT_TYPE))
+            .andExpect(jsonPath("$.photo").value(Base64.getEncoder().encodeToString(DEFAULT_PHOTO)))
+            .andExpect(jsonPath("$.citizenshipNo").value(DEFAULT_CITIZENSHIP_NO))
+            .andExpect(jsonPath("$.panNo").value(DEFAULT_PAN_NO))
+            .andExpect(jsonPath("$.category").value(DEFAULT_CATEGORY))
             .andExpect(jsonPath("$.detail").value(DEFAULT_DETAIL))
-            .andExpect(jsonPath("$.publicationDate").value(DEFAULT_PUBLICATION_DATE.toString()));
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
     }
 
     @Test
@@ -180,7 +251,18 @@ class EmployeeResourceIT {
         Employee updatedEmployee = employeeRepository.findById(employee.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedEmployee are not directly saved in db
         em.detach(updatedEmployee);
-        updatedEmployee.name(UPDATED_NAME).detail(UPDATED_DETAIL).publicationDate(UPDATED_PUBLICATION_DATE);
+        updatedEmployee
+            .fullName(UPDATED_FULL_NAME)
+            .dob(UPDATED_DOB)
+            .gender(UPDATED_GENDER)
+            .mobile(UPDATED_MOBILE)
+            .photo(UPDATED_PHOTO)
+            .photoContentType(UPDATED_PHOTO_CONTENT_TYPE)
+            .citizenshipNo(UPDATED_CITIZENSHIP_NO)
+            .panNo(UPDATED_PAN_NO)
+            .category(UPDATED_CATEGORY)
+            .detail(UPDATED_DETAIL)
+            .status(UPDATED_STATUS);
         EmployeeDTO employeeDTO = employeeMapper.toDto(updatedEmployee);
 
         restEmployeeMockMvc
@@ -195,9 +277,17 @@ class EmployeeResourceIT {
         List<Employee> employeeList = employeeRepository.findAll();
         assertThat(employeeList).hasSize(databaseSizeBeforeUpdate);
         Employee testEmployee = employeeList.get(employeeList.size() - 1);
-        assertThat(testEmployee.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testEmployee.getFullName()).isEqualTo(UPDATED_FULL_NAME);
+        assertThat(testEmployee.getDob()).isEqualTo(UPDATED_DOB);
+        assertThat(testEmployee.getGender()).isEqualTo(UPDATED_GENDER);
+        assertThat(testEmployee.getMobile()).isEqualTo(UPDATED_MOBILE);
+        assertThat(testEmployee.getPhoto()).isEqualTo(UPDATED_PHOTO);
+        assertThat(testEmployee.getPhotoContentType()).isEqualTo(UPDATED_PHOTO_CONTENT_TYPE);
+        assertThat(testEmployee.getCitizenshipNo()).isEqualTo(UPDATED_CITIZENSHIP_NO);
+        assertThat(testEmployee.getPanNo()).isEqualTo(UPDATED_PAN_NO);
+        assertThat(testEmployee.getCategory()).isEqualTo(UPDATED_CATEGORY);
         assertThat(testEmployee.getDetail()).isEqualTo(UPDATED_DETAIL);
-        assertThat(testEmployee.getPublicationDate()).isEqualTo(UPDATED_PUBLICATION_DATE);
+        assertThat(testEmployee.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 
     @Test
@@ -277,7 +367,7 @@ class EmployeeResourceIT {
         Employee partialUpdatedEmployee = new Employee();
         partialUpdatedEmployee.setId(employee.getId());
 
-        partialUpdatedEmployee.name(UPDATED_NAME).detail(UPDATED_DETAIL);
+        partialUpdatedEmployee.fullName(UPDATED_FULL_NAME).dob(UPDATED_DOB).detail(UPDATED_DETAIL).status(UPDATED_STATUS);
 
         restEmployeeMockMvc
             .perform(
@@ -291,9 +381,17 @@ class EmployeeResourceIT {
         List<Employee> employeeList = employeeRepository.findAll();
         assertThat(employeeList).hasSize(databaseSizeBeforeUpdate);
         Employee testEmployee = employeeList.get(employeeList.size() - 1);
-        assertThat(testEmployee.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testEmployee.getFullName()).isEqualTo(UPDATED_FULL_NAME);
+        assertThat(testEmployee.getDob()).isEqualTo(UPDATED_DOB);
+        assertThat(testEmployee.getGender()).isEqualTo(DEFAULT_GENDER);
+        assertThat(testEmployee.getMobile()).isEqualTo(DEFAULT_MOBILE);
+        assertThat(testEmployee.getPhoto()).isEqualTo(DEFAULT_PHOTO);
+        assertThat(testEmployee.getPhotoContentType()).isEqualTo(DEFAULT_PHOTO_CONTENT_TYPE);
+        assertThat(testEmployee.getCitizenshipNo()).isEqualTo(DEFAULT_CITIZENSHIP_NO);
+        assertThat(testEmployee.getPanNo()).isEqualTo(DEFAULT_PAN_NO);
+        assertThat(testEmployee.getCategory()).isEqualTo(DEFAULT_CATEGORY);
         assertThat(testEmployee.getDetail()).isEqualTo(UPDATED_DETAIL);
-        assertThat(testEmployee.getPublicationDate()).isEqualTo(DEFAULT_PUBLICATION_DATE);
+        assertThat(testEmployee.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 
     @Test
@@ -308,7 +406,18 @@ class EmployeeResourceIT {
         Employee partialUpdatedEmployee = new Employee();
         partialUpdatedEmployee.setId(employee.getId());
 
-        partialUpdatedEmployee.name(UPDATED_NAME).detail(UPDATED_DETAIL).publicationDate(UPDATED_PUBLICATION_DATE);
+        partialUpdatedEmployee
+            .fullName(UPDATED_FULL_NAME)
+            .dob(UPDATED_DOB)
+            .gender(UPDATED_GENDER)
+            .mobile(UPDATED_MOBILE)
+            .photo(UPDATED_PHOTO)
+            .photoContentType(UPDATED_PHOTO_CONTENT_TYPE)
+            .citizenshipNo(UPDATED_CITIZENSHIP_NO)
+            .panNo(UPDATED_PAN_NO)
+            .category(UPDATED_CATEGORY)
+            .detail(UPDATED_DETAIL)
+            .status(UPDATED_STATUS);
 
         restEmployeeMockMvc
             .perform(
@@ -322,9 +431,17 @@ class EmployeeResourceIT {
         List<Employee> employeeList = employeeRepository.findAll();
         assertThat(employeeList).hasSize(databaseSizeBeforeUpdate);
         Employee testEmployee = employeeList.get(employeeList.size() - 1);
-        assertThat(testEmployee.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testEmployee.getFullName()).isEqualTo(UPDATED_FULL_NAME);
+        assertThat(testEmployee.getDob()).isEqualTo(UPDATED_DOB);
+        assertThat(testEmployee.getGender()).isEqualTo(UPDATED_GENDER);
+        assertThat(testEmployee.getMobile()).isEqualTo(UPDATED_MOBILE);
+        assertThat(testEmployee.getPhoto()).isEqualTo(UPDATED_PHOTO);
+        assertThat(testEmployee.getPhotoContentType()).isEqualTo(UPDATED_PHOTO_CONTENT_TYPE);
+        assertThat(testEmployee.getCitizenshipNo()).isEqualTo(UPDATED_CITIZENSHIP_NO);
+        assertThat(testEmployee.getPanNo()).isEqualTo(UPDATED_PAN_NO);
+        assertThat(testEmployee.getCategory()).isEqualTo(UPDATED_CATEGORY);
         assertThat(testEmployee.getDetail()).isEqualTo(UPDATED_DETAIL);
-        assertThat(testEmployee.getPublicationDate()).isEqualTo(UPDATED_PUBLICATION_DATE);
+        assertThat(testEmployee.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 
     @Test

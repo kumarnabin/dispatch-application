@@ -13,6 +13,7 @@ import { getEntities as getServiceProviders } from 'app/entities/service-provide
 import { IBranchCircuit } from 'app/shared/model/branch-circuit.model';
 import { getEntities as getBranchCircuits } from 'app/entities/branch-circuit/branch-circuit.reducer';
 import { IBranch } from 'app/shared/model/branch.model';
+import { Status } from 'app/shared/model/enumerations/status.model';
 import { getEntity, updateEntity, createEntity, reset } from './branch.reducer';
 
 export const BranchUpdate = () => {
@@ -29,6 +30,7 @@ export const BranchUpdate = () => {
   const loading = useAppSelector(state => state.branch.loading);
   const updating = useAppSelector(state => state.branch.updating);
   const updateSuccess = useAppSelector(state => state.branch.updateSuccess);
+  const statusValues = Object.keys(Status);
 
   const handleClose = () => {
     navigate('/branch');
@@ -56,7 +58,6 @@ export const BranchUpdate = () => {
     if (values.id !== undefined && typeof values.id !== 'number') {
       values.id = Number(values.id);
     }
-    values.publicationDate = convertDateTimeToServer(values.publicationDate);
 
     const entity = {
       ...branchEntity,
@@ -73,12 +74,10 @@ export const BranchUpdate = () => {
 
   const defaultValues = () =>
     isNew
-      ? {
-          publicationDate: displayDefaultDateTime(),
-        }
+      ? {}
       : {
+          status: 'OPEN',
           ...branchEntity,
-          publicationDate: convertDateTimeFromServer(branchEntity.publicationDate),
           serviceProvider: branchEntity?.serviceProvider?.id,
         };
 
@@ -99,14 +98,14 @@ export const BranchUpdate = () => {
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
               {!isNew ? <ValidatedField name="id" required readOnly id="branch-id" label="ID" validate={{ required: true }} /> : null}
               <ValidatedField label="Name" id="branch-name" name="name" data-cy="name" type="text" />
-              <ValidatedField
-                label="Publication Date"
-                id="branch-publicationDate"
-                name="publicationDate"
-                data-cy="publicationDate"
-                type="datetime-local"
-                placeholder="YYYY-MM-DD HH:mm"
-              />
+              <ValidatedField label="Code" id="branch-code" name="code" data-cy="code" type="text" />
+              <ValidatedField label="Status" id="branch-status" name="status" data-cy="status" type="select">
+                {statusValues.map(status => (
+                  <option value={status} key={status}>
+                    {status}
+                  </option>
+                ))}
+              </ValidatedField>
               <ValidatedField
                 id="branch-serviceProvider"
                 name="serviceProvider"

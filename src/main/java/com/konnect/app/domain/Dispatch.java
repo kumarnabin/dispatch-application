@@ -1,5 +1,6 @@
 package com.konnect.app.domain;
 
+import com.konnect.app.domain.enumeration.Status;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
@@ -56,8 +57,9 @@ public class Dispatch implements Serializable {
     @Column(name = "remark")
     private String remark;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private String status;
+    private Status status;
 
     @Column(name = "location")
     private String location;
@@ -242,16 +244,16 @@ public class Dispatch implements Serializable {
         this.remark = remark;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return this.status;
     }
 
-    public Dispatch status(String status) {
+    public Dispatch status(Status status) {
         this.setStatus(status);
         return this;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

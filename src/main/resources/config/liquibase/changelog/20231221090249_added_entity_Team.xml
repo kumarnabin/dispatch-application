@@ -29,12 +29,8 @@
             <column name="team_leader_phone" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="publication_date" type="${datetimeType}">
-                <constraints nullable="true" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-        <dropDefaultValue tableName="team" columnName="publication_date" columnDataType="${datetimeType}"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -59,7 +55,6 @@
             <column name="supervisor_phone_no" type="string"/>
             <column name="team_leader" type="string"/>
             <column name="team_leader_phone" type="string"/>
-            <column name="publication_date" type="date"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

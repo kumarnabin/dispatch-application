@@ -1,9 +1,9 @@
 package com.konnect.app.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.konnect.app.domain.enumeration.Status;
 import jakarta.persistence.*;
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,8 +25,12 @@ public class Branch implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "publication_date")
-    private Instant publicationDate;
+    @Column(name = "code")
+    private String code;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private Status status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "masterCircuits" }, allowSetters = true)
@@ -64,17 +68,30 @@ public class Branch implements Serializable {
         this.name = name;
     }
 
-    public Instant getPublicationDate() {
-        return this.publicationDate;
+    public String getCode() {
+        return this.code;
     }
 
-    public Branch publicationDate(Instant publicationDate) {
-        this.setPublicationDate(publicationDate);
+    public Branch code(String code) {
+        this.setCode(code);
         return this;
     }
 
-    public void setPublicationDate(Instant publicationDate) {
-        this.publicationDate = publicationDate;
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Status getStatus() {
+        return this.status;
+    }
+
+    public Branch status(Status status) {
+        this.setStatus(status);
+        return this;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public ServiceProvider getServiceProvider() {
@@ -146,7 +163,8 @@ public class Branch implements Serializable {
         return "Branch{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", publicationDate='" + getPublicationDate() + "'" +
+            ", code='" + getCode() + "'" +
+            ", status='" + getStatus() + "'" +
             "}";
     }
 }

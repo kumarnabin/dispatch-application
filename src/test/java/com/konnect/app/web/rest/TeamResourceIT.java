@@ -11,8 +11,6 @@ import com.konnect.app.repository.TeamRepository;
 import com.konnect.app.service.dto.TeamDTO;
 import com.konnect.app.service.mapper.TeamMapper;
 import jakarta.persistence.EntityManager;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
@@ -48,9 +46,6 @@ class TeamResourceIT {
     private static final String DEFAULT_TEAM_LEADER_PHONE = "AAAAAAAAAA";
     private static final String UPDATED_TEAM_LEADER_PHONE = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_PUBLICATION_DATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_PUBLICATION_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
     private static final String ENTITY_API_URL = "/api/teams";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -83,8 +78,7 @@ class TeamResourceIT {
             .supervisor(DEFAULT_SUPERVISOR)
             .supervisorPhoneNo(DEFAULT_SUPERVISOR_PHONE_NO)
             .teamLeader(DEFAULT_TEAM_LEADER)
-            .teamLeaderPhone(DEFAULT_TEAM_LEADER_PHONE)
-            .publicationDate(DEFAULT_PUBLICATION_DATE);
+            .teamLeaderPhone(DEFAULT_TEAM_LEADER_PHONE);
         return team;
     }
 
@@ -100,8 +94,7 @@ class TeamResourceIT {
             .supervisor(UPDATED_SUPERVISOR)
             .supervisorPhoneNo(UPDATED_SUPERVISOR_PHONE_NO)
             .teamLeader(UPDATED_TEAM_LEADER)
-            .teamLeaderPhone(UPDATED_TEAM_LEADER_PHONE)
-            .publicationDate(UPDATED_PUBLICATION_DATE);
+            .teamLeaderPhone(UPDATED_TEAM_LEADER_PHONE);
         return team;
     }
 
@@ -129,7 +122,6 @@ class TeamResourceIT {
         assertThat(testTeam.getSupervisorPhoneNo()).isEqualTo(DEFAULT_SUPERVISOR_PHONE_NO);
         assertThat(testTeam.getTeamLeader()).isEqualTo(DEFAULT_TEAM_LEADER);
         assertThat(testTeam.getTeamLeaderPhone()).isEqualTo(DEFAULT_TEAM_LEADER_PHONE);
-        assertThat(testTeam.getPublicationDate()).isEqualTo(DEFAULT_PUBLICATION_DATE);
     }
 
     @Test
@@ -167,8 +159,7 @@ class TeamResourceIT {
             .andExpect(jsonPath("$.[*].supervisor").value(hasItem(DEFAULT_SUPERVISOR)))
             .andExpect(jsonPath("$.[*].supervisorPhoneNo").value(hasItem(DEFAULT_SUPERVISOR_PHONE_NO)))
             .andExpect(jsonPath("$.[*].teamLeader").value(hasItem(DEFAULT_TEAM_LEADER)))
-            .andExpect(jsonPath("$.[*].teamLeaderPhone").value(hasItem(DEFAULT_TEAM_LEADER_PHONE)))
-            .andExpect(jsonPath("$.[*].publicationDate").value(hasItem(DEFAULT_PUBLICATION_DATE.toString())));
+            .andExpect(jsonPath("$.[*].teamLeaderPhone").value(hasItem(DEFAULT_TEAM_LEADER_PHONE)));
     }
 
     @Test
@@ -187,8 +178,7 @@ class TeamResourceIT {
             .andExpect(jsonPath("$.supervisor").value(DEFAULT_SUPERVISOR))
             .andExpect(jsonPath("$.supervisorPhoneNo").value(DEFAULT_SUPERVISOR_PHONE_NO))
             .andExpect(jsonPath("$.teamLeader").value(DEFAULT_TEAM_LEADER))
-            .andExpect(jsonPath("$.teamLeaderPhone").value(DEFAULT_TEAM_LEADER_PHONE))
-            .andExpect(jsonPath("$.publicationDate").value(DEFAULT_PUBLICATION_DATE.toString()));
+            .andExpect(jsonPath("$.teamLeaderPhone").value(DEFAULT_TEAM_LEADER_PHONE));
     }
 
     @Test
@@ -215,8 +205,7 @@ class TeamResourceIT {
             .supervisor(UPDATED_SUPERVISOR)
             .supervisorPhoneNo(UPDATED_SUPERVISOR_PHONE_NO)
             .teamLeader(UPDATED_TEAM_LEADER)
-            .teamLeaderPhone(UPDATED_TEAM_LEADER_PHONE)
-            .publicationDate(UPDATED_PUBLICATION_DATE);
+            .teamLeaderPhone(UPDATED_TEAM_LEADER_PHONE);
         TeamDTO teamDTO = teamMapper.toDto(updatedTeam);
 
         restTeamMockMvc
@@ -236,7 +225,6 @@ class TeamResourceIT {
         assertThat(testTeam.getSupervisorPhoneNo()).isEqualTo(UPDATED_SUPERVISOR_PHONE_NO);
         assertThat(testTeam.getTeamLeader()).isEqualTo(UPDATED_TEAM_LEADER);
         assertThat(testTeam.getTeamLeaderPhone()).isEqualTo(UPDATED_TEAM_LEADER_PHONE);
-        assertThat(testTeam.getPublicationDate()).isEqualTo(UPDATED_PUBLICATION_DATE);
     }
 
     @Test
@@ -335,7 +323,6 @@ class TeamResourceIT {
         assertThat(testTeam.getSupervisorPhoneNo()).isEqualTo(UPDATED_SUPERVISOR_PHONE_NO);
         assertThat(testTeam.getTeamLeader()).isEqualTo(UPDATED_TEAM_LEADER);
         assertThat(testTeam.getTeamLeaderPhone()).isEqualTo(DEFAULT_TEAM_LEADER_PHONE);
-        assertThat(testTeam.getPublicationDate()).isEqualTo(DEFAULT_PUBLICATION_DATE);
     }
 
     @Test
@@ -355,8 +342,7 @@ class TeamResourceIT {
             .supervisor(UPDATED_SUPERVISOR)
             .supervisorPhoneNo(UPDATED_SUPERVISOR_PHONE_NO)
             .teamLeader(UPDATED_TEAM_LEADER)
-            .teamLeaderPhone(UPDATED_TEAM_LEADER_PHONE)
-            .publicationDate(UPDATED_PUBLICATION_DATE);
+            .teamLeaderPhone(UPDATED_TEAM_LEADER_PHONE);
 
         restTeamMockMvc
             .perform(
@@ -375,7 +361,6 @@ class TeamResourceIT {
         assertThat(testTeam.getSupervisorPhoneNo()).isEqualTo(UPDATED_SUPERVISOR_PHONE_NO);
         assertThat(testTeam.getTeamLeader()).isEqualTo(UPDATED_TEAM_LEADER);
         assertThat(testTeam.getTeamLeaderPhone()).isEqualTo(UPDATED_TEAM_LEADER_PHONE);
-        assertThat(testTeam.getPublicationDate()).isEqualTo(UPDATED_PUBLICATION_DATE);
     }
 
     @Test

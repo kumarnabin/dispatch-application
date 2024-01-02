@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { ITeam } from 'app/shared/model/team.model';
 import { getEntities as getTeams } from 'app/entities/team/team.reducer';
 import { IDispatch } from 'app/shared/model/dispatch.model';
+import { Status } from 'app/shared/model/enumerations/status.model';
 import { getEntity, updateEntity, createEntity, reset } from './dispatch.reducer';
 
 export const DispatchUpdate = () => {
@@ -26,6 +27,7 @@ export const DispatchUpdate = () => {
   const loading = useAppSelector(state => state.dispatch.loading);
   const updating = useAppSelector(state => state.dispatch.updating);
   const updateSuccess = useAppSelector(state => state.dispatch.updateSuccess);
+  const statusValues = Object.keys(Status);
 
   const handleClose = () => {
     navigate('/dispatch');
@@ -73,6 +75,7 @@ export const DispatchUpdate = () => {
           publicationDate: displayDefaultDateTime(),
         }
       : {
+          status: 'OPEN',
           ...dispatchEntity,
           publicationDate: convertDateTimeFromServer(dispatchEntity.publicationDate),
           team: dispatchEntity?.team?.id,
@@ -106,7 +109,13 @@ export const DispatchUpdate = () => {
               <ValidatedField label="Cpe Rx" id="dispatch-cpeRx" name="cpeRx" data-cy="cpeRx" type="text" />
               <ValidatedField label="Complain" id="dispatch-complain" name="complain" data-cy="complain" type="text" />
               <ValidatedField label="Remark" id="dispatch-remark" name="remark" data-cy="remark" type="text" />
-              <ValidatedField label="Status" id="dispatch-status" name="status" data-cy="status" type="text" />
+              <ValidatedField label="Status" id="dispatch-status" name="status" data-cy="status" type="select">
+                {statusValues.map(status => (
+                  <option value={status} key={status}>
+                    {status}
+                  </option>
+                ))}
+              </ValidatedField>
               <ValidatedField label="Location" id="dispatch-location" name="location" data-cy="location" type="text" />
               <ValidatedField label="Print Date" id="dispatch-printDate" name="printDate" data-cy="printDate" type="date" />
               <ValidatedField

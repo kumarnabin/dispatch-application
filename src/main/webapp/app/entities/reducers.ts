@@ -8,6 +8,10 @@ import customer from 'app/entities/customer/customer.reducer';
 import area from 'app/entities/area/area.reducer';
 import dispatch from 'app/entities/dispatch/dispatch.reducer';
 import employee from 'app/entities/employee/employee.reducer';
+import employeeArea from 'app/entities/employee-area/employee-area.reducer';
+import attendance from 'app/entities/attendance/attendance.reducer';
+import document from 'app/entities/document/document.reducer';
+import dispatchRecord from 'app/entities/dispatch-record/dispatch-record.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 const entitiesReducers = {
@@ -21,6 +25,10 @@ const entitiesReducers = {
   area,
   dispatch,
   employee,
+  employeeArea,
+  attendance,
+  document,
+  dispatchRecord,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
 };
 

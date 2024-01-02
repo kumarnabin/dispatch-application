@@ -1,5 +1,3 @@
-import dayjs from 'dayjs';
-
 export interface ITeam {
   id?: number;
   teamNo?: string | null;
@@ -7,7 +5,6 @@ export interface ITeam {
   supervisorPhoneNo?: string | null;
   teamLeader?: string | null;
   teamLeaderPhone?: string | null;
-  publicationDate?: dayjs.Dayjs | null;
 }
 
 export const defaultValue: Readonly<ITeam> = {};

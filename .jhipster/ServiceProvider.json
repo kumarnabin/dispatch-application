@@ -11,20 +11,25 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "address",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Status",
+      "fieldValues": "OPEN (Open),WAITING_FOR_RESPONSE (Waiting for Customer Response),CLOSED (Closed),DUPLICATE (Duplicate),IN_PROGRESS (In Progress),REOPENED (Reopened),CANNOT_REPRODUCE (Cannot Reproduce),SOLVED (Solved),WONT_IMPLEMENT (Won't Implement),VERIFIED (Verified)"
     }
   ],
   "name": "ServiceProvider",
-  "relationships": [
-    {
-      "otherEntityName": "masterCircuit",
-      "otherEntityRelationshipName": "serviceProvider",
-      "relationshipName": "masterCircuit",
-      "relationshipSide": "right",
-      "relationshipType": "many-to-many"
-    }
-  ],
+  "relationships": [],
   "searchEngine": "no",
   "service": "serviceClass"
 }

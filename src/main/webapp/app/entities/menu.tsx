@@ -36,6 +36,18 @@ const EntitiesMenu = () => {
       <MenuItem icon="asterisk" to="/employee">
         Employee
       </MenuItem>
+      <MenuItem icon="asterisk" to="/employee-area">
+        Employee Area
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/attendance">
+        Attendance
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/document">
+        Document
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/dispatch-record">
+        Dispatch Record
+      </MenuItem>
       {/* jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here */}
     </>
   );

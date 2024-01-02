@@ -1,11 +1,9 @@
 package com.konnect.app.service.dto;
 
+import com.konnect.app.domain.enumeration.Status;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
-import java.time.Instant;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * A DTO for the {@link com.konnect.app.domain.Area} entity.
@@ -15,13 +13,15 @@ public class AreaDTO implements Serializable {
 
     private Long id;
 
+    private String name;
+
     private String code;
 
     private String detail;
 
-    private Instant publicationDate;
+    private Status status;
 
-    private Set<EmployeeDTO> employees = new HashSet<>();
+    private EmployeeDTO employee;
 
     public Long getId() {
         return id;
@@ -29,6 +29,14 @@ public class AreaDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCode() {
@@ -47,20 +55,20 @@ public class AreaDTO implements Serializable {
         this.detail = detail;
     }
 
-    public Instant getPublicationDate() {
-        return publicationDate;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setPublicationDate(Instant publicationDate) {
-        this.publicationDate = publicationDate;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
-    public Set<EmployeeDTO> getEmployees() {
-        return employees;
+    public EmployeeDTO getEmployee() {
+        return employee;
     }
 
-    public void setEmployees(Set<EmployeeDTO> employees) {
-        this.employees = employees;
+    public void setEmployee(EmployeeDTO employee) {
+        this.employee = employee;
     }
 
     @Override
@@ -89,10 +97,11 @@ public class AreaDTO implements Serializable {
     public String toString() {
         return "AreaDTO{" +
             "id=" + getId() +
+            ", name='" + getName() + "'" +
             ", code='" + getCode() + "'" +
             ", detail='" + getDetail() + "'" +
-            ", publicationDate='" + getPublicationDate() + "'" +
-            ", employees=" + getEmployees() +
+            ", status='" + getStatus() + "'" +
+            ", employee=" + getEmployee() +
             "}";
     }
 }

@@ -5,8 +5,6 @@ import static com.konnect.app.domain.EmployeeTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.konnect.app.web.rest.TestUtil;
-import java.util.HashSet;
-import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class AreaTest {
@@ -30,16 +28,10 @@ class AreaTest {
         Area area = getAreaRandomSampleGenerator();
         Employee employeeBack = getEmployeeRandomSampleGenerator();
 
-        area.addEmployee(employeeBack);
-        assertThat(area.getEmployees()).containsOnly(employeeBack);
+        area.setEmployee(employeeBack);
+        assertThat(area.getEmployee()).isEqualTo(employeeBack);
 
-        area.removeEmployee(employeeBack);
-        assertThat(area.getEmployees()).doesNotContain(employeeBack);
-
-        area.employees(new HashSet<>(Set.of(employeeBack)));
-        assertThat(area.getEmployees()).containsOnly(employeeBack);
-
-        area.setEmployees(new HashSet<>());
-        assertThat(area.getEmployees()).doesNotContain(employeeBack);
+        area.employee(null);
+        assertThat(area.getEmployee()).isNull();
     }
 }

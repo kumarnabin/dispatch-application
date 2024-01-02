@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.konnect.app.IntegrationTest;
 import com.konnect.app.domain.Dispatch;
+import com.konnect.app.domain.enumeration.Status;
 import com.konnect.app.repository.DispatchRepository;
 import com.konnect.app.service.dto.DispatchDTO;
 import com.konnect.app.service.mapper.DispatchMapper;
@@ -71,8 +72,8 @@ class DispatchResourceIT {
     private static final String DEFAULT_REMARK = "AAAAAAAAAA";
     private static final String UPDATED_REMARK = "BBBBBBBBBB";
 
-    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_STATUS = "BBBBBBBBBB";
+    private static final Status DEFAULT_STATUS = Status.OPEN;
+    private static final Status UPDATED_STATUS = Status.WAITING_FOR_RESPONSE;
 
     private static final String DEFAULT_LOCATION = "AAAAAAAAAA";
     private static final String UPDATED_LOCATION = "BBBBBBBBBB";
@@ -237,7 +238,7 @@ class DispatchResourceIT {
             .andExpect(jsonPath("$.[*].cpeRx").value(hasItem(DEFAULT_CPE_RX)))
             .andExpect(jsonPath("$.[*].complain").value(hasItem(DEFAULT_COMPLAIN)))
             .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION)))
             .andExpect(jsonPath("$.[*].printDate").value(hasItem(DEFAULT_PRINT_DATE.toString())))
             .andExpect(jsonPath("$.[*].publicationDate").value(hasItem(DEFAULT_PUBLICATION_DATE.toString())));
@@ -267,7 +268,7 @@ class DispatchResourceIT {
             .andExpect(jsonPath("$.cpeRx").value(DEFAULT_CPE_RX))
             .andExpect(jsonPath("$.complain").value(DEFAULT_COMPLAIN))
             .andExpect(jsonPath("$.remark").value(DEFAULT_REMARK))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.location").value(DEFAULT_LOCATION))
             .andExpect(jsonPath("$.printDate").value(DEFAULT_PRINT_DATE.toString()))
             .andExpect(jsonPath("$.publicationDate").value(DEFAULT_PUBLICATION_DATE.toString()));

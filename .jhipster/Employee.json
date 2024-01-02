@@ -7,7 +7,36 @@
   "entityTableName": "employee",
   "fields": [
     {
-      "fieldName": "name",
+      "fieldName": "fullName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dob",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "gender",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mobile",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "photo",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "citizenshipNo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "panNo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "category",
       "fieldType": "String"
     },
     {
@@ -15,8 +44,9 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "publicationDate",
-      "fieldType": "Instant"
+      "fieldName": "status",
+      "fieldType": "Status",
+      "fieldValues": "OPEN (Open),WAITING_FOR_RESPONSE (Waiting for Customer Response),CLOSED (Closed),DUPLICATE (Duplicate),IN_PROGRESS (In Progress),REOPENED (Reopened),CANNOT_REPRODUCE (Cannot Reproduce),SOLVED (Solved),WONT_IMPLEMENT (Won't Implement),VERIFIED (Verified)"
     }
   ],
   "name": "Employee",
@@ -27,13 +57,6 @@
       "relationshipSide": "left",
       "relationshipType": "many-to-one",
       "relationshipWithBuiltInEntity": true
-    },
-    {
-      "otherEntityName": "area",
-      "otherEntityRelationshipName": "employee",
-      "relationshipName": "area",
-      "relationshipSide": "right",
-      "relationshipType": "many-to-many"
     }
   ],
   "searchEngine": "no",

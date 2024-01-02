@@ -2,7 +2,6 @@ package com.konnect.app.domain;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
-import java.time.Instant;
 
 /**
  * A Team.
@@ -33,9 +32,6 @@ public class Team implements Serializable {
 
     @Column(name = "team_leader_phone")
     private String teamLeaderPhone;
-
-    @Column(name = "publication_date")
-    private Instant publicationDate;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -117,19 +113,6 @@ public class Team implements Serializable {
         this.teamLeaderPhone = teamLeaderPhone;
     }
 
-    public Instant getPublicationDate() {
-        return this.publicationDate;
-    }
-
-    public Team publicationDate(Instant publicationDate) {
-        this.setPublicationDate(publicationDate);
-        return this;
-    }
-
-    public void setPublicationDate(Instant publicationDate) {
-        this.publicationDate = publicationDate;
-    }
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -159,7 +142,6 @@ public class Team implements Serializable {
             ", supervisorPhoneNo='" + getSupervisorPhoneNo() + "'" +
             ", teamLeader='" + getTeamLeader() + "'" +
             ", teamLeaderPhone='" + getTeamLeaderPhone() + "'" +
-            ", publicationDate='" + getPublicationDate() + "'" +
             "}";
     }
 }

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Table } from 'reactstrap';
-import { Translate, TextFormat, getSortState } from 'react-jhipster';
+import { Translate, getSortState } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSort, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
-import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { ASC, DESC, SORT } from 'app/shared/util/pagination.constants';
 import { overrideSortStateWithQueryParams } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
@@ -86,14 +85,17 @@ export const Area = () => {
                 <th className="hand" onClick={sort('id')}>
                   ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
+                <th className="hand" onClick={sort('name')}>
+                  Name <FontAwesomeIcon icon={getSortIconByFieldName('name')} />
+                </th>
                 <th className="hand" onClick={sort('code')}>
                   Code <FontAwesomeIcon icon={getSortIconByFieldName('code')} />
                 </th>
                 <th className="hand" onClick={sort('detail')}>
                   Detail <FontAwesomeIcon icon={getSortIconByFieldName('detail')} />
                 </th>
-                <th className="hand" onClick={sort('publicationDate')}>
-                  Publication Date <FontAwesomeIcon icon={getSortIconByFieldName('publicationDate')} />
+                <th className="hand" onClick={sort('status')}>
+                  Status <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
                 </th>
                 <th>
                   Employee <FontAwesomeIcon icon="sort" />
@@ -109,19 +111,11 @@ export const Area = () => {
                       {area.id}
                     </Button>
                   </td>
+                  <td>{area.name}</td>
                   <td>{area.code}</td>
                   <td>{area.detail}</td>
-                  <td>{area.publicationDate ? <TextFormat type="date" value={area.publicationDate} format={APP_DATE_FORMAT} /> : null}</td>
-                  <td>
-                    {area.employees
-                      ? area.employees.map((val, j) => (
-                          <span key={j}>
-                            <Link to={`/employee/${val.id}`}>{val.id}</Link>
-                            {j === area.employees.length - 1 ? '' : ', '}
-                          </span>
-                        ))
-                      : null}
-                  </td>
+                  <td>{area.status}</td>
+                  <td>{area.employee ? <Link to={`/employee/${area.employee.id}`}>{area.employee.id}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/area/${area.id}`} color="info" size="sm" data-cy="entityDetailsButton">

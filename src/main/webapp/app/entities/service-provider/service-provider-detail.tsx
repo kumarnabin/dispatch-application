@@ -32,9 +32,21 @@ export const ServiceProviderDetail = () => {
           </dt>
           <dd>{serviceProviderEntity.name}</dd>
           <dt>
+            <span id="code">Code</span>
+          </dt>
+          <dd>{serviceProviderEntity.code}</dd>
+          <dt>
+            <span id="phone">Phone</span>
+          </dt>
+          <dd>{serviceProviderEntity.phone}</dd>
+          <dt>
             <span id="address">Address</span>
           </dt>
           <dd>{serviceProviderEntity.address}</dd>
+          <dt>
+            <span id="status">Status</span>
+          </dt>
+          <dd>{serviceProviderEntity.status}</dd>
         </dl>
         <Button tag={Link} to="/service-provider" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

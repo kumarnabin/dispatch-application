@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { IEmployee } from 'app/shared/model/employee.model';
 import { getEntities as getEmployees } from 'app/entities/employee/employee.reducer';
 import { IArea } from 'app/shared/model/area.model';
+import { Status } from 'app/shared/model/enumerations/status.model';
 import { getEntity, updateEntity, createEntity, reset } from './area.reducer';
 
 export const AreaUpdate = () => {
@@ -26,6 +27,7 @@ export const AreaUpdate = () => {
   const loading = useAppSelector(state => state.area.loading);
   const updating = useAppSelector(state => state.area.updating);
   const updateSuccess = useAppSelector(state => state.area.updateSuccess);
+  const statusValues = Object.keys(Status);
 
   const handleClose = () => {
     navigate('/area');
@@ -52,12 +54,11 @@ export const AreaUpdate = () => {
     if (values.id !== undefined && typeof values.id !== 'number') {
       values.id = Number(values.id);
     }
-    values.publicationDate = convertDateTimeToServer(values.publicationDate);
 
     const entity = {
       ...areaEntity,
       ...values,
-      employees: mapIdList(values.employees),
+      employee: employees.find(it => it.id.toString() === values.employee.toString()),
     };
 
     if (isNew) {
@@ -69,13 +70,11 @@ export const AreaUpdate = () => {
 
   const defaultValues = () =>
     isNew
-      ? {
-          publicationDate: displayDefaultDateTime(),
-        }
+      ? {}
       : {
+          status: 'OPEN',
           ...areaEntity,
-          publicationDate: convertDateTimeFromServer(areaEntity.publicationDate),
-          employees: areaEntity?.employees?.map(e => e.id.toString()),
+          employee: areaEntity?.employee?.id,
         };
 
   return (
@@ -94,17 +93,17 @@ export const AreaUpdate = () => {
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
               {!isNew ? <ValidatedField name="id" required readOnly id="area-id" label="ID" validate={{ required: true }} /> : null}
+              <ValidatedField label="Name" id="area-name" name="name" data-cy="name" type="text" />
               <ValidatedField label="Code" id="area-code" name="code" data-cy="code" type="text" validate={{}} />
               <ValidatedField label="Detail" id="area-detail" name="detail" data-cy="detail" type="text" />
-              <ValidatedField
-                label="Publication Date"
-                id="area-publicationDate"
-                name="publicationDate"
-                data-cy="publicationDate"
-                type="datetime-local"
-                placeholder="YYYY-MM-DD HH:mm"
-              />
-              <ValidatedField label="Employee" id="area-employee" data-cy="employee" type="select" multiple name="employees">
+              <ValidatedField label="Status" id="area-status" name="status" data-cy="status" type="select">
+                {statusValues.map(status => (
+                  <option value={status} key={status}>
+                    {status}
+                  </option>
+                ))}
+              </ValidatedField>
+              <ValidatedField id="area-employee" name="employee" data-cy="employee" label="Employee" type="select">
                 <option value="" key="0" />
                 {employees
                   ? employees.map(otherEntity => (
