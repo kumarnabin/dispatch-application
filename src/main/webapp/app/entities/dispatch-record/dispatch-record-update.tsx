@@ -8,10 +8,10 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-import { IEmployee } from 'app/shared/model/employee.model';
-import { getEntities as getEmployees } from 'app/entities/employee/employee.reducer';
 import { IDispatch } from 'app/shared/model/dispatch.model';
 import { getEntities as getDispatches } from 'app/entities/dispatch/dispatch.reducer';
+import { IEmployee } from 'app/shared/model/employee.model';
+import { getEntities as getEmployees } from 'app/entities/employee/employee.reducer';
 import { IDispatchRecord } from 'app/shared/model/dispatch-record.model';
 import { Status } from 'app/shared/model/enumerations/status.model';
 import { getEntity, updateEntity, createEntity, reset } from './dispatch-record.reducer';
@@ -24,8 +24,8 @@ export const DispatchRecordUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
-  const employees = useAppSelector(state => state.employee.entities);
   const dispatches = useAppSelector(state => state.dispatch.entities);
+  const employees = useAppSelector(state => state.employee.entities);
   const dispatchRecordEntity = useAppSelector(state => state.dispatchRecord.entity);
   const loading = useAppSelector(state => state.dispatchRecord.loading);
   const updating = useAppSelector(state => state.dispatchRecord.updating);
@@ -43,8 +43,8 @@ export const DispatchRecordUpdate = () => {
       dispatch(getEntity(id));
     }
 
-    dispatch(getEmployees({}));
     dispatch(getDispatches({}));
+    dispatch(getEmployees({}));
   }, []);
 
   useEffect(() => {
@@ -63,8 +63,8 @@ export const DispatchRecordUpdate = () => {
     const entity = {
       ...dispatchRecordEntity,
       ...values,
-      employee: employees.find(it => it.id.toString() === values.employee.toString()),
       dispatch: dispatches.find(it => it.id.toString() === values.dispatch.toString()),
+      employee: employees.find(it => it.id.toString() === values.employee.toString()),
     };
 
     if (isNew) {
@@ -83,8 +83,8 @@ export const DispatchRecordUpdate = () => {
           status: 'OPEN',
           ...dispatchRecordEntity,
           publicationDate: convertDateTimeFromServer(dispatchRecordEntity.publicationDate),
-          employee: dispatchRecordEntity?.employee?.id,
           dispatch: dispatchRecordEntity?.dispatch?.id,
+          employee: dispatchRecordEntity?.employee?.id,
         };
 
   return (
@@ -105,6 +105,7 @@ export const DispatchRecordUpdate = () => {
               {!isNew ? (
                 <ValidatedField name="id" required readOnly id="dispatch-record-id" label="ID" validate={{ required: true }} />
               ) : null}
+              <ValidatedField label="Remark" id="dispatch-record-remark" name="remark" data-cy="remark" type="text" />
               <ValidatedField label="Status" id="dispatch-record-status" name="status" data-cy="status" type="select">
                 {statusValues.map(status => (
                   <option value={status} key={status}>
@@ -120,20 +121,20 @@ export const DispatchRecordUpdate = () => {
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
               />
-              <ValidatedField id="dispatch-record-employee" name="employee" data-cy="employee" label="Employee" type="select">
+              <ValidatedField id="dispatch-record-dispatch" name="dispatch" data-cy="dispatch" label="Dispatch" type="select">
                 <option value="" key="0" />
-                {employees
-                  ? employees.map(otherEntity => (
+                {dispatches
+                  ? dispatches.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>
                     ))
                   : null}
               </ValidatedField>
-              <ValidatedField id="dispatch-record-dispatch" name="dispatch" data-cy="dispatch" label="Dispatch" type="select">
+              <ValidatedField id="dispatch-record-employee" name="employee" data-cy="employee" label="Employee" type="select">
                 <option value="" key="0" />
-                {dispatches
-                  ? dispatches.map(otherEntity => (
+                {employees
+                  ? employees.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

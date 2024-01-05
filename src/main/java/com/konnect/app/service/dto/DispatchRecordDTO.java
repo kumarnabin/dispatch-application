@@ -13,13 +13,15 @@ public class DispatchRecordDTO implements Serializable {
 
     private Long id;
 
+    private String remark;
+
     private Status status;
 
     private Instant publicationDate;
 
-    private EmployeeDTO employee;
-
     private DispatchDTO dispatch;
+
+    private EmployeeDTO employee;
 
     public Long getId() {
         return id;
@@ -27,6 +29,14 @@ public class DispatchRecordDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public Status getStatus() {
@@ -45,20 +55,20 @@ public class DispatchRecordDTO implements Serializable {
         this.publicationDate = publicationDate;
     }
 
-    public EmployeeDTO getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(EmployeeDTO employee) {
-        this.employee = employee;
-    }
-
     public DispatchDTO getDispatch() {
         return dispatch;
     }
 
     public void setDispatch(DispatchDTO dispatch) {
         this.dispatch = dispatch;
+    }
+
+    public EmployeeDTO getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(EmployeeDTO employee) {
+        this.employee = employee;
     }
 
     @Override
@@ -87,10 +97,11 @@ public class DispatchRecordDTO implements Serializable {
     public String toString() {
         return "DispatchRecordDTO{" +
             "id=" + getId() +
+            ", remark='" + getRemark() + "'" +
             ", status='" + getStatus() + "'" +
             ", publicationDate='" + getPublicationDate() + "'" +
-            ", employee=" + getEmployee() +
             ", dispatch=" + getDispatch() +
+            ", employee=" + getEmployee() +
             "}";
     }
 }

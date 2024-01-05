@@ -1,7 +1,7 @@
 package com.konnect.app.domain;
 
 import static com.konnect.app.domain.BranchTestSamples.*;
-import static com.konnect.app.domain.ServiceProviderTestSamples.getServiceProviderRandomSampleGenerator;
+import static com.konnect.app.domain.ServiceProviderTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.konnect.app.web.rest.TestUtil;

@@ -21,8 +21,6 @@ public class AreaDTO implements Serializable {
 
     private Status status;
 
-    private EmployeeDTO employee;
-
     public Long getId() {
         return id;
     }
@@ -63,14 +61,6 @@ public class AreaDTO implements Serializable {
         this.status = status;
     }
 
-    public EmployeeDTO getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(EmployeeDTO employee) {
-        this.employee = employee;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -101,7 +91,6 @@ public class AreaDTO implements Serializable {
             ", code='" + getCode() + "'" +
             ", detail='" + getDetail() + "'" +
             ", status='" + getStatus() + "'" +
-            ", employee=" + getEmployee() +
             "}";
     }
 }

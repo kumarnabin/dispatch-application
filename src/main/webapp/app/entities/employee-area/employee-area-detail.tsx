@@ -40,6 +40,8 @@ export const EmployeeAreaDetail = () => {
               <TextFormat value={employeeAreaEntity.publicationDate} type="date" format={APP_DATE_FORMAT} />
             ) : null}
           </dd>
+          <dt>Employee</dt>
+          <dd>{employeeAreaEntity.employee ? employeeAreaEntity.employee.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/employee-area" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

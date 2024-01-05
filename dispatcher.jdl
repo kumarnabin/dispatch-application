@@ -38,7 +38,6 @@ enum Status {
     OPEN("Open")
     WAITING_FOR_RESPONSE("Waiting for Customer Response")
     CLOSED("Closed")
-    DUPLICATE("Duplicate")
     IN_PROGRESS("In Progress")
     REOPENED("Reopened")
     CANNOT_REPRODUCE("Cannot Reproduce")
@@ -47,24 +46,6 @@ enum Status {
     VERIFIED("Verified")
 
 }
-
-// Define the Author entity
-entity ServiceProvider {
-    name String,
-    code String,
-    phone String,
-    address String,
-    status Status,
-}
-
-// Define the Book entity with a many-to-one relationship to Author
-entity Branch {
-    name String,
-    code String,
-    status Status,
-}
-
-
 entity ExcelData {
     column1 String,
     column2 String,
@@ -97,12 +78,20 @@ entity ExcelData {
     publicationDate Instant
 }
 
-entity Team {
-    teamNo String,
-    supervisor String,
-    supervisorPhoneNo String,
-    teamLeader String,
-    teamLeaderPhone String
+// Define the Author entity
+entity ServiceProvider {
+    name String,
+    code String,
+    phone String,
+    address String,
+    status Status,
+}
+
+// Define the Book entity with a many-to-one relationship to Author
+entity Branch {
+    name String,
+    code String,
+    status Status,
 }
 
 entity Area {
@@ -116,6 +105,14 @@ entity Olt {
     name String,
     detail String,
     status Status,
+}
+
+entity Team {
+    teamNo String,
+    supervisor String,
+    supervisorPhoneNo String,
+    teamLeader String,
+    teamLeaderPhone String
 }
 
 entity Dispatch {
@@ -144,12 +141,17 @@ entity Employee {
     mobile String,
     photo ImageBlob, // Assuming 'photo' is an image file
     citizenshipNo String,
-//    citizenship ImageBlob, // Assuming 'citizenshipFile' is a file
+    //    citizenship ImageBlob, // Assuming 'citizenshipFile' is a file
     panNo String,
-//    pan ImageBlob, // Assuming 'panFile' is a file
+    //    pan ImageBlob, // Assuming 'panFile' is a file
     category String,
     detail String,
     status Status
+}
+
+entity Document {
+    name String,
+    file ImageBlob,
 }
 entity EmployeeArea {
     status Status,
@@ -160,30 +162,26 @@ entity Attendance {
     meterPics String,
     publicationDate Instant
 }
-entity Document {
-    name String,
-    file ImageBlob,
-    publicationDate Instant
-}
 entity DispatchRecord {
+    remark String,
     status Status,
     publicationDate Instant
 }
 
+relationship OneToOne {
+    Employee{user} to User with builtInEntity
+}
 
 // Create a many-to-one relationship from Book to Author
 relationship ManyToOne {
     Branch{serviceProvider} to ServiceProvider
-    Dispatch{team} to Team
     Olt{branch} to Branch
-    Area{employee} to Employee
-    Attendance{employee} to Employee
-    Document{employee} to Employee
-    DispatchRecord{employee} to Employee
+    Dispatch{team} to Team
     DispatchRecord{dispatch} to Dispatch
-}
-relationship OneToOne {
-    Employee{user} to User with builtInEntity
+    Document{employee} to Employee
+    EmployeeArea{employee} to Employee
+    Attendance{employee} to Employee
+    DispatchRecord{employee} to Employee
 }
 
 //relationship ManyToMany {
@@ -194,5 +192,5 @@ relationship OneToOne {
 dto * with mapstruct
 
 // Specify the service for the ServiceProvider entity
-service ServiceProvider, Branch with serviceClass
+service * with serviceClass
 

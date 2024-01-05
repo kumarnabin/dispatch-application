@@ -1,9 +1,9 @@
 id;full_name;dob;gender;mobile;photo;photo_content_type;citizenship_no;pan_no;category;detail;status
 1;coaxingly;2023-12-28T15:17:16;atelier;ouch unlike;../fake-data/blob/hipster.png;image/png;fragment breathe since;whenever hungrily where;gosh;prefigure next;REOPENED
 2;austere last scoop;2023-12-28T20:37:48;till;um irritably drat;../fake-data/blob/hipster.png;image/png;boohoo;vice coaxingly ah;variable;broadly honorable;CLOSED
-3;anxiously;2023-12-28T17:34:56;toaster;round;../fake-data/blob/hipster.png;image/png;unless despite;before gap;never;nor personalise supposing;CLOSED
-4;abaft impossible functionality;2023-12-28T18:15:34;winged;kid;../fake-data/blob/hipster.png;image/png;standoff upbeat acorn;deliberately as munch;how;alphabetize boohoo provided;SOLVED
-5;unselfish apropos woot;2023-12-29T00:13:34;refract mistrust;interestingly fondly;../fake-data/blob/hipster.png;image/png;yet dereference barring;criticize cede;compensate flee qua;how slacken;SOLVED
+3;anxiously;2023-12-28T17:34:56;toaster;round;../fake-data/blob/hipster.png;image/png;unless despite;before gap;never;nor personalise supposing;WAITING_FOR_RESPONSE
+4;abaft impossible functionality;2023-12-28T18:15:34;winged;kid;../fake-data/blob/hipster.png;image/png;standoff upbeat acorn;deliberately as munch;how;alphabetize boohoo provided;WONT_IMPLEMENT
+5;unselfish apropos woot;2023-12-29T00:13:34;refract mistrust;interestingly fondly;../fake-data/blob/hipster.png;image/png;yet dereference barring;criticize cede;compensate flee qua;how slacken;WONT_IMPLEMENT
 6;blue fully;2023-12-28T13:40:25;seaside whoa mull;realign at very;../fake-data/blob/hipster.png;image/png;leafy;what finally avalanche;safely thoughtfully fabulous;mmm boohoo amber;OPEN
 7;answer;2023-12-28T07:18:52;hm fork;sniveling acidify terribly;../fake-data/blob/hipster.png;image/png;thankfully fluffy mortified;physically inside;yippee pointless;sail which;VERIFIED
 8;complexity where;2023-12-29T01:49:24;during;hefty however worshiper;../fake-data/blob/hipster.png;image/png;hourly honestly upbeat;when overdo nervously;likely forecast popular;weakly playful;WAITING_FOR_RESPONSE

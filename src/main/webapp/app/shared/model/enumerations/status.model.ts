@@ -5,8 +5,6 @@ export enum Status {
 
   CLOSED = 'Closed',
 
-  DUPLICATE = 'Duplicate',
-
   IN_PROGRESS = 'In Progress',
 
   REOPENED = 'Reopened',

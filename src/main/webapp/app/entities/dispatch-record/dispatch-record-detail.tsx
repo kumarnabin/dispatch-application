@@ -29,6 +29,10 @@ export const DispatchRecordDetail = () => {
           </dt>
           <dd>{dispatchRecordEntity.id}</dd>
           <dt>
+            <span id="remark">Remark</span>
+          </dt>
+          <dd>{dispatchRecordEntity.remark}</dd>
+          <dt>
             <span id="status">Status</span>
           </dt>
           <dd>{dispatchRecordEntity.status}</dd>
@@ -40,10 +44,10 @@ export const DispatchRecordDetail = () => {
               <TextFormat value={dispatchRecordEntity.publicationDate} type="date" format={APP_DATE_FORMAT} />
             ) : null}
           </dd>
-          <dt>Employee</dt>
-          <dd>{dispatchRecordEntity.employee ? dispatchRecordEntity.employee.id : ''}</dd>
           <dt>Dispatch</dt>
           <dd>{dispatchRecordEntity.dispatch ? dispatchRecordEntity.dispatch.id : ''}</dd>
+          <dt>Employee</dt>
+          <dd>{dispatchRecordEntity.employee ? dispatchRecordEntity.employee.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/dispatch-record" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

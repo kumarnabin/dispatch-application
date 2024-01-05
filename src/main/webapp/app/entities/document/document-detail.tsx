@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
-import { openFile, byteSize, TextFormat } from 'react-jhipster';
+import { openFile, byteSize } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { getEntity } from './document.reducer';
@@ -47,14 +46,6 @@ export const DocumentDetail = () => {
                   {documentEntity.fileContentType}, {byteSize(documentEntity.file)}
                 </span>
               </div>
-            ) : null}
-          </dd>
-          <dt>
-            <span id="publicationDate">Publication Date</span>
-          </dt>
-          <dd>
-            {documentEntity.publicationDate ? (
-              <TextFormat value={documentEntity.publicationDate} type="date" format={APP_DATE_FORMAT} />
             ) : null}
           </dd>
           <dt>Employee</dt>

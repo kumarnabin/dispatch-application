@@ -14,10 +14,6 @@
       "fieldName": "file",
       "fieldType": "byte[]",
       "fieldTypeBlobContent": "image"
-    },
-    {
-      "fieldName": "publicationDate",
-      "fieldType": "Instant"
     }
   ],
   "name": "Document",

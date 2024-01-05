@@ -1,11 +1,11 @@
 id;name;detail;status
-1;so why miserly;adept;DUPLICATE
+1;so why miserly;adept;IN_PROGRESS
 2;sadly;until;CANNOT_REPRODUCE
-3;hm eek zowie;the about dob;DUPLICATE
-4;screamer adventurously;monasticism;CANNOT_REPRODUCE
-5;slight theism person;circa wowee;DUPLICATE
+3;hm eek zowie;the about dob;IN_PROGRESS
+4;screamer adventurously;monasticism;SOLVED
+5;slight theism person;circa wowee;CLOSED
 6;freak instead nice;up bait sternly;OPEN
-7;constant;infatuated unfortunately;DUPLICATE
+7;constant;infatuated unfortunately;CLOSED
 8;excepting nor broadly;compost till unexpectedly;OPEN
 9;roughly;rehospitalisation anti;OPEN
-10;question while amidst;name;DUPLICATE
+10;question while amidst;name;IN_PROGRESS

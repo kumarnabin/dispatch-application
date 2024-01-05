@@ -4,8 +4,6 @@ import static com.konnect.app.domain.ServiceProviderTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.konnect.app.web.rest.TestUtil;
-import java.util.HashSet;
-import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class ServiceProviderTest {

@@ -34,6 +34,9 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class DispatchRecordResourceIT {
 
+    private static final String DEFAULT_REMARK = "AAAAAAAAAA";
+    private static final String UPDATED_REMARK = "BBBBBBBBBB";
+
     private static final Status DEFAULT_STATUS = Status.OPEN;
     private static final Status UPDATED_STATUS = Status.WAITING_FOR_RESPONSE;
 
@@ -67,7 +70,10 @@ class DispatchRecordResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static DispatchRecord createEntity(EntityManager em) {
-        DispatchRecord dispatchRecord = new DispatchRecord().status(DEFAULT_STATUS).publicationDate(DEFAULT_PUBLICATION_DATE);
+        DispatchRecord dispatchRecord = new DispatchRecord()
+            .remark(DEFAULT_REMARK)
+            .status(DEFAULT_STATUS)
+            .publicationDate(DEFAULT_PUBLICATION_DATE);
         return dispatchRecord;
     }
 
@@ -78,7 +84,10 @@ class DispatchRecordResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static DispatchRecord createUpdatedEntity(EntityManager em) {
-        DispatchRecord dispatchRecord = new DispatchRecord().status(UPDATED_STATUS).publicationDate(UPDATED_PUBLICATION_DATE);
+        DispatchRecord dispatchRecord = new DispatchRecord()
+            .remark(UPDATED_REMARK)
+            .status(UPDATED_STATUS)
+            .publicationDate(UPDATED_PUBLICATION_DATE);
         return dispatchRecord;
     }
 
@@ -103,6 +112,7 @@ class DispatchRecordResourceIT {
         List<DispatchRecord> dispatchRecordList = dispatchRecordRepository.findAll();
         assertThat(dispatchRecordList).hasSize(databaseSizeBeforeCreate + 1);
         DispatchRecord testDispatchRecord = dispatchRecordList.get(dispatchRecordList.size() - 1);
+        assertThat(testDispatchRecord.getRemark()).isEqualTo(DEFAULT_REMARK);
         assertThat(testDispatchRecord.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testDispatchRecord.getPublicationDate()).isEqualTo(DEFAULT_PUBLICATION_DATE);
     }
@@ -140,6 +150,7 @@ class DispatchRecordResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(dispatchRecord.getId().intValue())))
+            .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK)))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].publicationDate").value(hasItem(DEFAULT_PUBLICATION_DATE.toString())));
     }
@@ -156,6 +167,7 @@ class DispatchRecordResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(dispatchRecord.getId().intValue()))
+            .andExpect(jsonPath("$.remark").value(DEFAULT_REMARK))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.publicationDate").value(DEFAULT_PUBLICATION_DATE.toString()));
     }
@@ -179,7 +191,7 @@ class DispatchRecordResourceIT {
         DispatchRecord updatedDispatchRecord = dispatchRecordRepository.findById(dispatchRecord.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedDispatchRecord are not directly saved in db
         em.detach(updatedDispatchRecord);
-        updatedDispatchRecord.status(UPDATED_STATUS).publicationDate(UPDATED_PUBLICATION_DATE);
+        updatedDispatchRecord.remark(UPDATED_REMARK).status(UPDATED_STATUS).publicationDate(UPDATED_PUBLICATION_DATE);
         DispatchRecordDTO dispatchRecordDTO = dispatchRecordMapper.toDto(updatedDispatchRecord);
 
         restDispatchRecordMockMvc
@@ -194,6 +206,7 @@ class DispatchRecordResourceIT {
         List<DispatchRecord> dispatchRecordList = dispatchRecordRepository.findAll();
         assertThat(dispatchRecordList).hasSize(databaseSizeBeforeUpdate);
         DispatchRecord testDispatchRecord = dispatchRecordList.get(dispatchRecordList.size() - 1);
+        assertThat(testDispatchRecord.getRemark()).isEqualTo(UPDATED_REMARK);
         assertThat(testDispatchRecord.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testDispatchRecord.getPublicationDate()).isEqualTo(UPDATED_PUBLICATION_DATE);
     }
@@ -277,7 +290,7 @@ class DispatchRecordResourceIT {
         DispatchRecord partialUpdatedDispatchRecord = new DispatchRecord();
         partialUpdatedDispatchRecord.setId(dispatchRecord.getId());
 
-        partialUpdatedDispatchRecord.publicationDate(UPDATED_PUBLICATION_DATE);
+        partialUpdatedDispatchRecord.status(UPDATED_STATUS).publicationDate(UPDATED_PUBLICATION_DATE);
 
         restDispatchRecordMockMvc
             .perform(
@@ -291,7 +304,8 @@ class DispatchRecordResourceIT {
         List<DispatchRecord> dispatchRecordList = dispatchRecordRepository.findAll();
         assertThat(dispatchRecordList).hasSize(databaseSizeBeforeUpdate);
         DispatchRecord testDispatchRecord = dispatchRecordList.get(dispatchRecordList.size() - 1);
-        assertThat(testDispatchRecord.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testDispatchRecord.getRemark()).isEqualTo(DEFAULT_REMARK);
+        assertThat(testDispatchRecord.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testDispatchRecord.getPublicationDate()).isEqualTo(UPDATED_PUBLICATION_DATE);
     }
 
@@ -307,7 +321,7 @@ class DispatchRecordResourceIT {
         DispatchRecord partialUpdatedDispatchRecord = new DispatchRecord();
         partialUpdatedDispatchRecord.setId(dispatchRecord.getId());
 
-        partialUpdatedDispatchRecord.status(UPDATED_STATUS).publicationDate(UPDATED_PUBLICATION_DATE);
+        partialUpdatedDispatchRecord.remark(UPDATED_REMARK).status(UPDATED_STATUS).publicationDate(UPDATED_PUBLICATION_DATE);
 
         restDispatchRecordMockMvc
             .perform(
@@ -321,6 +335,7 @@ class DispatchRecordResourceIT {
         List<DispatchRecord> dispatchRecordList = dispatchRecordRepository.findAll();
         assertThat(dispatchRecordList).hasSize(databaseSizeBeforeUpdate);
         DispatchRecord testDispatchRecord = dispatchRecordList.get(dispatchRecordList.size() - 1);
+        assertThat(testDispatchRecord.getRemark()).isEqualTo(UPDATED_REMARK);
         assertThat(testDispatchRecord.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testDispatchRecord.getPublicationDate()).isEqualTo(UPDATED_PUBLICATION_DATE);
     }

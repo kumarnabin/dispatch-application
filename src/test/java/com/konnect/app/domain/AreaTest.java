@@ -1,7 +1,6 @@
 package com.konnect.app.domain;
 
 import static com.konnect.app.domain.AreaTestSamples.*;
-import static com.konnect.app.domain.EmployeeTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.konnect.app.web.rest.TestUtil;
@@ -21,17 +20,5 @@ class AreaTest {
 
         area2 = getAreaSample2();
         assertThat(area1).isNotEqualTo(area2);
-    }
-
-    @Test
-    void employeeTest() throws Exception {
-        Area area = getAreaRandomSampleGenerator();
-        Employee employeeBack = getEmployeeRandomSampleGenerator();
-
-        area.setEmployee(employeeBack);
-        assertThat(area.getEmployee()).isEqualTo(employeeBack);
-
-        area.employee(null);
-        assertThat(area.getEmployee()).isNull();
     }
 }

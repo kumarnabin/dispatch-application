@@ -92,6 +92,9 @@ export const EmployeeArea = () => {
                 <th className="hand" onClick={sort('publicationDate')}>
                   Publication Date <FontAwesomeIcon icon={getSortIconByFieldName('publicationDate')} />
                 </th>
+                <th>
+                  Employee <FontAwesomeIcon icon="sort" />
+                </th>
                 <th />
               </tr>
             </thead>
@@ -108,6 +111,9 @@ export const EmployeeArea = () => {
                     {employeeArea.publicationDate ? (
                       <TextFormat type="date" value={employeeArea.publicationDate} format={APP_DATE_FORMAT} />
                     ) : null}
+                  </td>
+                  <td>
+                    {employeeArea.employee ? <Link to={`/employee/${employeeArea.employee.id}`}>{employeeArea.employee.id}</Link> : ''}
                   </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">

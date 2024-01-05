@@ -1,6 +1,5 @@
 package com.konnect.app.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.konnect.app.domain.enumeration.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -33,10 +32,6 @@ public class Area implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private Status status;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "user" }, allowSetters = true)
-    private Employee employee;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -103,19 +98,6 @@ public class Area implements Serializable {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public Employee getEmployee() {
-        return this.employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public Area employee(Employee employee) {
-        this.setEmployee(employee);
-        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

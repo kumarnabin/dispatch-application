@@ -21,6 +21,9 @@ public class DispatchRecord implements Serializable {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "remark")
+    private String remark;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private Status status;
@@ -29,12 +32,12 @@ public class DispatchRecord implements Serializable {
     private Instant publicationDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "user" }, allowSetters = true)
-    private Employee employee;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "team" }, allowSetters = true)
     private Dispatch dispatch;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "user" }, allowSetters = true)
+    private Employee employee;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -49,6 +52,19 @@ public class DispatchRecord implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getRemark() {
+        return this.remark;
+    }
+
+    public DispatchRecord remark(String remark) {
+        this.setRemark(remark);
+        return this;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public Status getStatus() {
@@ -77,19 +93,6 @@ public class DispatchRecord implements Serializable {
         this.publicationDate = publicationDate;
     }
 
-    public Employee getEmployee() {
-        return this.employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public DispatchRecord employee(Employee employee) {
-        this.setEmployee(employee);
-        return this;
-    }
-
     public Dispatch getDispatch() {
         return this.dispatch;
     }
@@ -100,6 +103,19 @@ public class DispatchRecord implements Serializable {
 
     public DispatchRecord dispatch(Dispatch dispatch) {
         this.setDispatch(dispatch);
+        return this;
+    }
+
+    public Employee getEmployee() {
+        return this.employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public DispatchRecord employee(Employee employee) {
+        this.setEmployee(employee);
         return this;
     }
 
@@ -127,6 +143,7 @@ public class DispatchRecord implements Serializable {
     public String toString() {
         return "DispatchRecord{" +
             "id=" + getId() +
+            ", remark='" + getRemark() + "'" +
             ", status='" + getStatus() + "'" +
             ", publicationDate='" + getPublicationDate() + "'" +
             "}";

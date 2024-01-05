@@ -2,7 +2,6 @@ package com.konnect.app.service.dto;
 
 import jakarta.persistence.Lob;
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.Objects;
 
 /**
@@ -19,8 +18,6 @@ public class DocumentDTO implements Serializable {
     private byte[] file;
 
     private String fileContentType;
-    private Instant publicationDate;
-
     private EmployeeDTO employee;
 
     public Long getId() {
@@ -53,14 +50,6 @@ public class DocumentDTO implements Serializable {
 
     public void setFileContentType(String fileContentType) {
         this.fileContentType = fileContentType;
-    }
-
-    public Instant getPublicationDate() {
-        return publicationDate;
-    }
-
-    public void setPublicationDate(Instant publicationDate) {
-        this.publicationDate = publicationDate;
     }
 
     public EmployeeDTO getEmployee() {
@@ -99,7 +88,6 @@ public class DocumentDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", file='" + getFile() + "'" +
-            ", publicationDate='" + getPublicationDate() + "'" +
             ", employee=" + getEmployee() +
             "}";
     }

@@ -1,11 +1,11 @@
 id;name;code;status
-1;severe if semantics;uh-huh campaigning;DUPLICATE
+1;severe if semantics;uh-huh campaigning;CLOSED
 2;disposer with;trot hence;OPEN
-3;tender aha;sheepishly for;DUPLICATE
-4;yet nervously poorly;frown gee;IN_PROGRESS
+3;tender aha;sheepishly for;IN_PROGRESS
+4;yet nervously poorly;frown gee;REOPENED
 5;restrain raise;embryo before;WAITING_FOR_RESPONSE
-6;fine sleepily ecstatic;wherever;REOPENED
+6;fine sleepily ecstatic;wherever;CANNOT_REPRODUCE
 7;plus smug;like villainous about;REOPENED
-8;diet as;whisker since abaft;CLOSED
+8;diet as;whisker since abaft;WAITING_FOR_RESPONSE
 9;gah furthermore;midst yum;REOPENED
 10;never throughout;oddly;OPEN

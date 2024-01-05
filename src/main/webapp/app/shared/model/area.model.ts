@@ -1,4 +1,3 @@
-import { IEmployee } from 'app/shared/model/employee.model';
 import { Status } from 'app/shared/model/enumerations/status.model';
 
 export interface IArea {
@@ -7,7 +6,6 @@ export interface IArea {
   code?: string | null;
   detail?: string | null;
   status?: keyof typeof Status | null;
-  employee?: IEmployee | null;
 }
 
 export const defaultValue: Readonly<IArea> = {};

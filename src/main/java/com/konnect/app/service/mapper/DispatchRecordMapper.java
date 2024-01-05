@@ -13,17 +13,17 @@ import org.mapstruct.*;
  */
 @Mapper(componentModel = "spring")
 public interface DispatchRecordMapper extends EntityMapper<DispatchRecordDTO, DispatchRecord> {
-    @Mapping(target = "employee", source = "employee", qualifiedByName = "employeeId")
     @Mapping(target = "dispatch", source = "dispatch", qualifiedByName = "dispatchId")
+    @Mapping(target = "employee", source = "employee", qualifiedByName = "employeeId")
     DispatchRecordDTO toDto(DispatchRecord s);
-
-    @Named("employeeId")
-    @BeanMapping(ignoreByDefault = true)
-    @Mapping(target = "id", source = "id")
-    EmployeeDTO toDtoEmployeeId(Employee employee);
 
     @Named("dispatchId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     DispatchDTO toDtoDispatchId(Dispatch dispatch);
+
+    @Named("employeeId")
+    @BeanMapping(ignoreByDefault = true)
+    @Mapping(target = "id", source = "id")
+    EmployeeDTO toDtoEmployeeId(Employee employee);
 }

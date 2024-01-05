@@ -25,18 +25,6 @@ class DispatchRecordTest {
     }
 
     @Test
-    void employeeTest() throws Exception {
-        DispatchRecord dispatchRecord = getDispatchRecordRandomSampleGenerator();
-        Employee employeeBack = getEmployeeRandomSampleGenerator();
-
-        dispatchRecord.setEmployee(employeeBack);
-        assertThat(dispatchRecord.getEmployee()).isEqualTo(employeeBack);
-
-        dispatchRecord.employee(null);
-        assertThat(dispatchRecord.getEmployee()).isNull();
-    }
-
-    @Test
     void dispatchTest() throws Exception {
         DispatchRecord dispatchRecord = getDispatchRecordRandomSampleGenerator();
         Dispatch dispatchBack = getDispatchRandomSampleGenerator();
@@ -46,5 +34,17 @@ class DispatchRecordTest {
 
         dispatchRecord.dispatch(null);
         assertThat(dispatchRecord.getDispatch()).isNull();
+    }
+
+    @Test
+    void employeeTest() throws Exception {
+        DispatchRecord dispatchRecord = getDispatchRecordRandomSampleGenerator();
+        Employee employeeBack = getEmployeeRandomSampleGenerator();
+
+        dispatchRecord.setEmployee(employeeBack);
+        assertThat(dispatchRecord.getEmployee()).isEqualTo(employeeBack);
+
+        dispatchRecord.employee(null);
+        assertThat(dispatchRecord.getEmployee()).isNull();
     }
 }

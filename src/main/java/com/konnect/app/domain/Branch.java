@@ -1,11 +1,8 @@
 package com.konnect.app.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.konnect.app.domain.enumeration.Status;
 import jakarta.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * A Branch.

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Table } from 'reactstrap';
-import { openFile, byteSize, Translate, TextFormat, getSortState } from 'react-jhipster';
+import { openFile, byteSize, Translate, getSortState } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSort, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
-import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { ASC, DESC, SORT } from 'app/shared/util/pagination.constants';
 import { overrideSortStateWithQueryParams } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
@@ -92,9 +91,6 @@ export const Document = () => {
                 <th className="hand" onClick={sort('file')}>
                   File <FontAwesomeIcon icon={getSortIconByFieldName('file')} />
                 </th>
-                <th className="hand" onClick={sort('publicationDate')}>
-                  Publication Date <FontAwesomeIcon icon={getSortIconByFieldName('publicationDate')} />
-                </th>
                 <th>
                   Employee <FontAwesomeIcon icon="sort" />
                 </th>
@@ -124,9 +120,6 @@ export const Document = () => {
                         </span>
                       </div>
                     ) : null}
-                  </td>
-                  <td>
-                    {document.publicationDate ? <TextFormat type="date" value={document.publicationDate} format={APP_DATE_FORMAT} /> : null}
                   </td>
                   <td>{document.employee ? <Link to={`/employee/${document.employee.id}`}>{document.employee.id}</Link> : ''}</td>
                   <td className="text-end">

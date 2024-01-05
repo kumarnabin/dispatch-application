@@ -11,8 +11,6 @@ import com.konnect.app.repository.DocumentRepository;
 import com.konnect.app.service.dto.DocumentDTO;
 import com.konnect.app.service.mapper.DocumentMapper;
 import jakarta.persistence.EntityManager;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.Base64;
 import java.util.List;
 import java.util.Random;
@@ -42,9 +40,6 @@ class DocumentResourceIT {
     private static final String DEFAULT_FILE_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_FILE_CONTENT_TYPE = "image/png";
 
-    private static final Instant DEFAULT_PUBLICATION_DATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_PUBLICATION_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
     private static final String ENTITY_API_URL = "/api/documents";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -72,11 +67,7 @@ class DocumentResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Document createEntity(EntityManager em) {
-        Document document = new Document()
-            .name(DEFAULT_NAME)
-            .file(DEFAULT_FILE)
-            .fileContentType(DEFAULT_FILE_CONTENT_TYPE)
-            .publicationDate(DEFAULT_PUBLICATION_DATE);
+        Document document = new Document().name(DEFAULT_NAME).file(DEFAULT_FILE).fileContentType(DEFAULT_FILE_CONTENT_TYPE);
         return document;
     }
 
@@ -87,11 +78,7 @@ class DocumentResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Document createUpdatedEntity(EntityManager em) {
-        Document document = new Document()
-            .name(UPDATED_NAME)
-            .file(UPDATED_FILE)
-            .fileContentType(UPDATED_FILE_CONTENT_TYPE)
-            .publicationDate(UPDATED_PUBLICATION_DATE);
+        Document document = new Document().name(UPDATED_NAME).file(UPDATED_FILE).fileContentType(UPDATED_FILE_CONTENT_TYPE);
         return document;
     }
 
@@ -117,7 +104,6 @@ class DocumentResourceIT {
         assertThat(testDocument.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testDocument.getFile()).isEqualTo(DEFAULT_FILE);
         assertThat(testDocument.getFileContentType()).isEqualTo(DEFAULT_FILE_CONTENT_TYPE);
-        assertThat(testDocument.getPublicationDate()).isEqualTo(DEFAULT_PUBLICATION_DATE);
     }
 
     @Test
@@ -153,8 +139,7 @@ class DocumentResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(document.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].fileContentType").value(hasItem(DEFAULT_FILE_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].file").value(hasItem(Base64.getEncoder().encodeToString(DEFAULT_FILE))))
-            .andExpect(jsonPath("$.[*].publicationDate").value(hasItem(DEFAULT_PUBLICATION_DATE.toString())));
+            .andExpect(jsonPath("$.[*].file").value(hasItem(Base64.getEncoder().encodeToString(DEFAULT_FILE))));
     }
 
     @Test
@@ -171,8 +156,7 @@ class DocumentResourceIT {
             .andExpect(jsonPath("$.id").value(document.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.fileContentType").value(DEFAULT_FILE_CONTENT_TYPE))
-            .andExpect(jsonPath("$.file").value(Base64.getEncoder().encodeToString(DEFAULT_FILE)))
-            .andExpect(jsonPath("$.publicationDate").value(DEFAULT_PUBLICATION_DATE.toString()));
+            .andExpect(jsonPath("$.file").value(Base64.getEncoder().encodeToString(DEFAULT_FILE)));
     }
 
     @Test
@@ -194,11 +178,7 @@ class DocumentResourceIT {
         Document updatedDocument = documentRepository.findById(document.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedDocument are not directly saved in db
         em.detach(updatedDocument);
-        updatedDocument
-            .name(UPDATED_NAME)
-            .file(UPDATED_FILE)
-            .fileContentType(UPDATED_FILE_CONTENT_TYPE)
-            .publicationDate(UPDATED_PUBLICATION_DATE);
+        updatedDocument.name(UPDATED_NAME).file(UPDATED_FILE).fileContentType(UPDATED_FILE_CONTENT_TYPE);
         DocumentDTO documentDTO = documentMapper.toDto(updatedDocument);
 
         restDocumentMockMvc
@@ -216,7 +196,6 @@ class DocumentResourceIT {
         assertThat(testDocument.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testDocument.getFile()).isEqualTo(UPDATED_FILE);
         assertThat(testDocument.getFileContentType()).isEqualTo(UPDATED_FILE_CONTENT_TYPE);
-        assertThat(testDocument.getPublicationDate()).isEqualTo(UPDATED_PUBLICATION_DATE);
     }
 
     @Test
@@ -296,7 +275,7 @@ class DocumentResourceIT {
         Document partialUpdatedDocument = new Document();
         partialUpdatedDocument.setId(document.getId());
 
-        partialUpdatedDocument.file(UPDATED_FILE).fileContentType(UPDATED_FILE_CONTENT_TYPE).publicationDate(UPDATED_PUBLICATION_DATE);
+        partialUpdatedDocument.file(UPDATED_FILE).fileContentType(UPDATED_FILE_CONTENT_TYPE);
 
         restDocumentMockMvc
             .perform(
@@ -313,7 +292,6 @@ class DocumentResourceIT {
         assertThat(testDocument.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testDocument.getFile()).isEqualTo(UPDATED_FILE);
         assertThat(testDocument.getFileContentType()).isEqualTo(UPDATED_FILE_CONTENT_TYPE);
-        assertThat(testDocument.getPublicationDate()).isEqualTo(UPDATED_PUBLICATION_DATE);
     }
 
     @Test
@@ -328,11 +306,7 @@ class DocumentResourceIT {
         Document partialUpdatedDocument = new Document();
         partialUpdatedDocument.setId(document.getId());
 
-        partialUpdatedDocument
-            .name(UPDATED_NAME)
-            .file(UPDATED_FILE)
-            .fileContentType(UPDATED_FILE_CONTENT_TYPE)
-            .publicationDate(UPDATED_PUBLICATION_DATE);
+        partialUpdatedDocument.name(UPDATED_NAME).file(UPDATED_FILE).fileContentType(UPDATED_FILE_CONTENT_TYPE);
 
         restDocumentMockMvc
             .perform(
@@ -349,7 +323,6 @@ class DocumentResourceIT {
         assertThat(testDocument.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testDocument.getFile()).isEqualTo(UPDATED_FILE);
         assertThat(testDocument.getFileContentType()).isEqualTo(UPDATED_FILE_CONTENT_TYPE);
-        assertThat(testDocument.getPublicationDate()).isEqualTo(UPDATED_PUBLICATION_DATE);
     }
 
     @Test

@@ -52,7 +52,6 @@ export const DocumentUpdate = () => {
     if (values.id !== undefined && typeof values.id !== 'number') {
       values.id = Number(values.id);
     }
-    values.publicationDate = convertDateTimeToServer(values.publicationDate);
 
     const entity = {
       ...documentEntity,
@@ -69,12 +68,9 @@ export const DocumentUpdate = () => {
 
   const defaultValues = () =>
     isNew
-      ? {
-          publicationDate: displayDefaultDateTime(),
-        }
+      ? {}
       : {
           ...documentEntity,
-          publicationDate: convertDateTimeFromServer(documentEntity.publicationDate),
           employee: documentEntity?.employee?.id,
         };
 
@@ -96,14 +92,6 @@ export const DocumentUpdate = () => {
               {!isNew ? <ValidatedField name="id" required readOnly id="document-id" label="ID" validate={{ required: true }} /> : null}
               <ValidatedField label="Name" id="document-name" name="name" data-cy="name" type="text" />
               <ValidatedBlobField label="File" id="document-file" name="file" data-cy="file" isImage accept="image/*" />
-              <ValidatedField
-                label="Publication Date"
-                id="document-publicationDate"
-                name="publicationDate"
-                data-cy="publicationDate"
-                type="datetime-local"
-                placeholder="YYYY-MM-DD HH:mm"
-              />
               <ValidatedField id="document-employee" name="employee" data-cy="employee" label="Employee" type="select">
                 <option value="" key="0" />
                 {employees

@@ -3,7 +3,6 @@ package com.konnect.app.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.io.Serializable;
-import java.time.Instant;
 
 /**
  * A Document.
@@ -29,9 +28,6 @@ public class Document implements Serializable {
 
     @Column(name = "file_content_type")
     private String fileContentType;
-
-    @Column(name = "publication_date")
-    private Instant publicationDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "user" }, allowSetters = true)
@@ -91,19 +87,6 @@ public class Document implements Serializable {
         this.fileContentType = fileContentType;
     }
 
-    public Instant getPublicationDate() {
-        return this.publicationDate;
-    }
-
-    public Document publicationDate(Instant publicationDate) {
-        this.setPublicationDate(publicationDate);
-        return this;
-    }
-
-    public void setPublicationDate(Instant publicationDate) {
-        this.publicationDate = publicationDate;
-    }
-
     public Employee getEmployee() {
         return this.employee;
     }
@@ -144,7 +127,6 @@ public class Document implements Serializable {
             ", name='" + getName() + "'" +
             ", file='" + getFile() + "'" +
             ", fileContentType='" + getFileContentType() + "'" +
-            ", publicationDate='" + getPublicationDate() + "'" +
             "}";
     }
 }

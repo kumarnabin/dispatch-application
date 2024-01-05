@@ -86,6 +86,9 @@ export const DispatchRecord = () => {
                 <th className="hand" onClick={sort('id')}>
                   ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
+                <th className="hand" onClick={sort('remark')}>
+                  Remark <FontAwesomeIcon icon={getSortIconByFieldName('remark')} />
+                </th>
                 <th className="hand" onClick={sort('status')}>
                   Status <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
                 </th>
@@ -93,10 +96,10 @@ export const DispatchRecord = () => {
                   Publication Date <FontAwesomeIcon icon={getSortIconByFieldName('publicationDate')} />
                 </th>
                 <th>
-                  Employee <FontAwesomeIcon icon="sort" />
+                  Dispatch <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  Dispatch <FontAwesomeIcon icon="sort" />
+                  Employee <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -109,6 +112,7 @@ export const DispatchRecord = () => {
                       {dispatchRecord.id}
                     </Button>
                   </td>
+                  <td>{dispatchRecord.remark}</td>
                   <td>{dispatchRecord.status}</td>
                   <td>
                     {dispatchRecord.publicationDate ? (
@@ -116,15 +120,15 @@ export const DispatchRecord = () => {
                     ) : null}
                   </td>
                   <td>
-                    {dispatchRecord.employee ? (
-                      <Link to={`/employee/${dispatchRecord.employee.id}`}>{dispatchRecord.employee.id}</Link>
+                    {dispatchRecord.dispatch ? (
+                      <Link to={`/dispatch/${dispatchRecord.dispatch.id}`}>{dispatchRecord.dispatch.id}</Link>
                     ) : (
                       ''
                     )}
                   </td>
                   <td>
-                    {dispatchRecord.dispatch ? (
-                      <Link to={`/dispatch/${dispatchRecord.dispatch.id}`}>{dispatchRecord.dispatch.id}</Link>
+                    {dispatchRecord.employee ? (
+                      <Link to={`/employee/${dispatchRecord.employee.id}`}>{dispatchRecord.employee.id}</Link>
                     ) : (
                       ''
                     )}
