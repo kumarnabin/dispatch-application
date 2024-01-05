@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Table } from 'reactstrap';
-import { Translate, TextFormat, getSortState } from 'react-jhipster';
+import { Translate, getSortState } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSort, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
-import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { ASC, DESC, SORT } from 'app/shared/util/pagination.constants';
 import { overrideSortStateWithQueryParams } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-import { getEntities } from './dispatch-record.reducer';
+import { getEntities } from './olt.reducer';
 
-export const DispatchRecord = () => {
+export const Olt = () => {
   const dispatch = useAppDispatch();
 
   const pageLocation = useLocation();
@@ -19,8 +18,8 @@ export const DispatchRecord = () => {
 
   const [sortState, setSortState] = useState(overrideSortStateWithQueryParams(getSortState(pageLocation, 'id'), pageLocation.search));
 
-  const dispatchRecordList = useAppSelector(state => state.dispatchRecord.entities);
-  const loading = useAppSelector(state => state.dispatchRecord.loading);
+  const oltList = useAppSelector(state => state.olt.entities);
+  const loading = useAppSelector(state => state.olt.loading);
 
   const getAllEntities = () => {
     dispatch(
@@ -66,85 +65,63 @@ export const DispatchRecord = () => {
 
   return (
     <div>
-      <h2 id="dispatch-record-heading" data-cy="DispatchRecordHeading">
-        Dispatch Records
+      <h2 id="olt-heading" data-cy="OltHeading">
+        Olts
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
           </Button>
-          <Link to="/dispatch-record/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
+          <Link to="/olt/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp; Create a new Dispatch Record
+            &nbsp; Create a new Olt
           </Link>
         </div>
       </h2>
       <div className="table-responsive">
-        {dispatchRecordList && dispatchRecordList.length > 0 ? (
+        {oltList && oltList.length > 0 ? (
           <Table responsive>
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
                   ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
+                <th className="hand" onClick={sort('name')}>
+                  Name <FontAwesomeIcon icon={getSortIconByFieldName('name')} />
+                </th>
+                <th className="hand" onClick={sort('detail')}>
+                  Detail <FontAwesomeIcon icon={getSortIconByFieldName('detail')} />
+                </th>
                 <th className="hand" onClick={sort('status')}>
                   Status <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
                 </th>
-                <th className="hand" onClick={sort('publicationDate')}>
-                  Publication Date <FontAwesomeIcon icon={getSortIconByFieldName('publicationDate')} />
-                </th>
                 <th>
-                  Employee <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
-                  Dispatch <FontAwesomeIcon icon="sort" />
+                  Branch <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
             </thead>
             <tbody>
-              {dispatchRecordList.map((dispatchRecord, i) => (
+              {oltList.map((olt, i) => (
                 <tr key={`entity-${i}`} data-cy="entityTable">
                   <td>
-                    <Button tag={Link} to={`/dispatch-record/${dispatchRecord.id}`} color="link" size="sm">
-                      {dispatchRecord.id}
+                    <Button tag={Link} to={`/olt/${olt.id}`} color="link" size="sm">
+                      {olt.id}
                     </Button>
                   </td>
-                  <td>{dispatchRecord.status}</td>
-                  <td>
-                    {dispatchRecord.publicationDate ? (
-                      <TextFormat type="date" value={dispatchRecord.publicationDate} format={APP_DATE_FORMAT} />
-                    ) : null}
-                  </td>
-                  <td>
-                    {dispatchRecord.employee ? (
-                      <Link to={`/employee/${dispatchRecord.employee.id}`}>{dispatchRecord.employee.id}</Link>
-                    ) : (
-                      ''
-                    )}
-                  </td>
-                  <td>
-                    {dispatchRecord.dispatch ? (
-                      <Link to={`/dispatch/${dispatchRecord.dispatch.id}`}>{dispatchRecord.dispatch.id}</Link>
-                    ) : (
-                      ''
-                    )}
-                  </td>
+                  <td>{olt.name}</td>
+                  <td>{olt.detail}</td>
+                  <td>{olt.status}</td>
+                  <td>{olt.branch ? <Link to={`/branch/${olt.branch.id}`}>{olt.branch.id}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
-                      <Button tag={Link} to={`/dispatch-record/${dispatchRecord.id}`} color="info" size="sm" data-cy="entityDetailsButton">
+                      <Button tag={Link} to={`/olt/${olt.id}`} color="info" size="sm" data-cy="entityDetailsButton">
                         <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
                       </Button>
-                      <Button
-                        tag={Link}
-                        to={`/dispatch-record/${dispatchRecord.id}/edit`}
-                        color="primary"
-                        size="sm"
-                        data-cy="entityEditButton"
-                      >
+                      <Button tag={Link} to={`/olt/${olt.id}/edit`} color="primary" size="sm" data-cy="entityEditButton">
                         <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
                       </Button>
                       <Button
-                        onClick={() => (window.location.href = `/dispatch-record/${dispatchRecord.id}/delete`)}
+                        onClick={() => (window.location.href = `/olt/${olt.id}/delete`)}
                         color="danger"
                         size="sm"
                         data-cy="entityDeleteButton"
@@ -158,11 +135,11 @@ export const DispatchRecord = () => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No Dispatch Records found</div>
+          !loading && <div className="alert alert-warning">No Olts found</div>
         )}
       </div>
     </div>
   );
 };
 
-export default DispatchRecord;
+export default Olt;

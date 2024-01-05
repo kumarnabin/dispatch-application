@@ -10,8 +10,8 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IEmployee } from 'app/shared/model/employee.model';
 import { getEntities as getEmployees } from 'app/entities/employee/employee.reducer';
-import { IArea } from 'app/shared/model/area.model';
-import { getEntities as getAreas } from 'app/entities/area/area.reducer';
+import { IDispatch } from 'app/shared/model/dispatch.model';
+import { getEntities as getDispatches } from 'app/entities/dispatch/dispatch.reducer';
 import { IDispatchRecord } from 'app/shared/model/dispatch-record.model';
 import { Status } from 'app/shared/model/enumerations/status.model';
 import { getEntity, updateEntity, createEntity, reset } from './dispatch-record.reducer';
@@ -25,7 +25,7 @@ export const DispatchRecordUpdate = () => {
   const isNew = id === undefined;
 
   const employees = useAppSelector(state => state.employee.entities);
-  const areas = useAppSelector(state => state.area.entities);
+  const dispatches = useAppSelector(state => state.dispatch.entities);
   const dispatchRecordEntity = useAppSelector(state => state.dispatchRecord.entity);
   const loading = useAppSelector(state => state.dispatchRecord.loading);
   const updating = useAppSelector(state => state.dispatchRecord.updating);
@@ -44,7 +44,7 @@ export const DispatchRecordUpdate = () => {
     }
 
     dispatch(getEmployees({}));
-    dispatch(getAreas({}));
+    dispatch(getDispatches({}));
   }, []);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export const DispatchRecordUpdate = () => {
       ...dispatchRecordEntity,
       ...values,
       employee: employees.find(it => it.id.toString() === values.employee.toString()),
-      area: areas.find(it => it.id.toString() === values.area.toString()),
+      dispatch: dispatches.find(it => it.id.toString() === values.dispatch.toString()),
     };
 
     if (isNew) {
@@ -84,7 +84,7 @@ export const DispatchRecordUpdate = () => {
           ...dispatchRecordEntity,
           publicationDate: convertDateTimeFromServer(dispatchRecordEntity.publicationDate),
           employee: dispatchRecordEntity?.employee?.id,
-          area: dispatchRecordEntity?.area?.id,
+          dispatch: dispatchRecordEntity?.dispatch?.id,
         };
 
   return (
@@ -130,10 +130,10 @@ export const DispatchRecordUpdate = () => {
                     ))
                   : null}
               </ValidatedField>
-              <ValidatedField id="dispatch-record-area" name="area" data-cy="area" label="Area" type="select">
+              <ValidatedField id="dispatch-record-dispatch" name="dispatch" data-cy="dispatch" label="Dispatch" type="select">
                 <option value="" key="0" />
-                {areas
-                  ? areas.map(otherEntity => (
+                {dispatches
+                  ? dispatches.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

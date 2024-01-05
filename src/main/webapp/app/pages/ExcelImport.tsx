@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, Col, Form, Row } from 'reactstrap';
-import { ValidatedBlobField } from 'react-jhipster';
+import { Button, Col, Row } from 'reactstrap';
+import { ValidatedBlobField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
@@ -10,12 +10,10 @@ export const ExcelImport = () => {
 
   const navigate = useNavigate();
 
-  const loading = useAppSelector(state => state.document.loading);
-  const updating = useAppSelector(state => state.document.updating);
-  const updateSuccess = useAppSelector(state => state.document.updateSuccess);
-  const [documentEntity, setDocumentEntity] = useState({
-    file: null,
-  });
+  const loading = useAppSelector(state => state.excelFile.loading);
+  const updating = useAppSelector(state => state.excelFile.updating);
+  const updateSuccess = useAppSelector(state => state.excelFile.updateSuccess);
+  const documentEntity = useAppSelector(state => state.excelFile.entity);
 
   const handleClose = () => {
     navigate('/document');
@@ -30,12 +28,16 @@ export const ExcelImport = () => {
 
   // eslint-disable-next-line complexity
   const saveEntity = values => {
+    // values.preventDefault()
     const entity = {
       ...documentEntity,
       ...values,
     };
+    console.log(values);
     console.log(entity);
   };
+
+  const defaultValues = () => documentEntity;
   return (
     <div>
       <Row className="justify-content-center">
@@ -50,8 +52,8 @@ export const ExcelImport = () => {
           {loading ? (
             <p>Loading...</p>
           ) : (
-            <Form onSubmit={saveEntity}>
-              <ValidatedBlobField type={'file'} label="File" id="document-file" name="file" data-cy="file" />
+            <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
+              <ValidatedBlobField type={'file'} label="File" id="document-file" name="file" data-cy="file" accept=".xls, .xlsx, .csv" />
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/excel-data" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
@@ -62,7 +64,7 @@ export const ExcelImport = () => {
                 <FontAwesomeIcon icon="save" />
                 &nbsp; Save
               </Button>
-            </Form>
+            </ValidatedForm>
           )}
         </Col>
       </Row>

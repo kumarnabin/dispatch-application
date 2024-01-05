@@ -1,7 +1,7 @@
 package com.konnect.app.domain;
 
-import static com.konnect.app.domain.AreaTestSamples.*;
 import static com.konnect.app.domain.DispatchRecordTestSamples.*;
+import static com.konnect.app.domain.DispatchTestSamples.*;
 import static com.konnect.app.domain.EmployeeTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -37,14 +37,14 @@ class DispatchRecordTest {
     }
 
     @Test
-    void areaTest() throws Exception {
+    void dispatchTest() throws Exception {
         DispatchRecord dispatchRecord = getDispatchRecordRandomSampleGenerator();
-        Area areaBack = getAreaRandomSampleGenerator();
+        Dispatch dispatchBack = getDispatchRandomSampleGenerator();
 
-        dispatchRecord.setArea(areaBack);
-        assertThat(dispatchRecord.getArea()).isEqualTo(areaBack);
+        dispatchRecord.setDispatch(dispatchBack);
+        assertThat(dispatchRecord.getDispatch()).isEqualTo(dispatchBack);
 
-        dispatchRecord.area(null);
-        assertThat(dispatchRecord.getArea()).isNull();
+        dispatchRecord.dispatch(null);
+        assertThat(dispatchRecord.getDispatch()).isNull();
     }
 }

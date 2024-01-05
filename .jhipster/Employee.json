@@ -55,7 +55,7 @@
       "otherEntityName": "user",
       "relationshipName": "user",
       "relationshipSide": "left",
-      "relationshipType": "many-to-one",
+      "relationshipType": "one-to-one",
       "relationshipWithBuiltInEntity": true
     }
   ],

@@ -38,10 +38,6 @@ public class ServiceProvider implements Serializable {
     @Column(name = "status")
     private Status status;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "serviceProviders")
-    @JsonIgnoreProperties(value = { "serviceProviders" }, allowSetters = true)
-    private Set<MasterCircuit> masterCircuits = new HashSet<>();
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -120,37 +116,6 @@ public class ServiceProvider implements Serializable {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public Set<MasterCircuit> getMasterCircuits() {
-        return this.masterCircuits;
-    }
-
-    public void setMasterCircuits(Set<MasterCircuit> masterCircuits) {
-        if (this.masterCircuits != null) {
-            this.masterCircuits.forEach(i -> i.removeServiceProvider(this));
-        }
-        if (masterCircuits != null) {
-            masterCircuits.forEach(i -> i.addServiceProvider(this));
-        }
-        this.masterCircuits = masterCircuits;
-    }
-
-    public ServiceProvider masterCircuits(Set<MasterCircuit> masterCircuits) {
-        this.setMasterCircuits(masterCircuits);
-        return this;
-    }
-
-    public ServiceProvider addMasterCircuit(MasterCircuit masterCircuit) {
-        this.masterCircuits.add(masterCircuit);
-        masterCircuit.getServiceProviders().add(this);
-        return this;
-    }
-
-    public ServiceProvider removeMasterCircuit(MasterCircuit masterCircuit) {
-        this.masterCircuits.remove(masterCircuit);
-        masterCircuit.getServiceProviders().remove(this);
-        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

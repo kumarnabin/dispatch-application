@@ -42,8 +42,8 @@ export const DispatchRecordDetail = () => {
           </dd>
           <dt>Employee</dt>
           <dd>{dispatchRecordEntity.employee ? dispatchRecordEntity.employee.id : ''}</dd>
-          <dt>Area</dt>
-          <dd>{dispatchRecordEntity.area ? dispatchRecordEntity.area.id : ''}</dd>
+          <dt>Dispatch</dt>
+          <dd>{dispatchRecordEntity.dispatch ? dispatchRecordEntity.dispatch.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/dispatch-record" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

@@ -1,13 +1,10 @@
 package com.konnect.app.domain;
 
-import static com.konnect.app.domain.BranchCircuitTestSamples.*;
 import static com.konnect.app.domain.BranchTestSamples.*;
-import static com.konnect.app.domain.ServiceProviderTestSamples.*;
+import static com.konnect.app.domain.ServiceProviderTestSamples.getServiceProviderRandomSampleGenerator;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.konnect.app.web.rest.TestUtil;
-import java.util.HashSet;
-import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class BranchTest {
@@ -36,27 +33,5 @@ class BranchTest {
 
         branch.serviceProvider(null);
         assertThat(branch.getServiceProvider()).isNull();
-    }
-
-    @Test
-    void branchCircuitTest() throws Exception {
-        Branch branch = getBranchRandomSampleGenerator();
-        BranchCircuit branchCircuitBack = getBranchCircuitRandomSampleGenerator();
-
-        branch.addBranchCircuit(branchCircuitBack);
-        assertThat(branch.getBranchCircuits()).containsOnly(branchCircuitBack);
-        assertThat(branchCircuitBack.getBranches()).containsOnly(branch);
-
-        branch.removeBranchCircuit(branchCircuitBack);
-        assertThat(branch.getBranchCircuits()).doesNotContain(branchCircuitBack);
-        assertThat(branchCircuitBack.getBranches()).doesNotContain(branch);
-
-        branch.branchCircuits(new HashSet<>(Set.of(branchCircuitBack)));
-        assertThat(branch.getBranchCircuits()).containsOnly(branchCircuitBack);
-        assertThat(branchCircuitBack.getBranches()).containsOnly(branch);
-
-        branch.setBranchCircuits(new HashSet<>());
-        assertThat(branch.getBranchCircuits()).doesNotContain(branchCircuitBack);
-        assertThat(branchCircuitBack.getBranches()).doesNotContain(branch);
     }
 }

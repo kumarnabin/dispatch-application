@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { Button, Col, Row } from 'reactstrap';
+import { ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
-import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
-
-import { IMasterCircuit } from 'app/shared/model/master-circuit.model';
-import { getEntities as getMasterCircuits } from 'app/entities/master-circuit/master-circuit.reducer';
-import { IServiceProvider } from 'app/shared/model/service-provider.model';
 import { Status } from 'app/shared/model/enumerations/status.model';
-import { getEntity, updateEntity, createEntity, reset } from './service-provider.reducer';
+import { createEntity, getEntity, reset, updateEntity } from './service-provider.reducer';
 
 export const ServiceProviderUpdate = () => {
   const dispatch = useAppDispatch();
@@ -22,7 +15,6 @@ export const ServiceProviderUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
-  const masterCircuits = useAppSelector(state => state.masterCircuit.entities);
   const serviceProviderEntity = useAppSelector(state => state.serviceProvider.entity);
   const loading = useAppSelector(state => state.serviceProvider.loading);
   const updating = useAppSelector(state => state.serviceProvider.updating);
@@ -39,8 +31,6 @@ export const ServiceProviderUpdate = () => {
     } else {
       dispatch(getEntity(id));
     }
-
-    dispatch(getMasterCircuits({}));
   }, []);
 
   useEffect(() => {

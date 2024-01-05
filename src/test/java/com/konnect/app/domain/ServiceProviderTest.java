@@ -1,6 +1,5 @@
 package com.konnect.app.domain;
 
-import static com.konnect.app.domain.MasterCircuitTestSamples.*;
 import static com.konnect.app.domain.ServiceProviderTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,27 +22,5 @@ class ServiceProviderTest {
 
         serviceProvider2 = getServiceProviderSample2();
         assertThat(serviceProvider1).isNotEqualTo(serviceProvider2);
-    }
-
-    @Test
-    void masterCircuitTest() throws Exception {
-        ServiceProvider serviceProvider = getServiceProviderRandomSampleGenerator();
-        MasterCircuit masterCircuitBack = getMasterCircuitRandomSampleGenerator();
-
-        serviceProvider.addMasterCircuit(masterCircuitBack);
-        assertThat(serviceProvider.getMasterCircuits()).containsOnly(masterCircuitBack);
-        assertThat(masterCircuitBack.getServiceProviders()).containsOnly(serviceProvider);
-
-        serviceProvider.removeMasterCircuit(masterCircuitBack);
-        assertThat(serviceProvider.getMasterCircuits()).doesNotContain(masterCircuitBack);
-        assertThat(masterCircuitBack.getServiceProviders()).doesNotContain(serviceProvider);
-
-        serviceProvider.masterCircuits(new HashSet<>(Set.of(masterCircuitBack)));
-        assertThat(serviceProvider.getMasterCircuits()).containsOnly(masterCircuitBack);
-        assertThat(masterCircuitBack.getServiceProviders()).containsOnly(serviceProvider);
-
-        serviceProvider.setMasterCircuits(new HashSet<>());
-        assertThat(serviceProvider.getMasterCircuits()).doesNotContain(masterCircuitBack);
-        assertThat(masterCircuitBack.getServiceProviders()).doesNotContain(serviceProvider);
     }
 }

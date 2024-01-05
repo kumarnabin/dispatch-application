@@ -19,7 +19,7 @@ public class DispatchRecordDTO implements Serializable {
 
     private EmployeeDTO employee;
 
-    private AreaDTO area;
+    private DispatchDTO dispatch;
 
     public Long getId() {
         return id;
@@ -53,12 +53,12 @@ public class DispatchRecordDTO implements Serializable {
         this.employee = employee;
     }
 
-    public AreaDTO getArea() {
-        return area;
+    public DispatchDTO getDispatch() {
+        return dispatch;
     }
 
-    public void setArea(AreaDTO area) {
-        this.area = area;
+    public void setDispatch(DispatchDTO dispatch) {
+        this.dispatch = dispatch;
     }
 
     @Override
@@ -90,7 +90,7 @@ public class DispatchRecordDTO implements Serializable {
             ", status='" + getStatus() + "'" +
             ", publicationDate='" + getPublicationDate() + "'" +
             ", employee=" + getEmployee() +
-            ", area=" + getArea() +
+            ", dispatch=" + getDispatch() +
             "}";
     }
 }

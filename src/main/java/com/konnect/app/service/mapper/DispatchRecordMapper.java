@@ -1,9 +1,9 @@
 package com.konnect.app.service.mapper;
 
-import com.konnect.app.domain.Area;
+import com.konnect.app.domain.Dispatch;
 import com.konnect.app.domain.DispatchRecord;
 import com.konnect.app.domain.Employee;
-import com.konnect.app.service.dto.AreaDTO;
+import com.konnect.app.service.dto.DispatchDTO;
 import com.konnect.app.service.dto.DispatchRecordDTO;
 import com.konnect.app.service.dto.EmployeeDTO;
 import org.mapstruct.*;
@@ -14,7 +14,7 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring")
 public interface DispatchRecordMapper extends EntityMapper<DispatchRecordDTO, DispatchRecord> {
     @Mapping(target = "employee", source = "employee", qualifiedByName = "employeeId")
-    @Mapping(target = "area", source = "area", qualifiedByName = "areaId")
+    @Mapping(target = "dispatch", source = "dispatch", qualifiedByName = "dispatchId")
     DispatchRecordDTO toDto(DispatchRecord s);
 
     @Named("employeeId")
@@ -22,8 +22,8 @@ public interface DispatchRecordMapper extends EntityMapper<DispatchRecordDTO, Di
     @Mapping(target = "id", source = "id")
     EmployeeDTO toDtoEmployeeId(Employee employee);
 
-    @Named("areaId")
+    @Named("dispatchId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
-    AreaDTO toDtoAreaId(Area area);
+    DispatchDTO toDtoDispatchId(Dispatch dispatch);
 }

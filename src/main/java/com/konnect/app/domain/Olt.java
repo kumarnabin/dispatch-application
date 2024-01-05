@@ -4,16 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.konnect.app.domain.enumeration.Status;
 import jakarta.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
- * A Branch.
+ * A Olt.
  */
 @Entity
-@Table(name = "branch")
+@Table(name = "olt")
 @SuppressWarnings("common-java:DuplicatedBlocks")
-public class Branch implements Serializable {
+public class Olt implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -25,15 +23,16 @@ public class Branch implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "code")
-    private String code;
+    @Column(name = "detail")
+    private String detail;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private Status status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private ServiceProvider serviceProvider;
+    @JsonIgnoreProperties(value = { "serviceProvider" }, allowSetters = true)
+    private Branch branch;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -41,7 +40,7 @@ public class Branch implements Serializable {
         return this.id;
     }
 
-    public Branch id(Long id) {
+    public Olt id(Long id) {
         this.setId(id);
         return this;
     }
@@ -54,7 +53,7 @@ public class Branch implements Serializable {
         return this.name;
     }
 
-    public Branch name(String name) {
+    public Olt name(String name) {
         this.setName(name);
         return this;
     }
@@ -63,24 +62,24 @@ public class Branch implements Serializable {
         this.name = name;
     }
 
-    public String getCode() {
-        return this.code;
+    public String getDetail() {
+        return this.detail;
     }
 
-    public Branch code(String code) {
-        this.setCode(code);
+    public Olt detail(String detail) {
+        this.setDetail(detail);
         return this;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
     public Status getStatus() {
         return this.status;
     }
 
-    public Branch status(Status status) {
+    public Olt status(Status status) {
         this.setStatus(status);
         return this;
     }
@@ -89,16 +88,16 @@ public class Branch implements Serializable {
         this.status = status;
     }
 
-    public ServiceProvider getServiceProvider() {
-        return this.serviceProvider;
+    public Branch getBranch() {
+        return this.branch;
     }
 
-    public void setServiceProvider(ServiceProvider serviceProvider) {
-        this.serviceProvider = serviceProvider;
+    public void setBranch(Branch branch) {
+        this.branch = branch;
     }
 
-    public Branch serviceProvider(ServiceProvider serviceProvider) {
-        this.setServiceProvider(serviceProvider);
+    public Olt branch(Branch branch) {
+        this.setBranch(branch);
         return this;
     }
 
@@ -109,10 +108,10 @@ public class Branch implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Branch)) {
+        if (!(o instanceof Olt)) {
             return false;
         }
-        return getId() != null && getId().equals(((Branch) o).getId());
+        return getId() != null && getId().equals(((Olt) o).getId());
     }
 
     @Override
@@ -124,10 +123,10 @@ public class Branch implements Serializable {
     // prettier-ignore
     @Override
     public String toString() {
-        return "Branch{" +
+        return "Olt{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", code='" + getCode() + "'" +
+            ", detail='" + getDetail() + "'" +
             ", status='" + getStatus() + "'" +
             "}";
     }

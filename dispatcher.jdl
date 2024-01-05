@@ -112,6 +112,12 @@ entity Area {
     status Status,
 }
 
+entity Olt {
+    name String,
+    detail String,
+    status Status,
+}
+
 entity Dispatch {
     voice String,
     data String,
@@ -169,13 +175,17 @@ entity DispatchRecord {
 relationship ManyToOne {
     Branch{serviceProvider} to ServiceProvider
     Dispatch{team} to Team
-    Employee{user} to User with builtInEntity
+    Olt{branch} to Branch
     Area{employee} to Employee
     Attendance{employee} to Employee
     Document{employee} to Employee
     DispatchRecord{employee} to Employee
-    DispatchRecord{area} to Area
+    DispatchRecord{dispatch} to Dispatch
 }
+relationship OneToOne {
+    Employee{user} to User with builtInEntity
+}
+
 //relationship ManyToMany {
 //    Area to Employee
 //}

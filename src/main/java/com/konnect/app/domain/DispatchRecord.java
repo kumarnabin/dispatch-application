@@ -33,8 +33,8 @@ public class DispatchRecord implements Serializable {
     private Employee employee;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "employee" }, allowSetters = true)
-    private Area area;
+    @JsonIgnoreProperties(value = { "team" }, allowSetters = true)
+    private Dispatch dispatch;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -90,16 +90,16 @@ public class DispatchRecord implements Serializable {
         return this;
     }
 
-    public Area getArea() {
-        return this.area;
+    public Dispatch getDispatch() {
+        return this.dispatch;
     }
 
-    public void setArea(Area area) {
-        this.area = area;
+    public void setDispatch(Dispatch dispatch) {
+        this.dispatch = dispatch;
     }
 
-    public DispatchRecord area(Area area) {
-        this.setArea(area);
+    public DispatchRecord dispatch(Dispatch dispatch) {
+        this.setDispatch(dispatch);
         return this;
     }
 
