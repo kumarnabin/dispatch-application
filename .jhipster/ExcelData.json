@@ -1,0 +1,126 @@
+{
+  "annotations": {
+    "changelogDate": "20240108035627"
+  },
+  "applications": ["DispatchApplication"],
+  "dto": "mapstruct",
+  "entityTableName": "excel_data",
+  "fields": [
+    {
+      "fieldName": "column1",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column2",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column3",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column4",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column5",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column6",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column7",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column8",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column9",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column10",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column11",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column12",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column13",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column14",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column15",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column16",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column17",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column18",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column19",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column20",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column21",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column22",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column23",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column24",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column25",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column26",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "column27",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "publicationDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "ExcelData",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

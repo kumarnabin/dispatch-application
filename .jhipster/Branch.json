@@ -1,0 +1,34 @@
+{
+  "annotations": {
+    "changelogDate": "20240108035629"
+  },
+  "applications": ["DispatchApplication"],
+  "dto": "mapstruct",
+  "entityTableName": "branch",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Status",
+      "fieldValues": "OPEN (Open),WAITING_FOR_RESPONSE (Waiting for Customer Response),CLOSED (Closed),IN_PROGRESS (In Progress),REOPENED (Reopened),CANNOT_REPRODUCE (Cannot Reproduce),SOLVED (Solved),WONT_IMPLEMENT (Won't Implement),VERIFIED (Verified)"
+    }
+  ],
+  "name": "Branch",
+  "relationships": [
+    {
+      "otherEntityName": "serviceProvider",
+      "relationshipName": "serviceProvider",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}
