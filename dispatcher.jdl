@@ -1,0 +1,196 @@
+application {
+    config {
+        applicationType monolith
+        authenticationType jwt
+        baseName DispatchApplication
+        blueprints []
+        buildTool maven
+        cacheProvider no
+        clientFramework react
+        clientPackageManager npm
+        creationTimestamp 1703063485871
+        databaseType sql
+        devDatabaseType mysql
+        enableHibernateCache false
+        enableSwaggerCodegen false
+        enableTranslation false
+        jhiPrefix jhi
+        jhipsterVersion "8.1.0"
+        jwtSecretKey "NzI3NDZiOGMzYTgwODY0NWQyYzhhZmYwNzUzNWEzMTI0ZGVkY2M3MDU2Y2EwNDNlMzY0OGVmODI1YzI5NTAzZDhhYTAyZjUyOGY5ZjM1MWM2YTk4NzRhZjE1YTMxYWEwYjU3NmZjOWM0NDhmY2M2MjJjN2E1Njg3NGMzZTlkMDY="
+        languages [en]
+        messageBroker false
+        nativeLanguage en
+        packageName com.konnect.app
+        prodDatabaseType mysql
+        searchEngine false
+        serverPort 8080
+        serviceDiscoveryType false
+        testFrameworks []
+        websocket false
+        withAdminUi true
+        nativeLanguage en,
+        languages [en, hi]
+    }
+    entities *
+}
+
+enum Status {
+    OPEN("Open")
+    WAITING_FOR_RESPONSE("Waiting for Customer Response")
+    CLOSED("Closed")
+    IN_PROGRESS("In Progress")
+    REOPENED("Reopened")
+    CANNOT_REPRODUCE("Cannot Reproduce")
+    SOLVED("Solved")
+    WONT_IMPLEMENT("Won't Implement")
+    VERIFIED("Verified")
+
+}
+entity ExcelData {
+    column1 String,
+    column2 String,
+    column3 String,
+    column4 String,
+    column5 String,
+    column6 String,
+    column7 String,
+    column8 String,
+    column9 String,
+    column10 String,
+    column11 String,
+    column12 String,
+    column13 String,
+    column14 String,
+    column15 String,
+    column16 String,
+    column17 String,
+    column18 String,
+    column19 String,
+    column20 String,
+    column21 String,
+    column22 String,
+    column23 String,
+    column24 String,
+    column25 String,
+    column26 String,
+    column27 String,
+
+    publicationDate Instant
+}
+
+// Define the Author entity
+entity ServiceProvider {
+    name String,
+    code String,
+    phone String,
+    address String,
+    status Status,
+}
+
+// Define the Book entity with a many-to-one relationship to Author
+entity Branch {
+    name String,
+    code String,
+    status Status,
+}
+
+entity Area {
+    name String,
+    code String unique,
+    detail String,
+    status Status,
+}
+
+entity Olt {
+    name String,
+    detail String,
+    status Status,
+}
+
+entity Team {
+    teamNo String,
+    supervisor String,
+    supervisorPhoneNo String,
+    teamLeader String,
+    teamLeaderPhone String
+}
+
+entity Dispatch {
+    voice String,
+    data String,
+    iptv String,
+    customerName String,
+    contactNo String,
+    oltPort String,
+    regDate String,
+    fapPort String,
+    cpeSn String,
+    cpeRx String,
+    complain String,
+    remark String,
+    status Status,
+    location String,
+    printDate LocalDate,
+    publicationDate Instant
+}
+
+entity Employee {
+    fullName String,
+    dob Date,
+    gender String,
+    mobile String,
+    photo ImageBlob, // Assuming 'photo' is an image file
+    citizenshipNo String,
+    //    citizenship ImageBlob, // Assuming 'citizenshipFile' is a file
+    panNo String,
+    //    pan ImageBlob, // Assuming 'panFile' is a file
+    category String,
+    detail String,
+    status Status
+}
+
+entity Document {
+    name String,
+    file ImageBlob,
+}
+entity EmployeeArea {
+    status Status,
+    publicationDate Instant
+}
+entity Attendance {
+    status Status,
+    meterPics String,
+    publicationDate Instant
+}
+entity DispatchRecord {
+    remark String,
+    status Status,
+    publicationDate Instant
+}
+
+relationship OneToOne {
+    Employee{user} to User with builtInEntity
+}
+
+// Create a many-to-one relationship from Book to Author
+relationship ManyToOne {
+    Branch{serviceProvider} to ServiceProvider
+    Olt{branch} to Branch
+    Dispatch{team} to Team
+    DispatchRecord{dispatch} to Dispatch
+    Document{employee} to Employee
+    EmployeeArea{employee} to Employee
+    Attendance{employee} to Employee
+    DispatchRecord{employee} to Employee
+}
+
+//relationship ManyToMany {
+//    Area to Employee
+//}
+
+// Specify the DTO (Data Transfer Object) for the Book entity
+dto * with mapstruct
+
+// Specify the service for the ServiceProvider entity
+service * with serviceClass
+
