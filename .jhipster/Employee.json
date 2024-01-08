@@ -50,6 +50,7 @@
     }
   ],
   "name": "Employee",
+  "pagination": "pagination",
   "relationships": [
     {
       "otherEntityName": "user",

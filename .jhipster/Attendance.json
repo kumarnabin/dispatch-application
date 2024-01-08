@@ -21,6 +21,7 @@
     }
   ],
   "name": "Attendance",
+  "pagination": "pagination",
   "relationships": [
     {
       "otherEntityName": "employee",

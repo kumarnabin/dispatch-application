@@ -30,7 +30,7 @@ export const AttendanceUpdate = () => {
   const statusValues = Object.keys(Status);
 
   const handleClose = () => {
-    navigate('/attendance');
+    navigate('/attendance' + location.search);
   };
 
   useEffect(() => {

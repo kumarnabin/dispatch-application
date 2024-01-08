@@ -28,6 +28,7 @@
     }
   ],
   "name": "Team",
+  "pagination": "pagination",
   "relationships": [],
   "searchEngine": "no",
   "service": "serviceClass"

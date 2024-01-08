@@ -194,3 +194,5 @@ dto * with mapstruct
 // Specify the service for the ServiceProvider entity
 service * with serviceClass
 
+paginate all with pagination
+

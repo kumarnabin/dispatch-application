@@ -73,6 +73,7 @@
     }
   ],
   "name": "Dispatch",
+  "pagination": "pagination",
   "relationships": [
     {
       "otherEntityName": "team",

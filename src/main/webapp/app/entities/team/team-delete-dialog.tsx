@@ -25,7 +25,7 @@ export const TeamDeleteDialog = () => {
   const updateSuccess = useAppSelector(state => state.team.updateSuccess);
 
   const handleClose = () => {
-    navigate('/team');
+    navigate('/team' + pageLocation.search);
   };
 
   useEffect(() => {

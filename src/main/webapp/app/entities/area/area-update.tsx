@@ -27,7 +27,7 @@ export const AreaUpdate = () => {
   const statusValues = Object.keys(Status);
 
   const handleClose = () => {
-    navigate('/area');
+    navigate('/area' + location.search);
   };
 
   useEffect(() => {

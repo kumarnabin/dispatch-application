@@ -25,7 +25,7 @@ export const DispatchDeleteDialog = () => {
   const updateSuccess = useAppSelector(state => state.dispatch.updateSuccess);
 
   const handleClose = () => {
-    navigate('/dispatch');
+    navigate('/dispatch' + pageLocation.search);
   };
 
   useEffect(() => {

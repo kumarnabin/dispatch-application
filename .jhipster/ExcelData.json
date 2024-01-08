@@ -120,6 +120,7 @@
     }
   ],
   "name": "ExcelData",
+  "pagination": "pagination",
   "relationships": [],
   "searchEngine": "no",
   "service": "serviceClass"

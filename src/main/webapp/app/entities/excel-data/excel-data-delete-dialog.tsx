@@ -25,7 +25,7 @@ export const ExcelDataDeleteDialog = () => {
   const updateSuccess = useAppSelector(state => state.excelData.updateSuccess);
 
   const handleClose = () => {
-    navigate('/excel-data');
+    navigate('/excel-data' + pageLocation.search);
   };
 
   useEffect(() => {

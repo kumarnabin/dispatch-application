@@ -25,7 +25,7 @@ export const TeamUpdate = () => {
   const updateSuccess = useAppSelector(state => state.team.updateSuccess);
 
   const handleClose = () => {
-    navigate('/team');
+    navigate('/team' + location.search);
   };
 
   useEffect(() => {

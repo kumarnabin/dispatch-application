@@ -21,6 +21,7 @@
     }
   ],
   "name": "Branch",
+  "pagination": "pagination",
   "relationships": [
     {
       "otherEntityName": "serviceProvider",

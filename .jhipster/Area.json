@@ -26,6 +26,7 @@
     }
   ],
   "name": "Area",
+  "pagination": "pagination",
   "relationships": [],
   "searchEngine": "no",
   "service": "serviceClass"

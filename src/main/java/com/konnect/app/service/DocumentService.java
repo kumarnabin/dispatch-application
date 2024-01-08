@@ -4,12 +4,11 @@ import com.konnect.app.domain.Document;
 import com.konnect.app.repository.DocumentRepository;
 import com.konnect.app.service.dto.DocumentDTO;
 import com.konnect.app.service.mapper.DocumentMapper;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -80,12 +79,13 @@ public class DocumentService {
     /**
      * Get all the documents.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
     @Transactional(readOnly = true)
-    public List<DocumentDTO> findAll() {
+    public Page<DocumentDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Documents");
-        return documentRepository.findAll().stream().map(documentMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+        return documentRepository.findAll(pageable).map(documentMapper::toDto);
     }
 
     /**

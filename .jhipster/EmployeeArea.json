@@ -17,6 +17,7 @@
     }
   ],
   "name": "EmployeeArea",
+  "pagination": "pagination",
   "relationships": [
     {
       "otherEntityName": "employee",

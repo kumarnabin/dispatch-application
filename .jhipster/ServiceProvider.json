@@ -29,6 +29,7 @@
     }
   ],
   "name": "ServiceProvider",
+  "pagination": "pagination",
   "relationships": [],
   "searchEngine": "no",
   "service": "serviceClass"

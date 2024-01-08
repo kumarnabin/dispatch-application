@@ -4,12 +4,11 @@ import com.konnect.app.domain.Attendance;
 import com.konnect.app.repository.AttendanceRepository;
 import com.konnect.app.service.dto.AttendanceDTO;
 import com.konnect.app.service.mapper.AttendanceMapper;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -80,12 +79,13 @@ public class AttendanceService {
     /**
      * Get all the attendances.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
     @Transactional(readOnly = true)
-    public List<AttendanceDTO> findAll() {
+    public Page<AttendanceDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Attendances");
-        return attendanceRepository.findAll().stream().map(attendanceMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+        return attendanceRepository.findAll(pageable).map(attendanceMapper::toDto);
     }
 
     /**

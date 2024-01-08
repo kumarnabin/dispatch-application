@@ -25,7 +25,7 @@ export const DispatchRecordDeleteDialog = () => {
   const updateSuccess = useAppSelector(state => state.dispatchRecord.updateSuccess);
 
   const handleClose = () => {
-    navigate('/dispatch-record');
+    navigate('/dispatch-record' + pageLocation.search);
   };
 
   useEffect(() => {

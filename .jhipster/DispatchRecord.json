@@ -21,6 +21,7 @@
     }
   ],
   "name": "DispatchRecord",
+  "pagination": "pagination",
   "relationships": [
     {
       "otherEntityName": "dispatch",

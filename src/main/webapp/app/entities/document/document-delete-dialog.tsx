@@ -25,7 +25,7 @@ export const DocumentDeleteDialog = () => {
   const updateSuccess = useAppSelector(state => state.document.updateSuccess);
 
   const handleClose = () => {
-    navigate('/document');
+    navigate('/document' + pageLocation.search);
   };
 
   useEffect(() => {

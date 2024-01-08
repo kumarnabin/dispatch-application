@@ -4,12 +4,11 @@ import com.konnect.app.domain.ServiceProvider;
 import com.konnect.app.repository.ServiceProviderRepository;
 import com.konnect.app.service.dto.ServiceProviderDTO;
 import com.konnect.app.service.mapper.ServiceProviderMapper;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -80,16 +79,13 @@ public class ServiceProviderService {
     /**
      * Get all the serviceProviders.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
     @Transactional(readOnly = true)
-    public List<ServiceProviderDTO> findAll() {
+    public Page<ServiceProviderDTO> findAll(Pageable pageable) {
         log.debug("Request to get all ServiceProviders");
-        return serviceProviderRepository
-            .findAll()
-            .stream()
-            .map(serviceProviderMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+        return serviceProviderRepository.findAll(pageable).map(serviceProviderMapper::toDto);
     }
 
     /**

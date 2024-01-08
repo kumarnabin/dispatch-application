@@ -17,6 +17,7 @@
     }
   ],
   "name": "Document",
+  "pagination": "pagination",
   "relationships": [
     {
       "otherEntityName": "employee",

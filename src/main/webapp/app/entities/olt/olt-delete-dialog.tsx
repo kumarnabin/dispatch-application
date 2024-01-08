@@ -25,7 +25,7 @@ export const OltDeleteDialog = () => {
   const updateSuccess = useAppSelector(state => state.olt.updateSuccess);
 
   const handleClose = () => {
-    navigate('/olt');
+    navigate('/olt' + pageLocation.search);
   };
 
   useEffect(() => {
