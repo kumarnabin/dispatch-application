@@ -35,7 +35,7 @@ public class EnumResource {
         log.debug("REST request to get all Status enums");
         System.out.println();
 
-        Map<Integer, String> statusMap = Arrays.stream(Status.values()).collect(Collectors.toMap(Enum::ordinal, Status::getValue));
+        Map<Integer, String> statusMap = Arrays.stream(Status.values()).collect(Collectors.toMap(Enum::ordinal, Status::name));
 
         return ResponseEntity.ok().body(statusMap);
     }
