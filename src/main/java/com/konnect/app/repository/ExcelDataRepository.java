@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface ExcelDataRepository extends JpaRepository<ExcelData, Long> {}
+public interface ExcelDataRepository extends JpaRepository<ExcelData, Long> {
+    boolean existsByColumn18AndColumn25(String value, String timestampValue);
+}
