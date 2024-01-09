@@ -43,6 +43,8 @@ export const AreaDetail = () => {
             <span id="status">Status</span>
           </dt>
           <dd>{areaEntity.status}</dd>
+          <dt>Olt</dt>
+          <dd>{areaEntity.olt ? areaEntity.olt.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/area" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

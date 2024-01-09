@@ -123,6 +123,9 @@ export const Area = () => {
                 <th className="hand" onClick={sort('status')}>
                   Status <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
                 </th>
+                <th>
+                  Olt <FontAwesomeIcon icon="sort" />
+                </th>
                 <th />
               </tr>
             </thead>
@@ -138,6 +141,7 @@ export const Area = () => {
                   <td>{area.code}</td>
                   <td>{area.detail}</td>
                   <td>{area.status}</td>
+                  <td>{area.olt ? <Link to={`/olt/${area.olt.id}`}>{area.olt.id}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/area/${area.id}`} color="info" size="sm" data-cy="entityDetailsButton">

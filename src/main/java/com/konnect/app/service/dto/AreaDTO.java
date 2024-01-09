@@ -21,6 +21,8 @@ public class AreaDTO implements Serializable {
 
     private Status status;
 
+    private OltDTO olt;
+
     public Long getId() {
         return id;
     }
@@ -61,6 +63,14 @@ public class AreaDTO implements Serializable {
         this.status = status;
     }
 
+    public OltDTO getOlt() {
+        return olt;
+    }
+
+    public void setOlt(OltDTO olt) {
+        this.olt = olt;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -91,6 +101,7 @@ public class AreaDTO implements Serializable {
             ", code='" + getCode() + "'" +
             ", detail='" + getDetail() + "'" +
             ", status='" + getStatus() + "'" +
+            ", olt=" + getOlt() +
             "}";
     }
 }

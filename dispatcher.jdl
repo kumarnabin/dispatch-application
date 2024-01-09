@@ -93,16 +93,16 @@ entity Branch {
     code String,
     status Status,
 }
-
-entity Area {
+entity Olt {
     name String,
-    code String unique,
     detail String,
     status Status,
 }
 
-entity Olt {
+
+entity Area {
     name String,
+    code String unique,
     detail String,
     status Status,
 }
@@ -176,6 +176,7 @@ relationship OneToOne {
 relationship ManyToOne {
     Branch{serviceProvider} to ServiceProvider
     Olt{branch} to Branch
+    Area{olt} to Olt
     Dispatch{team} to Team
     DispatchRecord{dispatch} to Dispatch
     Document{employee} to Employee
