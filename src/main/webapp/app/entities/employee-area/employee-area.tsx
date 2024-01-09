@@ -119,6 +119,9 @@ export const EmployeeArea = () => {
                   Publication Date <FontAwesomeIcon icon={getSortIconByFieldName('publicationDate')} />
                 </th>
                 <th>
+                  Area <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
                   Employee <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
@@ -138,6 +141,7 @@ export const EmployeeArea = () => {
                       <TextFormat type="date" value={employeeArea.publicationDate} format={APP_DATE_FORMAT} />
                     ) : null}
                   </td>
+                  <td>{employeeArea.area ? <Link to={`/area/${employeeArea.area.id}`}>{employeeArea.area.id}</Link> : ''}</td>
                   <td>
                     {employeeArea.employee ? <Link to={`/employee/${employeeArea.employee.id}`}>{employeeArea.employee.id}</Link> : ''}
                   </td>

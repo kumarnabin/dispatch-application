@@ -1,7 +1,9 @@
 package com.konnect.app.service.mapper;
 
+import com.konnect.app.domain.Area;
 import com.konnect.app.domain.Employee;
 import com.konnect.app.domain.EmployeeArea;
+import com.konnect.app.service.dto.AreaDTO;
 import com.konnect.app.service.dto.EmployeeAreaDTO;
 import com.konnect.app.service.dto.EmployeeDTO;
 import org.mapstruct.*;
@@ -11,8 +13,14 @@ import org.mapstruct.*;
  */
 @Mapper(componentModel = "spring")
 public interface EmployeeAreaMapper extends EntityMapper<EmployeeAreaDTO, EmployeeArea> {
+    @Mapping(target = "area", source = "area", qualifiedByName = "areaId")
     @Mapping(target = "employee", source = "employee", qualifiedByName = "employeeId")
     EmployeeAreaDTO toDto(EmployeeArea s);
+
+    @Named("areaId")
+    @BeanMapping(ignoreByDefault = true)
+    @Mapping(target = "id", source = "id")
+    AreaDTO toDtoAreaId(Area area);
 
     @Named("employeeId")
     @BeanMapping(ignoreByDefault = true)

@@ -17,6 +17,8 @@ public class EmployeeAreaDTO implements Serializable {
 
     private Instant publicationDate;
 
+    private AreaDTO area;
+
     private EmployeeDTO employee;
 
     public Long getId() {
@@ -41,6 +43,14 @@ public class EmployeeAreaDTO implements Serializable {
 
     public void setPublicationDate(Instant publicationDate) {
         this.publicationDate = publicationDate;
+    }
+
+    public AreaDTO getArea() {
+        return area;
+    }
+
+    public void setArea(AreaDTO area) {
+        this.area = area;
     }
 
     public EmployeeDTO getEmployee() {
@@ -79,6 +89,7 @@ public class EmployeeAreaDTO implements Serializable {
             "id=" + getId() +
             ", status='" + getStatus() + "'" +
             ", publicationDate='" + getPublicationDate() + "'" +
+            ", area=" + getArea() +
             ", employee=" + getEmployee() +
             "}";
     }

@@ -180,6 +180,7 @@ relationship ManyToOne {
     Dispatch{team} to Team
     DispatchRecord{dispatch} to Dispatch
     Document{employee} to Employee
+    EmployeeArea{area} to Area
     EmployeeArea{employee} to Employee
     Attendance{employee} to Employee
     DispatchRecord{employee} to Employee

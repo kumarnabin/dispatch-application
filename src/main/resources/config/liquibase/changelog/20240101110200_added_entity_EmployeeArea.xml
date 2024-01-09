@@ -20,6 +20,9 @@
             <column name="publication_date" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
+            <column name="area_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <column name="employee_id" type="bigint">
                 <constraints nullable="true" />
             </column>

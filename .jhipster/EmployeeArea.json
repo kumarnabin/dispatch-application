@@ -20,6 +20,12 @@
   "pagination": "pagination",
   "relationships": [
     {
+      "otherEntityName": "area",
+      "relationshipName": "area",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
       "otherEntityName": "employee",
       "relationshipName": "employee",
       "relationshipSide": "left",

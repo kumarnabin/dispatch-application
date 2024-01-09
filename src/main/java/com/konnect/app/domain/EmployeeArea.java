@@ -29,6 +29,10 @@ public class EmployeeArea implements Serializable {
     private Instant publicationDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "olt" }, allowSetters = true)
+    private Area area;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "user" }, allowSetters = true)
     private Employee employee;
 
@@ -71,6 +75,19 @@ public class EmployeeArea implements Serializable {
 
     public void setPublicationDate(Instant publicationDate) {
         this.publicationDate = publicationDate;
+    }
+
+    public Area getArea() {
+        return this.area;
+    }
+
+    public void setArea(Area area) {
+        this.area = area;
+    }
+
+    public EmployeeArea area(Area area) {
+        this.setArea(area);
+        return this;
     }
 
     public Employee getEmployee() {

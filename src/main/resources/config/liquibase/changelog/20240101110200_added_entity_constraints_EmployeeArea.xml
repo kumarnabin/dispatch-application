@@ -8,6 +8,13 @@
     -->
     <changeSet id="20240101110200-2" author="jhipster">
 
+        <addForeignKeyConstraint baseColumnNames="area_id"
+                                 baseTableName="employee_area"
+                                 constraintName="fk_employee_area__area_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="area"
+                                 />
+
         <addForeignKeyConstraint baseColumnNames="employee_id"
                                  baseTableName="employee_area"
                                  constraintName="fk_employee_area__employee_id"
