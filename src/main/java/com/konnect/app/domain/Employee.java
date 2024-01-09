@@ -4,6 +4,7 @@ import com.konnect.app.domain.enumeration.Status;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Set;
 
 /**
  * A Employee.
@@ -231,6 +232,24 @@ public class Employee implements Serializable {
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+
+    @ManyToMany
+    @JoinTable(
+        name = "EmployeeArea", // Name of the join table
+        joinColumns = @JoinColumn(name = "employee_id"), // Column name for Employee's side
+        inverseJoinColumns = @JoinColumn(name = "area_id") // Column name for Area's side
+    )
+    private Set<Area> areas;
+
+    // Other getters and setters
+
+    public Set<Area> getAreas() {
+        return areas;
+    }
+
+    public void setAreas(Set<Area> areas) {
+        this.areas = areas;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -1,5 +1,6 @@
 package com.konnect.app.web.rest;
 
+import com.konnect.app.domain.Dispatch;
 import com.konnect.app.repository.DispatchRepository;
 import com.konnect.app.service.DispatchService;
 import com.konnect.app.service.dto.DispatchDTO;
@@ -142,9 +143,9 @@ public class DispatchResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of dispatches in body.
      */
     @GetMapping("")
-    public ResponseEntity<List<DispatchDTO>> getAllDispatches(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
+    public ResponseEntity<List<Dispatch>> getAllDispatches(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
         log.debug("REST request to get a page of Dispatches");
-        Page<DispatchDTO> page = dispatchService.findAll(pageable);
+        Page<Dispatch> page = dispatchService.findFilteredData(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

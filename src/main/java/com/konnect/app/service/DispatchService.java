@@ -1,14 +1,22 @@
 package com.konnect.app.service;
 
+import com.konnect.app.domain.Area;
 import com.konnect.app.domain.Dispatch;
+import com.konnect.app.domain.User;
 import com.konnect.app.repository.DispatchRepository;
+import com.konnect.app.repository.UserRepository;
 import com.konnect.app.service.dto.DispatchDTO;
 import com.konnect.app.service.mapper.DispatchMapper;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,10 +32,12 @@ public class DispatchService {
     private final DispatchRepository dispatchRepository;
 
     private final DispatchMapper dispatchMapper;
+    private final UserRepository userRepository;
 
-    public DispatchService(DispatchRepository dispatchRepository, DispatchMapper dispatchMapper) {
+    public DispatchService(DispatchRepository dispatchRepository, DispatchMapper dispatchMapper, UserRepository userRepository) {
         this.dispatchRepository = dispatchRepository;
         this.dispatchMapper = dispatchMapper;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -86,6 +96,23 @@ public class DispatchService {
     public Page<DispatchDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Dispatches");
         return dispatchRepository.findAll(pageable).map(dispatchMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Dispatch> findFilteredData(Pageable pageable) {
+        log.debug("Request to get all Dispatches");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        User authenticatedUser = userRepository.findByLogin(username).orElse(null);
+
+        if (authenticatedUser != null && authenticatedUser.getEmployee() != null) {
+            List<String> userAreas = authenticatedUser.getEmployee().getAreas().stream().map(Area::getCode).toList();
+
+            return dispatchRepository.findAllByOltPortIn(userAreas, pageable);
+        } else {
+            return Page.empty(); // Or handle the case where user or employee information is not available
+        }
     }
 
     /**
