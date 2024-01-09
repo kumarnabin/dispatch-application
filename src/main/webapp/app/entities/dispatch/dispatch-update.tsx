@@ -30,7 +30,7 @@ export const DispatchUpdate = () => {
   const statusValues = Object.keys(Status);
 
   const handleClose = () => {
-    navigate('/dispatch');
+    navigate('/dispatch' + location.search);
   };
 
   useEffect(() => {

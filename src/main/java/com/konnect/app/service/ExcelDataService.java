@@ -4,12 +4,11 @@ import com.konnect.app.domain.ExcelData;
 import com.konnect.app.repository.ExcelDataRepository;
 import com.konnect.app.service.dto.ExcelDataDTO;
 import com.konnect.app.service.mapper.ExcelDataMapper;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -80,12 +79,13 @@ public class ExcelDataService {
     /**
      * Get all the excelData.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
     @Transactional(readOnly = true)
-    public List<ExcelDataDTO> findAll() {
+    public Page<ExcelDataDTO> findAll(Pageable pageable) {
         log.debug("Request to get all ExcelData");
-        return excelDataRepository.findAll().stream().map(excelDataMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+        return excelDataRepository.findAll(pageable).map(excelDataMapper::toDto);
     }
 
     /**

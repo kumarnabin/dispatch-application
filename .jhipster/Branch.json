@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240108042906"
+    "changelogDate": "20231220110516"
   },
   "applications": ["DispatchApplication"],
   "dto": "mapstruct",
@@ -21,6 +21,7 @@
     }
   ],
   "name": "Branch",
+  "pagination": "pagination",
   "relationships": [
     {
       "otherEntityName": "serviceProvider",

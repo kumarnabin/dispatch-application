@@ -30,7 +30,7 @@ export const OltUpdate = () => {
   const statusValues = Object.keys(Status);
 
   const handleClose = () => {
-    navigate('/olt');
+    navigate('/olt' + location.search);
   };
 
   useEffect(() => {

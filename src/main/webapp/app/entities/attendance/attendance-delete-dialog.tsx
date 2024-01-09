@@ -25,7 +25,7 @@ export const AttendanceDeleteDialog = () => {
   const updateSuccess = useAppSelector(state => state.attendance.updateSuccess);
 
   const handleClose = () => {
-    navigate('/attendance');
+    navigate('/attendance' + pageLocation.search);
   };
 
   useEffect(() => {

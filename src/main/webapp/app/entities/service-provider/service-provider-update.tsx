@@ -27,7 +27,7 @@ export const ServiceProviderUpdate = () => {
   const statusValues = Object.keys(Status);
 
   const handleClose = () => {
-    navigate('/service-provider');
+    navigate('/service-provider' + location.search);
   };
 
   useEffect(() => {

@@ -93,16 +93,16 @@ entity Branch {
     code String,
     status Status,
 }
-
-entity Area {
+entity Olt {
     name String,
-    code String unique,
     detail String,
     status Status,
 }
 
-entity Olt {
+
+entity Area {
     name String,
+    code String unique,
     detail String,
     status Status,
 }
@@ -176,9 +176,11 @@ relationship OneToOne {
 relationship ManyToOne {
     Branch{serviceProvider} to ServiceProvider
     Olt{branch} to Branch
+    Area{olt} to Olt
     Dispatch{team} to Team
     DispatchRecord{dispatch} to Dispatch
     Document{employee} to Employee
+    EmployeeArea{area} to Area
     EmployeeArea{employee} to Employee
     Attendance{employee} to Employee
     DispatchRecord{employee} to Employee
@@ -193,4 +195,6 @@ dto * with mapstruct
 
 // Specify the service for the ServiceProvider entity
 service * with serviceClass
+
+paginate all with pagination
 

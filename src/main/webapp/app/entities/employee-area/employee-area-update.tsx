@@ -8,6 +8,8 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
+import { IArea } from 'app/shared/model/area.model';
+import { getEntities as getAreas } from 'app/entities/area/area.reducer';
 import { IEmployee } from 'app/shared/model/employee.model';
 import { getEntities as getEmployees } from 'app/entities/employee/employee.reducer';
 import { IEmployeeArea } from 'app/shared/model/employee-area.model';
@@ -22,6 +24,7 @@ export const EmployeeAreaUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
+  const areas = useAppSelector(state => state.area.entities);
   const employees = useAppSelector(state => state.employee.entities);
   const employeeAreaEntity = useAppSelector(state => state.employeeArea.entity);
   const loading = useAppSelector(state => state.employeeArea.loading);
@@ -30,7 +33,7 @@ export const EmployeeAreaUpdate = () => {
   const statusValues = Object.keys(Status);
 
   const handleClose = () => {
-    navigate('/employee-area');
+    navigate('/employee-area' + location.search);
   };
 
   useEffect(() => {
@@ -40,6 +43,7 @@ export const EmployeeAreaUpdate = () => {
       dispatch(getEntity(id));
     }
 
+    dispatch(getAreas({}));
     dispatch(getEmployees({}));
   }, []);
 
@@ -59,6 +63,7 @@ export const EmployeeAreaUpdate = () => {
     const entity = {
       ...employeeAreaEntity,
       ...values,
+      area: areas.find(it => it.id.toString() === values.area.toString()),
       employee: employees.find(it => it.id.toString() === values.employee.toString()),
     };
 
@@ -78,6 +83,7 @@ export const EmployeeAreaUpdate = () => {
           status: 'OPEN',
           ...employeeAreaEntity,
           publicationDate: convertDateTimeFromServer(employeeAreaEntity.publicationDate),
+          area: employeeAreaEntity?.area?.id,
           employee: employeeAreaEntity?.employee?.id,
         };
 
@@ -114,6 +120,16 @@ export const EmployeeAreaUpdate = () => {
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
               />
+              <ValidatedField id="employee-area-area" name="area" data-cy="area" label="Area" type="select">
+                <option value="" key="0" />
+                {areas
+                  ? areas.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
               <ValidatedField id="employee-area-employee" name="employee" data-cy="employee" label="Employee" type="select">
                 <option value="" key="0" />
                 {employees

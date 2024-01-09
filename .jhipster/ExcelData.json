@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240108042904"
+    "changelogDate": "20231221050300"
   },
   "applications": ["DispatchApplication"],
   "dto": "mapstruct",
@@ -120,6 +120,7 @@
     }
   ],
   "name": "ExcelData",
+  "pagination": "pagination",
   "relationships": [],
   "searchEngine": "no",
   "service": "serviceClass"

@@ -1,6 +1,7 @@
 package com.konnect.app.domain;
 
 import static com.konnect.app.domain.AreaTestSamples.*;
+import static com.konnect.app.domain.OltTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.konnect.app.web.rest.TestUtil;
@@ -20,5 +21,17 @@ class AreaTest {
 
         area2 = getAreaSample2();
         assertThat(area1).isNotEqualTo(area2);
+    }
+
+    @Test
+    void oltTest() throws Exception {
+        Area area = getAreaRandomSampleGenerator();
+        Olt oltBack = getOltRandomSampleGenerator();
+
+        area.setOlt(oltBack);
+        assertThat(area.getOlt()).isEqualTo(oltBack);
+
+        area.olt(null);
+        assertThat(area.getOlt()).isNull();
     }
 }

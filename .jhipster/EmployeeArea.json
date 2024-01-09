@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240108042913"
+    "changelogDate": "20240101110200"
   },
   "applications": ["DispatchApplication"],
   "dto": "mapstruct",
@@ -17,7 +17,14 @@
     }
   ],
   "name": "EmployeeArea",
+  "pagination": "pagination",
   "relationships": [
+    {
+      "otherEntityName": "area",
+      "relationshipName": "area",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
     {
       "otherEntityName": "employee",
       "relationshipName": "employee",

@@ -25,7 +25,7 @@ export const AreaDeleteDialog = () => {
   const updateSuccess = useAppSelector(state => state.area.updateSuccess);
 
   const handleClose = () => {
-    navigate('/area');
+    navigate('/area' + pageLocation.search);
   };
 
   useEffect(() => {

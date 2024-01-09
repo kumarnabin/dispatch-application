@@ -25,7 +25,7 @@ export const EmployeeAreaDeleteDialog = () => {
   const updateSuccess = useAppSelector(state => state.employeeArea.updateSuccess);
 
   const handleClose = () => {
-    navigate('/employee-area');
+    navigate('/employee-area' + pageLocation.search);
   };
 
   useEffect(() => {

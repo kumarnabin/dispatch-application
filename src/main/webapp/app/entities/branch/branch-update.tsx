@@ -30,7 +30,7 @@ export const BranchUpdate = () => {
   const statusValues = Object.keys(Status);
 
   const handleClose = () => {
-    navigate('/branch');
+    navigate('/branch' + location.search);
   };
 
   useEffect(() => {

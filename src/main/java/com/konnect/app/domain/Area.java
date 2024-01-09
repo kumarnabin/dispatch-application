@@ -1,5 +1,6 @@
 package com.konnect.app.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.konnect.app.domain.enumeration.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -32,6 +33,10 @@ public class Area implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private Status status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "branch" }, allowSetters = true)
+    private Olt olt;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -98,6 +103,19 @@ public class Area implements Serializable {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public Olt getOlt() {
+        return this.olt;
+    }
+
+    public void setOlt(Olt olt) {
+        this.olt = olt;
+    }
+
+    public Area olt(Olt olt) {
+        this.setOlt(olt);
+        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

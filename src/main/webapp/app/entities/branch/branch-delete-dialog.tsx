@@ -25,7 +25,7 @@ export const BranchDeleteDialog = () => {
   const updateSuccess = useAppSelector(state => state.branch.updateSuccess);
 
   const handleClose = () => {
-    navigate('/branch');
+    navigate('/branch' + pageLocation.search);
   };
 
   useEffect(() => {

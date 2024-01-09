@@ -8,6 +8,8 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
+import { IOlt } from 'app/shared/model/olt.model';
+import { getEntities as getOlts } from 'app/entities/olt/olt.reducer';
 import { IArea } from 'app/shared/model/area.model';
 import { Status } from 'app/shared/model/enumerations/status.model';
 import { getEntity, updateEntity, createEntity, reset } from './area.reducer';
@@ -20,6 +22,7 @@ export const AreaUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
+  const olts = useAppSelector(state => state.olt.entities);
   const areaEntity = useAppSelector(state => state.area.entity);
   const loading = useAppSelector(state => state.area.loading);
   const updating = useAppSelector(state => state.area.updating);
@@ -27,7 +30,7 @@ export const AreaUpdate = () => {
   const statusValues = Object.keys(Status);
 
   const handleClose = () => {
-    navigate('/area');
+    navigate('/area' + location.search);
   };
 
   useEffect(() => {
@@ -36,6 +39,8 @@ export const AreaUpdate = () => {
     } else {
       dispatch(getEntity(id));
     }
+
+    dispatch(getOlts({}));
   }, []);
 
   useEffect(() => {
@@ -53,6 +58,7 @@ export const AreaUpdate = () => {
     const entity = {
       ...areaEntity,
       ...values,
+      olt: olts.find(it => it.id.toString() === values.olt.toString()),
     };
 
     if (isNew) {
@@ -68,6 +74,7 @@ export const AreaUpdate = () => {
       : {
           status: 'OPEN',
           ...areaEntity,
+          olt: areaEntity?.olt?.id,
         };
 
   return (
@@ -95,6 +102,16 @@ export const AreaUpdate = () => {
                     {status}
                   </option>
                 ))}
+              </ValidatedField>
+              <ValidatedField id="area-olt" name="olt" data-cy="olt" label="Olt" type="select">
+                <option value="" key="0" />
+                {olts
+                  ? olts.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
               </ValidatedField>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/area" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />

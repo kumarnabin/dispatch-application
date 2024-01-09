@@ -33,7 +33,7 @@ export const DispatchRecordUpdate = () => {
   const statusValues = Object.keys(Status);
 
   const handleClose = () => {
-    navigate('/dispatch-record');
+    navigate('/dispatch-record' + location.search);
   };
 
   useEffect(() => {

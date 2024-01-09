@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240108042907"
+    "changelogDate": "20231229023936"
   },
   "applications": ["DispatchApplication"],
   "dto": "mapstruct",
@@ -26,7 +26,15 @@
     }
   ],
   "name": "Area",
-  "relationships": [],
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "olt",
+      "relationshipName": "olt",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
   "searchEngine": "no",
   "service": "serviceClass"
 }

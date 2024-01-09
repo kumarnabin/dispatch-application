@@ -25,7 +25,7 @@ export const ExcelDataUpdate = () => {
   const updateSuccess = useAppSelector(state => state.excelData.updateSuccess);
 
   const handleClose = () => {
-    navigate('/excel-data');
+    navigate('/excel-data' + location.search);
   };
 
   useEffect(() => {

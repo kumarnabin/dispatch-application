@@ -25,7 +25,7 @@ export const ServiceProviderDeleteDialog = () => {
   const updateSuccess = useAppSelector(state => state.serviceProvider.updateSuccess);
 
   const handleClose = () => {
-    navigate('/service-provider');
+    navigate('/service-provider' + pageLocation.search);
   };
 
   useEffect(() => {

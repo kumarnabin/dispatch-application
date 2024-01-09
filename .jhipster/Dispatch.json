@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240108042910"
+    "changelogDate": "20231229023937"
   },
   "applications": ["DispatchApplication"],
   "dto": "mapstruct",
@@ -73,6 +73,7 @@
     }
   ],
   "name": "Dispatch",
+  "pagination": "pagination",
   "relationships": [
     {
       "otherEntityName": "team",

@@ -30,7 +30,7 @@ export const EmployeeUpdate = () => {
   const statusValues = Object.keys(Status);
 
   const handleClose = () => {
-    navigate('/employee');
+    navigate('/employee' + location.search);
   };
 
   useEffect(() => {
