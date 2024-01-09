@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -92,7 +92,7 @@ export const EmployeeAreaUpdate = () => {
       <Row className="justify-content-center">
         <Col md="8">
           <h2 id="dispatchApplicationApp.employeeArea.home.createOrEditLabel" data-cy="EmployeeAreaCreateUpdateHeading">
-            Create or edit a Employee Area
+            <Translate contentKey="dispatchApplicationApp.employeeArea.home.createOrEditLabel">Create or edit a EmployeeArea</Translate>
           </h2>
         </Col>
       </Row>
@@ -103,24 +103,43 @@ export const EmployeeAreaUpdate = () => {
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
               {!isNew ? (
-                <ValidatedField name="id" required readOnly id="employee-area-id" label="ID" validate={{ required: true }} />
+                <ValidatedField
+                  name="id"
+                  required
+                  readOnly
+                  id="employee-area-id"
+                  label={translate('global.field.id')}
+                  validate={{ required: true }}
+                />
               ) : null}
-              <ValidatedField label="Status" id="employee-area-status" name="status" data-cy="status" type="select">
+              <ValidatedField
+                label={translate('dispatchApplicationApp.employeeArea.status')}
+                id="employee-area-status"
+                name="status"
+                data-cy="status"
+                type="select"
+              >
                 {statusValues.map(status => (
                   <option value={status} key={status}>
-                    {status}
+                    {translate('dispatchApplicationApp.Status.' + status)}
                   </option>
                 ))}
               </ValidatedField>
               <ValidatedField
-                label="Publication Date"
+                label={translate('dispatchApplicationApp.employeeArea.publicationDate')}
                 id="employee-area-publicationDate"
                 name="publicationDate"
                 data-cy="publicationDate"
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
               />
-              <ValidatedField id="employee-area-area" name="area" data-cy="area" label="Area" type="select">
+              <ValidatedField
+                id="employee-area-area"
+                name="area"
+                data-cy="area"
+                label={translate('dispatchApplicationApp.employeeArea.area')}
+                type="select"
+              >
                 <option value="" key="0" />
                 {areas
                   ? areas.map(otherEntity => (
@@ -130,7 +149,13 @@ export const EmployeeAreaUpdate = () => {
                     ))
                   : null}
               </ValidatedField>
-              <ValidatedField id="employee-area-employee" name="employee" data-cy="employee" label="Employee" type="select">
+              <ValidatedField
+                id="employee-area-employee"
+                name="employee"
+                data-cy="employee"
+                label={translate('dispatchApplicationApp.employeeArea.employee')}
+                type="select"
+              >
                 <option value="" key="0" />
                 {employees
                   ? employees.map(otherEntity => (
@@ -143,12 +168,15 @@ export const EmployeeAreaUpdate = () => {
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/employee-area" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
-                <span className="d-none d-md-inline">Back</span>
+                <span className="d-none d-md-inline">
+                  <Translate contentKey="entity.action.back">Back</Translate>
+                </span>
               </Button>
               &nbsp;
               <Button color="primary" id="save-entity" data-cy="entityCreateSaveButton" type="submit" disabled={updating}>
                 <FontAwesomeIcon icon="save" />
-                &nbsp; Save
+                &nbsp;
+                <Translate contentKey="entity.action.save">Save</Translate>
               </Button>
             </ValidatedForm>
           )}

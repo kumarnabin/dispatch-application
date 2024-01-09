@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -72,7 +72,7 @@ export const TeamUpdate = () => {
       <Row className="justify-content-center">
         <Col md="8">
           <h2 id="dispatchApplicationApp.team.home.createOrEditLabel" data-cy="TeamCreateUpdateHeading">
-            Create or edit a Team
+            <Translate contentKey="dispatchApplicationApp.team.home.createOrEditLabel">Create or edit a Team</Translate>
           </h2>
         </Col>
       </Row>
@@ -82,19 +82,46 @@ export const TeamUpdate = () => {
             <p>Loading...</p>
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
-              {!isNew ? <ValidatedField name="id" required readOnly id="team-id" label="ID" validate={{ required: true }} /> : null}
-              <ValidatedField label="Team No" id="team-teamNo" name="teamNo" data-cy="teamNo" type="text" />
-              <ValidatedField label="Supervisor" id="team-supervisor" name="supervisor" data-cy="supervisor" type="text" />
+              {!isNew ? (
+                <ValidatedField
+                  name="id"
+                  required
+                  readOnly
+                  id="team-id"
+                  label={translate('global.field.id')}
+                  validate={{ required: true }}
+                />
+              ) : null}
               <ValidatedField
-                label="Supervisor Phone No"
+                label={translate('dispatchApplicationApp.team.teamNo')}
+                id="team-teamNo"
+                name="teamNo"
+                data-cy="teamNo"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('dispatchApplicationApp.team.supervisor')}
+                id="team-supervisor"
+                name="supervisor"
+                data-cy="supervisor"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('dispatchApplicationApp.team.supervisorPhoneNo')}
                 id="team-supervisorPhoneNo"
                 name="supervisorPhoneNo"
                 data-cy="supervisorPhoneNo"
                 type="text"
               />
-              <ValidatedField label="Team Leader" id="team-teamLeader" name="teamLeader" data-cy="teamLeader" type="text" />
               <ValidatedField
-                label="Team Leader Phone"
+                label={translate('dispatchApplicationApp.team.teamLeader')}
+                id="team-teamLeader"
+                name="teamLeader"
+                data-cy="teamLeader"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('dispatchApplicationApp.team.teamLeaderPhone')}
                 id="team-teamLeaderPhone"
                 name="teamLeaderPhone"
                 data-cy="teamLeaderPhone"
@@ -103,12 +130,15 @@ export const TeamUpdate = () => {
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/team" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
-                <span className="d-none d-md-inline">Back</span>
+                <span className="d-none d-md-inline">
+                  <Translate contentKey="entity.action.back">Back</Translate>
+                </span>
               </Button>
               &nbsp;
               <Button color="primary" id="save-entity" data-cy="entityCreateSaveButton" type="submit" disabled={updating}>
                 <FontAwesomeIcon icon="save" />
-                &nbsp; Save
+                &nbsp;
+                <Translate contentKey="entity.action.save">Save</Translate>
               </Button>
             </ValidatedForm>
           )}

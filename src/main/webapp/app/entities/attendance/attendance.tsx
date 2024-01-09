@@ -93,14 +93,16 @@ export const Attendance = () => {
   return (
     <div>
       <h2 id="attendance-heading" data-cy="AttendanceHeading">
-        Attendances
+        <Translate contentKey="dispatchApplicationApp.attendance.home.title">Attendances</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
+            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
+            <Translate contentKey="dispatchApplicationApp.attendance.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to="/attendance/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp; Create a new Attendance
+            &nbsp;
+            <Translate contentKey="dispatchApplicationApp.attendance.home.createLabel">Create new Attendance</Translate>
           </Link>
         </div>
       </h2>
@@ -110,19 +112,23 @@ export const Attendance = () => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
+                  <Translate contentKey="dispatchApplicationApp.attendance.id">ID</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
                 <th className="hand" onClick={sort('status')}>
-                  Status <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
+                  <Translate contentKey="dispatchApplicationApp.attendance.status">Status</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
                 </th>
                 <th className="hand" onClick={sort('meterPics')}>
-                  Meter Pics <FontAwesomeIcon icon={getSortIconByFieldName('meterPics')} />
+                  <Translate contentKey="dispatchApplicationApp.attendance.meterPics">Meter Pics</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('meterPics')} />
                 </th>
                 <th className="hand" onClick={sort('publicationDate')}>
-                  Publication Date <FontAwesomeIcon icon={getSortIconByFieldName('publicationDate')} />
+                  <Translate contentKey="dispatchApplicationApp.attendance.publicationDate">Publication Date</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('publicationDate')} />
                 </th>
                 <th>
-                  Employee <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="dispatchApplicationApp.attendance.employee">Employee</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -135,7 +141,9 @@ export const Attendance = () => {
                       {attendance.id}
                     </Button>
                   </td>
-                  <td>{attendance.status}</td>
+                  <td>
+                    <Translate contentKey={`dispatchApplicationApp.Status.${attendance.status}`} />
+                  </td>
                   <td>{attendance.meterPics}</td>
                   <td>
                     {attendance.publicationDate ? (
@@ -146,7 +154,10 @@ export const Attendance = () => {
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/attendance/${attendance.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                        <FontAwesomeIcon icon="eye" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
                       </Button>
                       <Button
                         tag={Link}
@@ -155,7 +166,10 @@ export const Attendance = () => {
                         size="sm"
                         data-cy="entityEditButton"
                       >
-                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+                        <FontAwesomeIcon icon="pencil-alt" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.edit">Edit</Translate>
+                        </span>
                       </Button>
                       <Button
                         onClick={() =>
@@ -165,7 +179,10 @@ export const Attendance = () => {
                         size="sm"
                         data-cy="entityDeleteButton"
                       >
-                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
+                        <FontAwesomeIcon icon="trash" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.delete">Delete</Translate>
+                        </span>
                       </Button>
                     </div>
                   </td>
@@ -174,13 +191,17 @@ export const Attendance = () => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No Attendances found</div>
+          !loading && (
+            <div className="alert alert-warning">
+              <Translate contentKey="dispatchApplicationApp.attendance.home.notFound">No Attendances found</Translate>
+            </div>
+          )
         )}
       </div>
       {totalItems ? (
         <div className={attendanceList && attendanceList.length > 0 ? '' : 'd-none'}>
           <div className="justify-content-center d-flex">
-            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} />
+            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} i18nEnabled />
           </div>
           <div className="justify-content-center d-flex">
             <JhiPagination

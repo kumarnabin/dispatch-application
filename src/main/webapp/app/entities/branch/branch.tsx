@@ -92,14 +92,16 @@ export const Branch = () => {
   return (
     <div>
       <h2 id="branch-heading" data-cy="BranchHeading">
-        Branches
+        <Translate contentKey="dispatchApplicationApp.branch.home.title">Branches</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
+            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
+            <Translate contentKey="dispatchApplicationApp.branch.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to="/branch/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp; Create a new Branch
+            &nbsp;
+            <Translate contentKey="dispatchApplicationApp.branch.home.createLabel">Create new Branch</Translate>
           </Link>
         </div>
       </h2>
@@ -109,19 +111,24 @@ export const Branch = () => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
+                  <Translate contentKey="dispatchApplicationApp.branch.id">ID</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
                 <th className="hand" onClick={sort('name')}>
-                  Name <FontAwesomeIcon icon={getSortIconByFieldName('name')} />
+                  <Translate contentKey="dispatchApplicationApp.branch.name">Name</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('name')} />
                 </th>
                 <th className="hand" onClick={sort('code')}>
-                  Code <FontAwesomeIcon icon={getSortIconByFieldName('code')} />
+                  <Translate contentKey="dispatchApplicationApp.branch.code">Code</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('code')} />
                 </th>
                 <th className="hand" onClick={sort('status')}>
-                  Status <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
+                  <Translate contentKey="dispatchApplicationApp.branch.status">Status</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
                 </th>
                 <th>
-                  Service Provider <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="dispatchApplicationApp.branch.serviceProvider">Service Provider</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -136,7 +143,9 @@ export const Branch = () => {
                   </td>
                   <td>{branch.name}</td>
                   <td>{branch.code}</td>
-                  <td>{branch.status}</td>
+                  <td>
+                    <Translate contentKey={`dispatchApplicationApp.Status.${branch.status}`} />
+                  </td>
                   <td>
                     {branch.serviceProvider ? (
                       <Link to={`/service-provider/${branch.serviceProvider.id}`}>{branch.serviceProvider.id}</Link>
@@ -147,7 +156,10 @@ export const Branch = () => {
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/branch/${branch.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                        <FontAwesomeIcon icon="eye" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
                       </Button>
                       <Button
                         tag={Link}
@@ -156,7 +168,10 @@ export const Branch = () => {
                         size="sm"
                         data-cy="entityEditButton"
                       >
-                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+                        <FontAwesomeIcon icon="pencil-alt" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.edit">Edit</Translate>
+                        </span>
                       </Button>
                       <Button
                         onClick={() =>
@@ -166,7 +181,10 @@ export const Branch = () => {
                         size="sm"
                         data-cy="entityDeleteButton"
                       >
-                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
+                        <FontAwesomeIcon icon="trash" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.delete">Delete</Translate>
+                        </span>
                       </Button>
                     </div>
                   </td>
@@ -175,13 +193,17 @@ export const Branch = () => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No Branches found</div>
+          !loading && (
+            <div className="alert alert-warning">
+              <Translate contentKey="dispatchApplicationApp.branch.home.notFound">No Branches found</Translate>
+            </div>
+          )
         )}
       </div>
       {totalItems ? (
         <div className={branchList && branchList.length > 0 ? '' : 'd-none'}>
           <div className="justify-content-center d-flex">
-            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} />
+            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} i18nEnabled />
           </div>
           <div className="justify-content-center d-flex">
             <JhiPagination

@@ -1,0 +1,40 @@
+{
+  "dispatchApplicationApp": {
+    "dispatch": {
+      "home": {
+        "title": "Dispatches",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Dispatch",
+        "createOrEditLabel": "Create or edit a Dispatch",
+        "notFound": "No Dispatches found"
+      },
+      "created": "A new Dispatch is created with identifier {{ param }}",
+      "updated": "A Dispatch is updated with identifier {{ param }}",
+      "deleted": "A Dispatch is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Dispatch {{ id }}?"
+      },
+      "detail": {
+        "title": "Dispatch"
+      },
+      "id": "ID",
+      "voice": "Voice",
+      "data": "Data",
+      "iptv": "Iptv",
+      "customerName": "Customer Name",
+      "contactNo": "Contact No",
+      "oltPort": "Olt Port",
+      "regDate": "Reg Date",
+      "fapPort": "Fap Port",
+      "cpeSn": "Cpe Sn",
+      "cpeRx": "Cpe Rx",
+      "complain": "Complain",
+      "remark": "Remark",
+      "status": "Status",
+      "location": "Location",
+      "printDate": "Print Date",
+      "publicationDate": "Publication Date",
+      "team": "Team"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "dispatchApplicationApp": {
+    "olt": {
+      "home": {
+        "title": "Olts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Olt",
+        "createOrEditLabel": "Create or edit a Olt",
+        "notFound": "No Olts found"
+      },
+      "created": "A new Olt is created with identifier {{ param }}",
+      "updated": "A Olt is updated with identifier {{ param }}",
+      "deleted": "A Olt is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Olt {{ id }}?"
+      },
+      "detail": {
+        "title": "Olt"
+      },
+      "id": "ID",
+      "name": "Name",
+      "detail": "Detail",
+      "status": "Status",
+      "branch": "Branch"
+    }
+  }
+}

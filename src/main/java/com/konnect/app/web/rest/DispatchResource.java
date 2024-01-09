@@ -61,7 +61,7 @@ public class DispatchResource {
         DispatchDTO result = dispatchService.save(dispatchDTO);
         return ResponseEntity
             .created(new URI("/api/dispatches/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
@@ -95,7 +95,7 @@ public class DispatchResource {
         DispatchDTO result = dispatchService.update(dispatchDTO);
         return ResponseEntity
             .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, dispatchDTO.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, dispatchDTO.getId().toString()))
             .body(result);
     }
 
@@ -131,7 +131,7 @@ public class DispatchResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, dispatchDTO.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, dispatchDTO.getId().toString())
         );
     }
 
@@ -174,7 +174,7 @@ public class DispatchResource {
         dispatchService.delete(id);
         return ResponseEntity
             .noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
 }

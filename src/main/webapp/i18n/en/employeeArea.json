@@ -1,0 +1,27 @@
+{
+  "dispatchApplicationApp": {
+    "employeeArea": {
+      "home": {
+        "title": "Employee Areas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Employee Area",
+        "createOrEditLabel": "Create or edit a Employee Area",
+        "notFound": "No Employee Areas found"
+      },
+      "created": "A new Employee Area is created with identifier {{ param }}",
+      "updated": "A Employee Area is updated with identifier {{ param }}",
+      "deleted": "A Employee Area is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Employee Area {{ id }}?"
+      },
+      "detail": {
+        "title": "Employee Area"
+      },
+      "id": "ID",
+      "status": "Status",
+      "publicationDate": "Publication Date",
+      "area": "Area",
+      "employee": "Employee"
+    }
+  }
+}

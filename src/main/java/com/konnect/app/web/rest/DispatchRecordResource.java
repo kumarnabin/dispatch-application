@@ -62,7 +62,7 @@ public class DispatchRecordResource {
         DispatchRecordDTO result = dispatchRecordService.save(dispatchRecordDTO);
         return ResponseEntity
             .created(new URI("/api/dispatch-records/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
@@ -96,7 +96,7 @@ public class DispatchRecordResource {
         DispatchRecordDTO result = dispatchRecordService.update(dispatchRecordDTO);
         return ResponseEntity
             .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, dispatchRecordDTO.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, dispatchRecordDTO.getId().toString()))
             .body(result);
     }
 
@@ -132,7 +132,7 @@ public class DispatchRecordResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, dispatchRecordDTO.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, dispatchRecordDTO.getId().toString())
         );
     }
 
@@ -177,7 +177,7 @@ public class DispatchRecordResource {
         dispatchRecordService.delete(id);
         return ResponseEntity
             .noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
 }

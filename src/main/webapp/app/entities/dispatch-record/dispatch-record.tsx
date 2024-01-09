@@ -93,14 +93,16 @@ export const DispatchRecord = () => {
   return (
     <div>
       <h2 id="dispatch-record-heading" data-cy="DispatchRecordHeading">
-        Dispatch Records
+        <Translate contentKey="dispatchApplicationApp.dispatchRecord.home.title">Dispatch Records</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
+            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
+            <Translate contentKey="dispatchApplicationApp.dispatchRecord.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to="/dispatch-record/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp; Create a new Dispatch Record
+            &nbsp;
+            <Translate contentKey="dispatchApplicationApp.dispatchRecord.home.createLabel">Create new Dispatch Record</Translate>
           </Link>
         </div>
       </h2>
@@ -110,22 +112,28 @@ export const DispatchRecord = () => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
+                  <Translate contentKey="dispatchApplicationApp.dispatchRecord.id">ID</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
                 <th className="hand" onClick={sort('remark')}>
-                  Remark <FontAwesomeIcon icon={getSortIconByFieldName('remark')} />
+                  <Translate contentKey="dispatchApplicationApp.dispatchRecord.remark">Remark</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('remark')} />
                 </th>
                 <th className="hand" onClick={sort('status')}>
-                  Status <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
+                  <Translate contentKey="dispatchApplicationApp.dispatchRecord.status">Status</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
                 </th>
                 <th className="hand" onClick={sort('publicationDate')}>
-                  Publication Date <FontAwesomeIcon icon={getSortIconByFieldName('publicationDate')} />
+                  <Translate contentKey="dispatchApplicationApp.dispatchRecord.publicationDate">Publication Date</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('publicationDate')} />
                 </th>
                 <th>
-                  Dispatch <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="dispatchApplicationApp.dispatchRecord.dispatch">Dispatch</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  Employee <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="dispatchApplicationApp.dispatchRecord.employee">Employee</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -139,7 +147,9 @@ export const DispatchRecord = () => {
                     </Button>
                   </td>
                   <td>{dispatchRecord.remark}</td>
-                  <td>{dispatchRecord.status}</td>
+                  <td>
+                    <Translate contentKey={`dispatchApplicationApp.Status.${dispatchRecord.status}`} />
+                  </td>
                   <td>
                     {dispatchRecord.publicationDate ? (
                       <TextFormat type="date" value={dispatchRecord.publicationDate} format={APP_DATE_FORMAT} />
@@ -162,7 +172,10 @@ export const DispatchRecord = () => {
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/dispatch-record/${dispatchRecord.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                        <FontAwesomeIcon icon="eye" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
                       </Button>
                       <Button
                         tag={Link}
@@ -171,7 +184,10 @@ export const DispatchRecord = () => {
                         size="sm"
                         data-cy="entityEditButton"
                       >
-                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+                        <FontAwesomeIcon icon="pencil-alt" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.edit">Edit</Translate>
+                        </span>
                       </Button>
                       <Button
                         onClick={() =>
@@ -181,7 +197,10 @@ export const DispatchRecord = () => {
                         size="sm"
                         data-cy="entityDeleteButton"
                       >
-                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
+                        <FontAwesomeIcon icon="trash" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.delete">Delete</Translate>
+                        </span>
                       </Button>
                     </div>
                   </td>
@@ -190,13 +209,17 @@ export const DispatchRecord = () => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No Dispatch Records found</div>
+          !loading && (
+            <div className="alert alert-warning">
+              <Translate contentKey="dispatchApplicationApp.dispatchRecord.home.notFound">No Dispatch Records found</Translate>
+            </div>
+          )
         )}
       </div>
       {totalItems ? (
         <div className={dispatchRecordList && dispatchRecordList.length > 0 ? '' : 'd-none'}>
           <div className="justify-content-center d-flex">
-            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} />
+            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} i18nEnabled />
           </div>
           <div className="justify-content-center d-flex">
             <JhiPagination

@@ -93,14 +93,16 @@ export const Employee = () => {
   return (
     <div>
       <h2 id="employee-heading" data-cy="EmployeeHeading">
-        Employees
+        <Translate contentKey="dispatchApplicationApp.employee.home.title">Employees</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
+            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
+            <Translate contentKey="dispatchApplicationApp.employee.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to="/employee/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp; Create a new Employee
+            &nbsp;
+            <Translate contentKey="dispatchApplicationApp.employee.home.createLabel">Create new Employee</Translate>
           </Link>
         </div>
       </h2>
@@ -110,40 +112,51 @@ export const Employee = () => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
+                  <Translate contentKey="dispatchApplicationApp.employee.id">ID</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
                 <th className="hand" onClick={sort('fullName')}>
-                  Full Name <FontAwesomeIcon icon={getSortIconByFieldName('fullName')} />
+                  <Translate contentKey="dispatchApplicationApp.employee.fullName">Full Name</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('fullName')} />
                 </th>
                 <th className="hand" onClick={sort('dob')}>
-                  Dob <FontAwesomeIcon icon={getSortIconByFieldName('dob')} />
+                  <Translate contentKey="dispatchApplicationApp.employee.dob">Dob</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('dob')} />
                 </th>
                 <th className="hand" onClick={sort('gender')}>
-                  Gender <FontAwesomeIcon icon={getSortIconByFieldName('gender')} />
+                  <Translate contentKey="dispatchApplicationApp.employee.gender">Gender</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('gender')} />
                 </th>
                 <th className="hand" onClick={sort('mobile')}>
-                  Mobile <FontAwesomeIcon icon={getSortIconByFieldName('mobile')} />
+                  <Translate contentKey="dispatchApplicationApp.employee.mobile">Mobile</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('mobile')} />
                 </th>
                 <th className="hand" onClick={sort('photo')}>
-                  Photo <FontAwesomeIcon icon={getSortIconByFieldName('photo')} />
+                  <Translate contentKey="dispatchApplicationApp.employee.photo">Photo</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('photo')} />
                 </th>
                 <th className="hand" onClick={sort('citizenshipNo')}>
-                  Citizenship No <FontAwesomeIcon icon={getSortIconByFieldName('citizenshipNo')} />
+                  <Translate contentKey="dispatchApplicationApp.employee.citizenshipNo">Citizenship No</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('citizenshipNo')} />
                 </th>
                 <th className="hand" onClick={sort('panNo')}>
-                  Pan No <FontAwesomeIcon icon={getSortIconByFieldName('panNo')} />
+                  <Translate contentKey="dispatchApplicationApp.employee.panNo">Pan No</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('panNo')} />
                 </th>
                 <th className="hand" onClick={sort('category')}>
-                  Category <FontAwesomeIcon icon={getSortIconByFieldName('category')} />
+                  <Translate contentKey="dispatchApplicationApp.employee.category">Category</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('category')} />
                 </th>
                 <th className="hand" onClick={sort('detail')}>
-                  Detail <FontAwesomeIcon icon={getSortIconByFieldName('detail')} />
+                  <Translate contentKey="dispatchApplicationApp.employee.detail">Detail</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('detail')} />
                 </th>
                 <th className="hand" onClick={sort('status')}>
-                  Status <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
+                  <Translate contentKey="dispatchApplicationApp.employee.status">Status</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
                 </th>
                 <th>
-                  User <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="dispatchApplicationApp.employee.user">User</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -179,12 +192,17 @@ export const Employee = () => {
                   <td>{employee.panNo}</td>
                   <td>{employee.category}</td>
                   <td>{employee.detail}</td>
-                  <td>{employee.status}</td>
+                  <td>
+                    <Translate contentKey={`dispatchApplicationApp.Status.${employee.status}`} />
+                  </td>
                   <td>{employee.user ? employee.user.id : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/employee/${employee.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                        <FontAwesomeIcon icon="eye" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
                       </Button>
                       <Button
                         tag={Link}
@@ -193,7 +211,10 @@ export const Employee = () => {
                         size="sm"
                         data-cy="entityEditButton"
                       >
-                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+                        <FontAwesomeIcon icon="pencil-alt" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.edit">Edit</Translate>
+                        </span>
                       </Button>
                       <Button
                         onClick={() =>
@@ -203,7 +224,10 @@ export const Employee = () => {
                         size="sm"
                         data-cy="entityDeleteButton"
                       >
-                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
+                        <FontAwesomeIcon icon="trash" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.delete">Delete</Translate>
+                        </span>
                       </Button>
                     </div>
                   </td>
@@ -212,13 +236,17 @@ export const Employee = () => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No Employees found</div>
+          !loading && (
+            <div className="alert alert-warning">
+              <Translate contentKey="dispatchApplicationApp.employee.home.notFound">No Employees found</Translate>
+            </div>
+          )
         )}
       </div>
       {totalItems ? (
         <div className={employeeList && employeeList.length > 0 ? '' : 'd-none'}>
           <div className="justify-content-center d-flex">
-            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} />
+            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} i18nEnabled />
           </div>
           <div className="justify-content-center d-flex">
             <JhiPagination

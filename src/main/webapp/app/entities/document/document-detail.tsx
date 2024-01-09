@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
-import { openFile, byteSize } from 'react-jhipster';
+import { Translate, openFile, byteSize } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useAppDispatch, useAppSelector } from 'app/config/store';
@@ -21,18 +21,26 @@ export const DocumentDetail = () => {
   return (
     <Row>
       <Col md="8">
-        <h2 data-cy="documentDetailsHeading">Document</h2>
+        <h2 data-cy="documentDetailsHeading">
+          <Translate contentKey="dispatchApplicationApp.document.detail.title">Document</Translate>
+        </h2>
         <dl className="jh-entity-details">
           <dt>
-            <span id="id">ID</span>
+            <span id="id">
+              <Translate contentKey="global.field.id">ID</Translate>
+            </span>
           </dt>
           <dd>{documentEntity.id}</dd>
           <dt>
-            <span id="name">Name</span>
+            <span id="name">
+              <Translate contentKey="dispatchApplicationApp.document.name">Name</Translate>
+            </span>
           </dt>
           <dd>{documentEntity.name}</dd>
           <dt>
-            <span id="file">File</span>
+            <span id="file">
+              <Translate contentKey="dispatchApplicationApp.document.file">File</Translate>
+            </span>
           </dt>
           <dd>
             {documentEntity.file ? (
@@ -48,15 +56,23 @@ export const DocumentDetail = () => {
               </div>
             ) : null}
           </dd>
-          <dt>Employee</dt>
+          <dt>
+            <Translate contentKey="dispatchApplicationApp.document.employee">Employee</Translate>
+          </dt>
           <dd>{documentEntity.employee ? documentEntity.employee.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/document" replace color="info" data-cy="entityDetailsBackButton">
-          <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>
+          <FontAwesomeIcon icon="arrow-left" />{' '}
+          <span className="d-none d-md-inline">
+            <Translate contentKey="entity.action.back">Back</Translate>
+          </span>
         </Button>
         &nbsp;
         <Button tag={Link} to={`/document/${documentEntity.id}/edit`} replace color="primary">
-          <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+          <FontAwesomeIcon icon="pencil-alt" />{' '}
+          <span className="d-none d-md-inline">
+            <Translate contentKey="entity.action.edit">Edit</Translate>
+          </span>
         </Button>
       </Col>
     </Row>

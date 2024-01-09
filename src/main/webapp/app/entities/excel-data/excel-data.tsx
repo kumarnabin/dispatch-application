@@ -93,14 +93,16 @@ export const ExcelData = () => {
   return (
     <div>
       <h2 id="excel-data-heading" data-cy="ExcelDataHeading">
-        Excel Data
+        <Translate contentKey="dispatchApplicationApp.excelData.home.title">Excel Data</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
+            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
+            <Translate contentKey="dispatchApplicationApp.excelData.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to="/excel-data/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp; Create a new Excel Data
+            &nbsp;
+            <Translate contentKey="dispatchApplicationApp.excelData.home.createLabel">Create new Excel Data</Translate>
           </Link>
         </div>
       </h2>
@@ -110,91 +112,120 @@ export const ExcelData = () => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.id">ID</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
                 <th className="hand" onClick={sort('column1')}>
-                  Column 1 <FontAwesomeIcon icon={getSortIconByFieldName('column1')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column1">Column 1</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column1')} />
                 </th>
                 <th className="hand" onClick={sort('column2')}>
-                  Column 2 <FontAwesomeIcon icon={getSortIconByFieldName('column2')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column2">Column 2</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column2')} />
                 </th>
                 <th className="hand" onClick={sort('column3')}>
-                  Column 3 <FontAwesomeIcon icon={getSortIconByFieldName('column3')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column3">Column 3</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column3')} />
                 </th>
                 <th className="hand" onClick={sort('column4')}>
-                  Column 4 <FontAwesomeIcon icon={getSortIconByFieldName('column4')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column4">Column 4</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column4')} />
                 </th>
                 <th className="hand" onClick={sort('column5')}>
-                  Column 5 <FontAwesomeIcon icon={getSortIconByFieldName('column5')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column5">Column 5</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column5')} />
                 </th>
                 <th className="hand" onClick={sort('column6')}>
-                  Column 6 <FontAwesomeIcon icon={getSortIconByFieldName('column6')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column6">Column 6</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column6')} />
                 </th>
                 <th className="hand" onClick={sort('column7')}>
-                  Column 7 <FontAwesomeIcon icon={getSortIconByFieldName('column7')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column7">Column 7</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column7')} />
                 </th>
                 <th className="hand" onClick={sort('column8')}>
-                  Column 8 <FontAwesomeIcon icon={getSortIconByFieldName('column8')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column8">Column 8</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column8')} />
                 </th>
                 <th className="hand" onClick={sort('column9')}>
-                  Column 9 <FontAwesomeIcon icon={getSortIconByFieldName('column9')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column9">Column 9</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column9')} />
                 </th>
                 <th className="hand" onClick={sort('column10')}>
-                  Column 10 <FontAwesomeIcon icon={getSortIconByFieldName('column10')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column10">Column 10</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column10')} />
                 </th>
                 <th className="hand" onClick={sort('column11')}>
-                  Column 11 <FontAwesomeIcon icon={getSortIconByFieldName('column11')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column11">Column 11</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column11')} />
                 </th>
                 <th className="hand" onClick={sort('column12')}>
-                  Column 12 <FontAwesomeIcon icon={getSortIconByFieldName('column12')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column12">Column 12</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column12')} />
                 </th>
                 <th className="hand" onClick={sort('column13')}>
-                  Column 13 <FontAwesomeIcon icon={getSortIconByFieldName('column13')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column13">Column 13</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column13')} />
                 </th>
                 <th className="hand" onClick={sort('column14')}>
-                  Column 14 <FontAwesomeIcon icon={getSortIconByFieldName('column14')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column14">Column 14</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column14')} />
                 </th>
                 <th className="hand" onClick={sort('column15')}>
-                  Column 15 <FontAwesomeIcon icon={getSortIconByFieldName('column15')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column15">Column 15</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column15')} />
                 </th>
                 <th className="hand" onClick={sort('column16')}>
-                  Column 16 <FontAwesomeIcon icon={getSortIconByFieldName('column16')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column16">Column 16</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column16')} />
                 </th>
                 <th className="hand" onClick={sort('column17')}>
-                  Column 17 <FontAwesomeIcon icon={getSortIconByFieldName('column17')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column17">Column 17</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column17')} />
                 </th>
                 <th className="hand" onClick={sort('column18')}>
-                  Column 18 <FontAwesomeIcon icon={getSortIconByFieldName('column18')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column18">Column 18</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column18')} />
                 </th>
                 <th className="hand" onClick={sort('column19')}>
-                  Column 19 <FontAwesomeIcon icon={getSortIconByFieldName('column19')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column19">Column 19</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column19')} />
                 </th>
                 <th className="hand" onClick={sort('column20')}>
-                  Column 20 <FontAwesomeIcon icon={getSortIconByFieldName('column20')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column20">Column 20</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column20')} />
                 </th>
                 <th className="hand" onClick={sort('column21')}>
-                  Column 21 <FontAwesomeIcon icon={getSortIconByFieldName('column21')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column21">Column 21</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column21')} />
                 </th>
                 <th className="hand" onClick={sort('column22')}>
-                  Column 22 <FontAwesomeIcon icon={getSortIconByFieldName('column22')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column22">Column 22</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column22')} />
                 </th>
                 <th className="hand" onClick={sort('column23')}>
-                  Column 23 <FontAwesomeIcon icon={getSortIconByFieldName('column23')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column23">Column 23</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column23')} />
                 </th>
                 <th className="hand" onClick={sort('column24')}>
-                  Column 24 <FontAwesomeIcon icon={getSortIconByFieldName('column24')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column24">Column 24</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column24')} />
                 </th>
                 <th className="hand" onClick={sort('column25')}>
-                  Column 25 <FontAwesomeIcon icon={getSortIconByFieldName('column25')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column25">Column 25</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column25')} />
                 </th>
                 <th className="hand" onClick={sort('column26')}>
-                  Column 26 <FontAwesomeIcon icon={getSortIconByFieldName('column26')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column26">Column 26</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column26')} />
                 </th>
                 <th className="hand" onClick={sort('column27')}>
-                  Column 27 <FontAwesomeIcon icon={getSortIconByFieldName('column27')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.column27">Column 27</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('column27')} />
                 </th>
                 <th className="hand" onClick={sort('publicationDate')}>
-                  Publication Date <FontAwesomeIcon icon={getSortIconByFieldName('publicationDate')} />
+                  <Translate contentKey="dispatchApplicationApp.excelData.publicationDate">Publication Date</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('publicationDate')} />
                 </th>
                 <th />
               </tr>
@@ -242,7 +273,10 @@ export const ExcelData = () => {
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/excel-data/${excelData.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                        <FontAwesomeIcon icon="eye" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
                       </Button>
                       <Button
                         tag={Link}
@@ -251,7 +285,10 @@ export const ExcelData = () => {
                         size="sm"
                         data-cy="entityEditButton"
                       >
-                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+                        <FontAwesomeIcon icon="pencil-alt" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.edit">Edit</Translate>
+                        </span>
                       </Button>
                       <Button
                         onClick={() =>
@@ -261,7 +298,10 @@ export const ExcelData = () => {
                         size="sm"
                         data-cy="entityDeleteButton"
                       >
-                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
+                        <FontAwesomeIcon icon="trash" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.delete">Delete</Translate>
+                        </span>
                       </Button>
                     </div>
                   </td>
@@ -270,13 +310,17 @@ export const ExcelData = () => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No Excel Data found</div>
+          !loading && (
+            <div className="alert alert-warning">
+              <Translate contentKey="dispatchApplicationApp.excelData.home.notFound">No Excel Data found</Translate>
+            </div>
+          )
         )}
       </div>
       {totalItems ? (
         <div className={excelDataList && excelDataList.length > 0 ? '' : 'd-none'}>
           <div className="justify-content-center d-flex">
-            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} />
+            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} i18nEnabled />
           </div>
           <div className="justify-content-center d-flex">
             <JhiPagination

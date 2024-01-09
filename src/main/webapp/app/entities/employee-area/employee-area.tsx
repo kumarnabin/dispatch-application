@@ -93,14 +93,16 @@ export const EmployeeArea = () => {
   return (
     <div>
       <h2 id="employee-area-heading" data-cy="EmployeeAreaHeading">
-        Employee Areas
+        <Translate contentKey="dispatchApplicationApp.employeeArea.home.title">Employee Areas</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
+            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
+            <Translate contentKey="dispatchApplicationApp.employeeArea.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to="/employee-area/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp; Create a new Employee Area
+            &nbsp;
+            <Translate contentKey="dispatchApplicationApp.employeeArea.home.createLabel">Create new Employee Area</Translate>
           </Link>
         </div>
       </h2>
@@ -110,19 +112,22 @@ export const EmployeeArea = () => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
+                  <Translate contentKey="dispatchApplicationApp.employeeArea.id">ID</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
                 <th className="hand" onClick={sort('status')}>
-                  Status <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
+                  <Translate contentKey="dispatchApplicationApp.employeeArea.status">Status</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
                 </th>
                 <th className="hand" onClick={sort('publicationDate')}>
-                  Publication Date <FontAwesomeIcon icon={getSortIconByFieldName('publicationDate')} />
+                  <Translate contentKey="dispatchApplicationApp.employeeArea.publicationDate">Publication Date</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('publicationDate')} />
                 </th>
                 <th>
-                  Area <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="dispatchApplicationApp.employeeArea.area">Area</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  Employee <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="dispatchApplicationApp.employeeArea.employee">Employee</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -135,7 +140,9 @@ export const EmployeeArea = () => {
                       {employeeArea.id}
                     </Button>
                   </td>
-                  <td>{employeeArea.status}</td>
+                  <td>
+                    <Translate contentKey={`dispatchApplicationApp.Status.${employeeArea.status}`} />
+                  </td>
                   <td>
                     {employeeArea.publicationDate ? (
                       <TextFormat type="date" value={employeeArea.publicationDate} format={APP_DATE_FORMAT} />
@@ -148,7 +155,10 @@ export const EmployeeArea = () => {
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/employee-area/${employeeArea.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                        <FontAwesomeIcon icon="eye" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
                       </Button>
                       <Button
                         tag={Link}
@@ -157,7 +167,10 @@ export const EmployeeArea = () => {
                         size="sm"
                         data-cy="entityEditButton"
                       >
-                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+                        <FontAwesomeIcon icon="pencil-alt" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.edit">Edit</Translate>
+                        </span>
                       </Button>
                       <Button
                         onClick={() =>
@@ -167,7 +180,10 @@ export const EmployeeArea = () => {
                         size="sm"
                         data-cy="entityDeleteButton"
                       >
-                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
+                        <FontAwesomeIcon icon="trash" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.delete">Delete</Translate>
+                        </span>
                       </Button>
                     </div>
                   </td>
@@ -176,13 +192,17 @@ export const EmployeeArea = () => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No Employee Areas found</div>
+          !loading && (
+            <div className="alert alert-warning">
+              <Translate contentKey="dispatchApplicationApp.employeeArea.home.notFound">No Employee Areas found</Translate>
+            </div>
+          )
         )}
       </div>
       {totalItems ? (
         <div className={employeeAreaList && employeeAreaList.length > 0 ? '' : 'd-none'}>
           <div className="justify-content-center d-flex">
-            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} />
+            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} i18nEnabled />
           </div>
           <div className="justify-content-center d-flex">
             <JhiPagination

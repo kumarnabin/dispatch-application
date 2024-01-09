@@ -93,14 +93,16 @@ export const Dispatch = () => {
   return (
     <div>
       <h2 id="dispatch-heading" data-cy="DispatchHeading">
-        Dispatches
+        <Translate contentKey="dispatchApplicationApp.dispatch.home.title">Dispatches</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
+            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
+            <Translate contentKey="dispatchApplicationApp.dispatch.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to="/dispatch/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp; Create a new Dispatch
+            &nbsp;
+            <Translate contentKey="dispatchApplicationApp.dispatch.home.createLabel">Create new Dispatch</Translate>
           </Link>
         </div>
       </h2>
@@ -110,58 +112,75 @@ export const Dispatch = () => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
+                  <Translate contentKey="dispatchApplicationApp.dispatch.id">ID</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
                 <th className="hand" onClick={sort('voice')}>
-                  Voice <FontAwesomeIcon icon={getSortIconByFieldName('voice')} />
+                  <Translate contentKey="dispatchApplicationApp.dispatch.voice">Voice</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('voice')} />
                 </th>
                 <th className="hand" onClick={sort('data')}>
-                  Data <FontAwesomeIcon icon={getSortIconByFieldName('data')} />
+                  <Translate contentKey="dispatchApplicationApp.dispatch.data">Data</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('data')} />
                 </th>
                 <th className="hand" onClick={sort('iptv')}>
-                  Iptv <FontAwesomeIcon icon={getSortIconByFieldName('iptv')} />
+                  <Translate contentKey="dispatchApplicationApp.dispatch.iptv">Iptv</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('iptv')} />
                 </th>
                 <th className="hand" onClick={sort('customerName')}>
-                  Customer Name <FontAwesomeIcon icon={getSortIconByFieldName('customerName')} />
+                  <Translate contentKey="dispatchApplicationApp.dispatch.customerName">Customer Name</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('customerName')} />
                 </th>
                 <th className="hand" onClick={sort('contactNo')}>
-                  Contact No <FontAwesomeIcon icon={getSortIconByFieldName('contactNo')} />
+                  <Translate contentKey="dispatchApplicationApp.dispatch.contactNo">Contact No</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('contactNo')} />
                 </th>
                 <th className="hand" onClick={sort('oltPort')}>
-                  Olt Port <FontAwesomeIcon icon={getSortIconByFieldName('oltPort')} />
+                  <Translate contentKey="dispatchApplicationApp.dispatch.oltPort">Olt Port</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('oltPort')} />
                 </th>
                 <th className="hand" onClick={sort('regDate')}>
-                  Reg Date <FontAwesomeIcon icon={getSortIconByFieldName('regDate')} />
+                  <Translate contentKey="dispatchApplicationApp.dispatch.regDate">Reg Date</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('regDate')} />
                 </th>
                 <th className="hand" onClick={sort('fapPort')}>
-                  Fap Port <FontAwesomeIcon icon={getSortIconByFieldName('fapPort')} />
+                  <Translate contentKey="dispatchApplicationApp.dispatch.fapPort">Fap Port</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('fapPort')} />
                 </th>
                 <th className="hand" onClick={sort('cpeSn')}>
-                  Cpe Sn <FontAwesomeIcon icon={getSortIconByFieldName('cpeSn')} />
+                  <Translate contentKey="dispatchApplicationApp.dispatch.cpeSn">Cpe Sn</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('cpeSn')} />
                 </th>
                 <th className="hand" onClick={sort('cpeRx')}>
-                  Cpe Rx <FontAwesomeIcon icon={getSortIconByFieldName('cpeRx')} />
+                  <Translate contentKey="dispatchApplicationApp.dispatch.cpeRx">Cpe Rx</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('cpeRx')} />
                 </th>
                 <th className="hand" onClick={sort('complain')}>
-                  Complain <FontAwesomeIcon icon={getSortIconByFieldName('complain')} />
+                  <Translate contentKey="dispatchApplicationApp.dispatch.complain">Complain</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('complain')} />
                 </th>
                 <th className="hand" onClick={sort('remark')}>
-                  Remark <FontAwesomeIcon icon={getSortIconByFieldName('remark')} />
+                  <Translate contentKey="dispatchApplicationApp.dispatch.remark">Remark</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('remark')} />
                 </th>
                 <th className="hand" onClick={sort('status')}>
-                  Status <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
+                  <Translate contentKey="dispatchApplicationApp.dispatch.status">Status</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
                 </th>
                 <th className="hand" onClick={sort('location')}>
-                  Location <FontAwesomeIcon icon={getSortIconByFieldName('location')} />
+                  <Translate contentKey="dispatchApplicationApp.dispatch.location">Location</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('location')} />
                 </th>
                 <th className="hand" onClick={sort('printDate')}>
-                  Print Date <FontAwesomeIcon icon={getSortIconByFieldName('printDate')} />
+                  <Translate contentKey="dispatchApplicationApp.dispatch.printDate">Print Date</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('printDate')} />
                 </th>
                 <th className="hand" onClick={sort('publicationDate')}>
-                  Publication Date <FontAwesomeIcon icon={getSortIconByFieldName('publicationDate')} />
+                  <Translate contentKey="dispatchApplicationApp.dispatch.publicationDate">Publication Date</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('publicationDate')} />
                 </th>
                 <th>
-                  Team <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="dispatchApplicationApp.dispatch.team">Team</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -186,7 +205,9 @@ export const Dispatch = () => {
                   <td>{dispatch.cpeRx}</td>
                   <td>{dispatch.complain}</td>
                   <td>{dispatch.remark}</td>
-                  <td>{dispatch.status}</td>
+                  <td>
+                    <Translate contentKey={`dispatchApplicationApp.Status.${dispatch.status}`} />
+                  </td>
                   <td>{dispatch.location}</td>
                   <td>
                     {dispatch.printDate ? <TextFormat type="date" value={dispatch.printDate} format={APP_LOCAL_DATE_FORMAT} /> : null}
@@ -198,7 +219,10 @@ export const Dispatch = () => {
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/dispatch/${dispatch.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                        <FontAwesomeIcon icon="eye" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
                       </Button>
                       <Button
                         tag={Link}
@@ -207,7 +231,10 @@ export const Dispatch = () => {
                         size="sm"
                         data-cy="entityEditButton"
                       >
-                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+                        <FontAwesomeIcon icon="pencil-alt" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.edit">Edit</Translate>
+                        </span>
                       </Button>
                       <Button
                         onClick={() =>
@@ -217,7 +244,10 @@ export const Dispatch = () => {
                         size="sm"
                         data-cy="entityDeleteButton"
                       >
-                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
+                        <FontAwesomeIcon icon="trash" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.delete">Delete</Translate>
+                        </span>
                       </Button>
                     </div>
                   </td>
@@ -226,13 +256,17 @@ export const Dispatch = () => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No Dispatches found</div>
+          !loading && (
+            <div className="alert alert-warning">
+              <Translate contentKey="dispatchApplicationApp.dispatch.home.notFound">No Dispatches found</Translate>
+            </div>
+          )
         )}
       </div>
       {totalItems ? (
         <div className={dispatchList && dispatchList.length > 0 ? '' : 'd-none'}>
           <div className="justify-content-center d-flex">
-            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} />
+            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} i18nEnabled />
           </div>
           <div className="justify-content-center d-flex">
             <JhiPagination

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -82,7 +82,7 @@ export const BranchUpdate = () => {
       <Row className="justify-content-center">
         <Col md="8">
           <h2 id="dispatchApplicationApp.branch.home.createOrEditLabel" data-cy="BranchCreateUpdateHeading">
-            Create or edit a Branch
+            <Translate contentKey="dispatchApplicationApp.branch.home.createOrEditLabel">Create or edit a Branch</Translate>
           </h2>
         </Col>
       </Row>
@@ -92,13 +92,40 @@ export const BranchUpdate = () => {
             <p>Loading...</p>
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
-              {!isNew ? <ValidatedField name="id" required readOnly id="branch-id" label="ID" validate={{ required: true }} /> : null}
-              <ValidatedField label="Name" id="branch-name" name="name" data-cy="name" type="text" />
-              <ValidatedField label="Code" id="branch-code" name="code" data-cy="code" type="text" />
-              <ValidatedField label="Status" id="branch-status" name="status" data-cy="status" type="select">
+              {!isNew ? (
+                <ValidatedField
+                  name="id"
+                  required
+                  readOnly
+                  id="branch-id"
+                  label={translate('global.field.id')}
+                  validate={{ required: true }}
+                />
+              ) : null}
+              <ValidatedField
+                label={translate('dispatchApplicationApp.branch.name')}
+                id="branch-name"
+                name="name"
+                data-cy="name"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('dispatchApplicationApp.branch.code')}
+                id="branch-code"
+                name="code"
+                data-cy="code"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('dispatchApplicationApp.branch.status')}
+                id="branch-status"
+                name="status"
+                data-cy="status"
+                type="select"
+              >
                 {statusValues.map(status => (
                   <option value={status} key={status}>
-                    {status}
+                    {translate('dispatchApplicationApp.Status.' + status)}
                   </option>
                 ))}
               </ValidatedField>
@@ -106,7 +133,7 @@ export const BranchUpdate = () => {
                 id="branch-serviceProvider"
                 name="serviceProvider"
                 data-cy="serviceProvider"
-                label="Service Provider"
+                label={translate('dispatchApplicationApp.branch.serviceProvider')}
                 type="select"
               >
                 <option value="" key="0" />
@@ -121,12 +148,15 @@ export const BranchUpdate = () => {
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/branch" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
-                <span className="d-none d-md-inline">Back</span>
+                <span className="d-none d-md-inline">
+                  <Translate contentKey="entity.action.back">Back</Translate>
+                </span>
               </Button>
               &nbsp;
               <Button color="primary" id="save-entity" data-cy="entityCreateSaveButton" type="submit" disabled={updating}>
                 <FontAwesomeIcon icon="save" />
-                &nbsp; Save
+                &nbsp;
+                <Translate contentKey="entity.action.save">Save</Translate>
               </Button>
             </ValidatedForm>
           )}

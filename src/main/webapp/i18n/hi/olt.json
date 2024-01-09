@@ -1,0 +1,27 @@
+{
+  "dispatchApplicationApp": {
+    "olt": {
+      "home": {
+        "title": "Olts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Olt बनाएँ",
+        "createOrEditLabel": "Olt बनाएँ या संपादित करें",
+        "notFound": "No Olts found"
+      },
+      "created": "एक नया Olt [identifier: {{ param }}] तैयार है",
+      "updated": "एक Olt [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Olt [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Olt [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Olt"
+      },
+      "id": "ID",
+      "name": "Name",
+      "detail": "Detail",
+      "status": "Status",
+      "branch": "Branch"
+    }
+  }
+}

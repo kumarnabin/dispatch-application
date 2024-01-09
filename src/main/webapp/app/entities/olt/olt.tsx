@@ -92,14 +92,16 @@ export const Olt = () => {
   return (
     <div>
       <h2 id="olt-heading" data-cy="OltHeading">
-        Olts
+        <Translate contentKey="dispatchApplicationApp.olt.home.title">Olts</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
+            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
+            <Translate contentKey="dispatchApplicationApp.olt.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to="/olt/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp; Create a new Olt
+            &nbsp;
+            <Translate contentKey="dispatchApplicationApp.olt.home.createLabel">Create new Olt</Translate>
           </Link>
         </div>
       </h2>
@@ -109,19 +111,23 @@ export const Olt = () => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
+                  <Translate contentKey="dispatchApplicationApp.olt.id">ID</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
                 <th className="hand" onClick={sort('name')}>
-                  Name <FontAwesomeIcon icon={getSortIconByFieldName('name')} />
+                  <Translate contentKey="dispatchApplicationApp.olt.name">Name</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('name')} />
                 </th>
                 <th className="hand" onClick={sort('detail')}>
-                  Detail <FontAwesomeIcon icon={getSortIconByFieldName('detail')} />
+                  <Translate contentKey="dispatchApplicationApp.olt.detail">Detail</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('detail')} />
                 </th>
                 <th className="hand" onClick={sort('status')}>
-                  Status <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
+                  <Translate contentKey="dispatchApplicationApp.olt.status">Status</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
                 </th>
                 <th>
-                  Branch <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="dispatchApplicationApp.olt.branch">Branch</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -136,12 +142,17 @@ export const Olt = () => {
                   </td>
                   <td>{olt.name}</td>
                   <td>{olt.detail}</td>
-                  <td>{olt.status}</td>
+                  <td>
+                    <Translate contentKey={`dispatchApplicationApp.Status.${olt.status}`} />
+                  </td>
                   <td>{olt.branch ? <Link to={`/branch/${olt.branch.id}`}>{olt.branch.id}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/olt/${olt.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                        <FontAwesomeIcon icon="eye" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
                       </Button>
                       <Button
                         tag={Link}
@@ -150,7 +161,10 @@ export const Olt = () => {
                         size="sm"
                         data-cy="entityEditButton"
                       >
-                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+                        <FontAwesomeIcon icon="pencil-alt" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.edit">Edit</Translate>
+                        </span>
                       </Button>
                       <Button
                         onClick={() =>
@@ -160,7 +174,10 @@ export const Olt = () => {
                         size="sm"
                         data-cy="entityDeleteButton"
                       >
-                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
+                        <FontAwesomeIcon icon="trash" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.delete">Delete</Translate>
+                        </span>
                       </Button>
                     </div>
                   </td>
@@ -169,13 +186,17 @@ export const Olt = () => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No Olts found</div>
+          !loading && (
+            <div className="alert alert-warning">
+              <Translate contentKey="dispatchApplicationApp.olt.home.notFound">No Olts found</Translate>
+            </div>
+          )
         )}
       </div>
       {totalItems ? (
         <div className={oltList && oltList.length > 0 ? '' : 'd-none'}>
           <div className="justify-content-center d-flex">
-            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} />
+            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} i18nEnabled />
           </div>
           <div className="justify-content-center d-flex">
             <JhiPagination

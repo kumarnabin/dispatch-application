@@ -92,14 +92,16 @@ export const Team = () => {
   return (
     <div>
       <h2 id="team-heading" data-cy="TeamHeading">
-        Teams
+        <Translate contentKey="dispatchApplicationApp.team.home.title">Teams</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
+            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
+            <Translate contentKey="dispatchApplicationApp.team.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to="/team/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp; Create a new Team
+            &nbsp;
+            <Translate contentKey="dispatchApplicationApp.team.home.createLabel">Create new Team</Translate>
           </Link>
         </div>
       </h2>
@@ -109,22 +111,28 @@ export const Team = () => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
+                  <Translate contentKey="dispatchApplicationApp.team.id">ID</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
                 <th className="hand" onClick={sort('teamNo')}>
-                  Team No <FontAwesomeIcon icon={getSortIconByFieldName('teamNo')} />
+                  <Translate contentKey="dispatchApplicationApp.team.teamNo">Team No</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('teamNo')} />
                 </th>
                 <th className="hand" onClick={sort('supervisor')}>
-                  Supervisor <FontAwesomeIcon icon={getSortIconByFieldName('supervisor')} />
+                  <Translate contentKey="dispatchApplicationApp.team.supervisor">Supervisor</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('supervisor')} />
                 </th>
                 <th className="hand" onClick={sort('supervisorPhoneNo')}>
-                  Supervisor Phone No <FontAwesomeIcon icon={getSortIconByFieldName('supervisorPhoneNo')} />
+                  <Translate contentKey="dispatchApplicationApp.team.supervisorPhoneNo">Supervisor Phone No</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('supervisorPhoneNo')} />
                 </th>
                 <th className="hand" onClick={sort('teamLeader')}>
-                  Team Leader <FontAwesomeIcon icon={getSortIconByFieldName('teamLeader')} />
+                  <Translate contentKey="dispatchApplicationApp.team.teamLeader">Team Leader</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('teamLeader')} />
                 </th>
                 <th className="hand" onClick={sort('teamLeaderPhone')}>
-                  Team Leader Phone <FontAwesomeIcon icon={getSortIconByFieldName('teamLeaderPhone')} />
+                  <Translate contentKey="dispatchApplicationApp.team.teamLeaderPhone">Team Leader Phone</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('teamLeaderPhone')} />
                 </th>
                 <th />
               </tr>
@@ -145,7 +153,10 @@ export const Team = () => {
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/team/${team.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                        <FontAwesomeIcon icon="eye" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
                       </Button>
                       <Button
                         tag={Link}
@@ -154,7 +165,10 @@ export const Team = () => {
                         size="sm"
                         data-cy="entityEditButton"
                       >
-                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+                        <FontAwesomeIcon icon="pencil-alt" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.edit">Edit</Translate>
+                        </span>
                       </Button>
                       <Button
                         onClick={() =>
@@ -164,7 +178,10 @@ export const Team = () => {
                         size="sm"
                         data-cy="entityDeleteButton"
                       >
-                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
+                        <FontAwesomeIcon icon="trash" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.delete">Delete</Translate>
+                        </span>
                       </Button>
                     </div>
                   </td>
@@ -173,13 +190,17 @@ export const Team = () => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No Teams found</div>
+          !loading && (
+            <div className="alert alert-warning">
+              <Translate contentKey="dispatchApplicationApp.team.home.notFound">No Teams found</Translate>
+            </div>
+          )
         )}
       </div>
       {totalItems ? (
         <div className={teamList && teamList.length > 0 ? '' : 'd-none'}>
           <div className="justify-content-center d-flex">
-            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} />
+            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} i18nEnabled />
           </div>
           <div className="justify-content-center d-flex">
             <JhiPagination

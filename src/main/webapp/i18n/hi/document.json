@@ -1,0 +1,26 @@
+{
+  "dispatchApplicationApp": {
+    "document": {
+      "home": {
+        "title": "Documents",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Document बनाएँ",
+        "createOrEditLabel": "Document बनाएँ या संपादित करें",
+        "notFound": "No Documents found"
+      },
+      "created": "एक नया Document [identifier: {{ param }}] तैयार है",
+      "updated": "एक Document [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Document [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Document [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Document"
+      },
+      "id": "ID",
+      "name": "Name",
+      "file": "File",
+      "employee": "Employee"
+    }
+  }
+}

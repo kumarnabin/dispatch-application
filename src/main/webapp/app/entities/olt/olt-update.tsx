@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -82,7 +82,7 @@ export const OltUpdate = () => {
       <Row className="justify-content-center">
         <Col md="8">
           <h2 id="dispatchApplicationApp.olt.home.createOrEditLabel" data-cy="OltCreateUpdateHeading">
-            Create or edit a Olt
+            <Translate contentKey="dispatchApplicationApp.olt.home.createOrEditLabel">Create or edit a Olt</Translate>
           </h2>
         </Col>
       </Row>
@@ -92,17 +92,44 @@ export const OltUpdate = () => {
             <p>Loading...</p>
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
-              {!isNew ? <ValidatedField name="id" required readOnly id="olt-id" label="ID" validate={{ required: true }} /> : null}
-              <ValidatedField label="Name" id="olt-name" name="name" data-cy="name" type="text" />
-              <ValidatedField label="Detail" id="olt-detail" name="detail" data-cy="detail" type="text" />
-              <ValidatedField label="Status" id="olt-status" name="status" data-cy="status" type="select">
+              {!isNew ? (
+                <ValidatedField
+                  name="id"
+                  required
+                  readOnly
+                  id="olt-id"
+                  label={translate('global.field.id')}
+                  validate={{ required: true }}
+                />
+              ) : null}
+              <ValidatedField label={translate('dispatchApplicationApp.olt.name')} id="olt-name" name="name" data-cy="name" type="text" />
+              <ValidatedField
+                label={translate('dispatchApplicationApp.olt.detail')}
+                id="olt-detail"
+                name="detail"
+                data-cy="detail"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('dispatchApplicationApp.olt.status')}
+                id="olt-status"
+                name="status"
+                data-cy="status"
+                type="select"
+              >
                 {statusValues.map(status => (
                   <option value={status} key={status}>
-                    {status}
+                    {translate('dispatchApplicationApp.Status.' + status)}
                   </option>
                 ))}
               </ValidatedField>
-              <ValidatedField id="olt-branch" name="branch" data-cy="branch" label="Branch" type="select">
+              <ValidatedField
+                id="olt-branch"
+                name="branch"
+                data-cy="branch"
+                label={translate('dispatchApplicationApp.olt.branch')}
+                type="select"
+              >
                 <option value="" key="0" />
                 {branches
                   ? branches.map(otherEntity => (
@@ -115,12 +142,15 @@ export const OltUpdate = () => {
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/olt" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
-                <span className="d-none d-md-inline">Back</span>
+                <span className="d-none d-md-inline">
+                  <Translate contentKey="entity.action.back">Back</Translate>
+                </span>
               </Button>
               &nbsp;
               <Button color="primary" id="save-entity" data-cy="entityCreateSaveButton" type="submit" disabled={updating}>
                 <FontAwesomeIcon icon="save" />
-                &nbsp; Save
+                &nbsp;
+                <Translate contentKey="entity.action.save">Save</Translate>
               </Button>
             </ValidatedForm>
           )}

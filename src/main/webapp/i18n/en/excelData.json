@@ -1,0 +1,51 @@
+{
+  "dispatchApplicationApp": {
+    "excelData": {
+      "home": {
+        "title": "Excel Data",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Excel Data",
+        "createOrEditLabel": "Create or edit a Excel Data",
+        "notFound": "No Excel Data found"
+      },
+      "created": "A new Excel Data is created with identifier {{ param }}",
+      "updated": "A Excel Data is updated with identifier {{ param }}",
+      "deleted": "A Excel Data is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Excel Data {{ id }}?"
+      },
+      "detail": {
+        "title": "Excel Data"
+      },
+      "id": "ID",
+      "column1": "Column 1",
+      "column2": "Column 2",
+      "column3": "Column 3",
+      "column4": "Column 4",
+      "column5": "Column 5",
+      "column6": "Column 6",
+      "column7": "Column 7",
+      "column8": "Column 8",
+      "column9": "Column 9",
+      "column10": "Column 10",
+      "column11": "Column 11",
+      "column12": "Column 12",
+      "column13": "Column 13",
+      "column14": "Column 14",
+      "column15": "Column 15",
+      "column16": "Column 16",
+      "column17": "Column 17",
+      "column18": "Column 18",
+      "column19": "Column 19",
+      "column20": "Column 20",
+      "column21": "Column 21",
+      "column22": "Column 22",
+      "column23": "Column 23",
+      "column24": "Column 24",
+      "column25": "Column 25",
+      "column26": "Column 26",
+      "column27": "Column 27",
+      "publicationDate": "Publication Date"
+    }
+  }
+}

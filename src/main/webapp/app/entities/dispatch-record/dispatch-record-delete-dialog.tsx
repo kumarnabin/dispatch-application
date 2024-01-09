@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
-
+import { Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useAppDispatch, useAppSelector } from 'app/config/store';
@@ -42,19 +42,23 @@ export const DispatchRecordDeleteDialog = () => {
   return (
     <Modal isOpen toggle={handleClose}>
       <ModalHeader toggle={handleClose} data-cy="dispatchRecordDeleteDialogHeading">
-        Confirm delete operation
+        <Translate contentKey="entity.delete.title">Confirm delete operation</Translate>
       </ModalHeader>
       <ModalBody id="dispatchApplicationApp.dispatchRecord.delete.question">
-        Are you sure you want to delete Dispatch Record {dispatchRecordEntity.id}?
+        <Translate contentKey="dispatchApplicationApp.dispatchRecord.delete.question" interpolate={{ id: dispatchRecordEntity.id }}>
+          Are you sure you want to delete this DispatchRecord?
+        </Translate>
       </ModalBody>
       <ModalFooter>
         <Button color="secondary" onClick={handleClose}>
           <FontAwesomeIcon icon="ban" />
-          &nbsp; Cancel
+          &nbsp;
+          <Translate contentKey="entity.action.cancel">Cancel</Translate>
         </Button>
         <Button id="jhi-confirm-delete-dispatchRecord" data-cy="entityConfirmDeleteButton" color="danger" onClick={confirmDelete}>
           <FontAwesomeIcon icon="trash" />
-          &nbsp; Delete
+          &nbsp;
+          <Translate contentKey="entity.action.delete">Delete</Translate>
         </Button>
       </ModalFooter>
     </Modal>

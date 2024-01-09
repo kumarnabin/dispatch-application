@@ -1,0 +1,27 @@
+{
+  "dispatchApplicationApp": {
+    "branch": {
+      "home": {
+        "title": "Branches",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Branch बनाएँ",
+        "createOrEditLabel": "Branch बनाएँ या संपादित करें",
+        "notFound": "No Branches found"
+      },
+      "created": "एक नया Branch [identifier: {{ param }}] तैयार है",
+      "updated": "एक Branch [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Branch [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Branch [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Branch"
+      },
+      "id": "ID",
+      "name": "Name",
+      "code": "Code",
+      "status": "Status",
+      "serviceProvider": "Service Provider"
+    }
+  }
+}

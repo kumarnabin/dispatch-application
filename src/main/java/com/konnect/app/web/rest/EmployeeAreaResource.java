@@ -61,7 +61,7 @@ public class EmployeeAreaResource {
         EmployeeAreaDTO result = employeeAreaService.save(employeeAreaDTO);
         return ResponseEntity
             .created(new URI("/api/employee-areas/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
@@ -95,7 +95,7 @@ public class EmployeeAreaResource {
         EmployeeAreaDTO result = employeeAreaService.update(employeeAreaDTO);
         return ResponseEntity
             .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, employeeAreaDTO.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, employeeAreaDTO.getId().toString()))
             .body(result);
     }
 
@@ -131,7 +131,7 @@ public class EmployeeAreaResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, employeeAreaDTO.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, employeeAreaDTO.getId().toString())
         );
     }
 
@@ -174,7 +174,7 @@ public class EmployeeAreaResource {
         employeeAreaService.delete(id);
         return ResponseEntity
             .noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
 }

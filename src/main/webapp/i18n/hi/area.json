@@ -1,0 +1,28 @@
+{
+  "dispatchApplicationApp": {
+    "area": {
+      "home": {
+        "title": "Areas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Area बनाएँ",
+        "createOrEditLabel": "Area बनाएँ या संपादित करें",
+        "notFound": "No Areas found"
+      },
+      "created": "एक नया Area [identifier: {{ param }}] तैयार है",
+      "updated": "एक Area [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Area [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Area [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Area"
+      },
+      "id": "ID",
+      "name": "Name",
+      "code": "Code",
+      "detail": "Detail",
+      "status": "Status",
+      "olt": "Olt"
+    }
+  }
+}

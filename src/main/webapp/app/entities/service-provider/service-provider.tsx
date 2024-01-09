@@ -92,14 +92,16 @@ export const ServiceProvider = () => {
   return (
     <div>
       <h2 id="service-provider-heading" data-cy="ServiceProviderHeading">
-        Service Providers
+        <Translate contentKey="dispatchApplicationApp.serviceProvider.home.title">Service Providers</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
+            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
+            <Translate contentKey="dispatchApplicationApp.serviceProvider.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to="/service-provider/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp; Create a new Service Provider
+            &nbsp;
+            <Translate contentKey="dispatchApplicationApp.serviceProvider.home.createLabel">Create new Service Provider</Translate>
           </Link>
         </div>
       </h2>
@@ -109,22 +111,28 @@ export const ServiceProvider = () => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
+                  <Translate contentKey="dispatchApplicationApp.serviceProvider.id">ID</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
                 <th className="hand" onClick={sort('name')}>
-                  Name <FontAwesomeIcon icon={getSortIconByFieldName('name')} />
+                  <Translate contentKey="dispatchApplicationApp.serviceProvider.name">Name</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('name')} />
                 </th>
                 <th className="hand" onClick={sort('code')}>
-                  Code <FontAwesomeIcon icon={getSortIconByFieldName('code')} />
+                  <Translate contentKey="dispatchApplicationApp.serviceProvider.code">Code</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('code')} />
                 </th>
                 <th className="hand" onClick={sort('phone')}>
-                  Phone <FontAwesomeIcon icon={getSortIconByFieldName('phone')} />
+                  <Translate contentKey="dispatchApplicationApp.serviceProvider.phone">Phone</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('phone')} />
                 </th>
                 <th className="hand" onClick={sort('address')}>
-                  Address <FontAwesomeIcon icon={getSortIconByFieldName('address')} />
+                  <Translate contentKey="dispatchApplicationApp.serviceProvider.address">Address</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('address')} />
                 </th>
                 <th className="hand" onClick={sort('status')}>
-                  Status <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
+                  <Translate contentKey="dispatchApplicationApp.serviceProvider.status">Status</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
                 </th>
                 <th />
               </tr>
@@ -141,7 +149,9 @@ export const ServiceProvider = () => {
                   <td>{serviceProvider.code}</td>
                   <td>{serviceProvider.phone}</td>
                   <td>{serviceProvider.address}</td>
-                  <td>{serviceProvider.status}</td>
+                  <td>
+                    <Translate contentKey={`dispatchApplicationApp.Status.${serviceProvider.status}`} />
+                  </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button
@@ -151,7 +161,10 @@ export const ServiceProvider = () => {
                         size="sm"
                         data-cy="entityDetailsButton"
                       >
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                        <FontAwesomeIcon icon="eye" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
                       </Button>
                       <Button
                         tag={Link}
@@ -160,7 +173,10 @@ export const ServiceProvider = () => {
                         size="sm"
                         data-cy="entityEditButton"
                       >
-                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+                        <FontAwesomeIcon icon="pencil-alt" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.edit">Edit</Translate>
+                        </span>
                       </Button>
                       <Button
                         onClick={() =>
@@ -170,7 +186,10 @@ export const ServiceProvider = () => {
                         size="sm"
                         data-cy="entityDeleteButton"
                       >
-                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
+                        <FontAwesomeIcon icon="trash" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.delete">Delete</Translate>
+                        </span>
                       </Button>
                     </div>
                   </td>
@@ -179,13 +198,17 @@ export const ServiceProvider = () => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No Service Providers found</div>
+          !loading && (
+            <div className="alert alert-warning">
+              <Translate contentKey="dispatchApplicationApp.serviceProvider.home.notFound">No Service Providers found</Translate>
+            </div>
+          )
         )}
       </div>
       {totalItems ? (
         <div className={serviceProviderList && serviceProviderList.length > 0 ? '' : 'd-none'}>
           <div className="justify-content-center d-flex">
-            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} />
+            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} i18nEnabled />
           </div>
           <div className="justify-content-center d-flex">
             <JhiPagination

@@ -67,14 +67,16 @@ export const Customer = () => {
   return (
     <div>
       <h2 id="customer-heading" data-cy="CustomerHeading">
-        Customers
+        <Translate contentKey="dispatchApplicationApp.customer.home.title">Customers</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
+            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
+            <Translate contentKey="dispatchApplicationApp.customer.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to="/customer/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp; Create a new Customer
+            &nbsp;
+            <Translate contentKey="dispatchApplicationApp.customer.home.createLabel">Create new Customer</Translate>
           </Link>
         </div>
       </h2>
@@ -84,58 +86,75 @@ export const Customer = () => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
+                  <Translate contentKey="dispatchApplicationApp.customer.id">ID</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
                 <th className="hand" onClick={sort('voice')}>
-                  Voice <FontAwesomeIcon icon={getSortIconByFieldName('voice')} />
+                  <Translate contentKey="dispatchApplicationApp.customer.voice">Voice</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('voice')} />
                 </th>
                 <th className="hand" onClick={sort('data')}>
-                  Data <FontAwesomeIcon icon={getSortIconByFieldName('data')} />
+                  <Translate contentKey="dispatchApplicationApp.customer.data">Data</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('data')} />
                 </th>
                 <th className="hand" onClick={sort('iptv')}>
-                  Iptv <FontAwesomeIcon icon={getSortIconByFieldName('iptv')} />
+                  <Translate contentKey="dispatchApplicationApp.customer.iptv">Iptv</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('iptv')} />
                 </th>
                 <th className="hand" onClick={sort('customerName')}>
-                  Customer Name <FontAwesomeIcon icon={getSortIconByFieldName('customerName')} />
+                  <Translate contentKey="dispatchApplicationApp.customer.customerName">Customer Name</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('customerName')} />
                 </th>
                 <th className="hand" onClick={sort('contactNo')}>
-                  Contact No <FontAwesomeIcon icon={getSortIconByFieldName('contactNo')} />
+                  <Translate contentKey="dispatchApplicationApp.customer.contactNo">Contact No</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('contactNo')} />
                 </th>
                 <th className="hand" onClick={sort('oltPort')}>
-                  Olt Port <FontAwesomeIcon icon={getSortIconByFieldName('oltPort')} />
+                  <Translate contentKey="dispatchApplicationApp.customer.oltPort">Olt Port</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('oltPort')} />
                 </th>
                 <th className="hand" onClick={sort('regDate')}>
-                  Reg Date <FontAwesomeIcon icon={getSortIconByFieldName('regDate')} />
+                  <Translate contentKey="dispatchApplicationApp.customer.regDate">Reg Date</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('regDate')} />
                 </th>
                 <th className="hand" onClick={sort('fapPort')}>
-                  Fap Port <FontAwesomeIcon icon={getSortIconByFieldName('fapPort')} />
+                  <Translate contentKey="dispatchApplicationApp.customer.fapPort">Fap Port</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('fapPort')} />
                 </th>
                 <th className="hand" onClick={sort('cpeSn')}>
-                  Cpe Sn <FontAwesomeIcon icon={getSortIconByFieldName('cpeSn')} />
+                  <Translate contentKey="dispatchApplicationApp.customer.cpeSn">Cpe Sn</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('cpeSn')} />
                 </th>
                 <th className="hand" onClick={sort('cpeRx')}>
-                  Cpe Rx <FontAwesomeIcon icon={getSortIconByFieldName('cpeRx')} />
+                  <Translate contentKey="dispatchApplicationApp.customer.cpeRx">Cpe Rx</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('cpeRx')} />
                 </th>
                 <th className="hand" onClick={sort('complain')}>
-                  Complain <FontAwesomeIcon icon={getSortIconByFieldName('complain')} />
+                  <Translate contentKey="dispatchApplicationApp.customer.complain">Complain</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('complain')} />
                 </th>
                 <th className="hand" onClick={sort('remark')}>
-                  Remark <FontAwesomeIcon icon={getSortIconByFieldName('remark')} />
+                  <Translate contentKey="dispatchApplicationApp.customer.remark">Remark</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('remark')} />
                 </th>
                 <th className="hand" onClick={sort('status')}>
-                  Status <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
+                  <Translate contentKey="dispatchApplicationApp.customer.status">Status</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
                 </th>
                 <th className="hand" onClick={sort('location')}>
-                  Location <FontAwesomeIcon icon={getSortIconByFieldName('location')} />
+                  <Translate contentKey="dispatchApplicationApp.customer.location">Location</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('location')} />
                 </th>
                 <th className="hand" onClick={sort('printDate')}>
-                  Print Date <FontAwesomeIcon icon={getSortIconByFieldName('printDate')} />
+                  <Translate contentKey="dispatchApplicationApp.customer.printDate">Print Date</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('printDate')} />
                 </th>
                 <th className="hand" onClick={sort('publicationDate')}>
-                  Publication Date <FontAwesomeIcon icon={getSortIconByFieldName('publicationDate')} />
+                  <Translate contentKey="dispatchApplicationApp.customer.publicationDate">Publication Date</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('publicationDate')} />
                 </th>
                 <th>
-                  Team <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="dispatchApplicationApp.customer.team">Team</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -172,10 +191,16 @@ export const Customer = () => {
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/customer/${customer.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                        <FontAwesomeIcon icon="eye" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
                       </Button>
                       <Button tag={Link} to={`/customer/${customer.id}/edit`} color="primary" size="sm" data-cy="entityEditButton">
-                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+                        <FontAwesomeIcon icon="pencil-alt" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.edit">Edit</Translate>
+                        </span>
                       </Button>
                       <Button
                         onClick={() => (window.location.href = `/customer/${customer.id}/delete`)}
@@ -183,7 +208,10 @@ export const Customer = () => {
                         size="sm"
                         data-cy="entityDeleteButton"
                       >
-                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
+                        <FontAwesomeIcon icon="trash" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.delete">Delete</Translate>
+                        </span>
                       </Button>
                     </div>
                   </td>
@@ -192,7 +220,11 @@ export const Customer = () => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No Customers found</div>
+          !loading && (
+            <div className="alert alert-warning">
+              <Translate contentKey="dispatchApplicationApp.customer.home.notFound">No Customers found</Translate>
+            </div>
+          )
         )}
       </div>
     </div>

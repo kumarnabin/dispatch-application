@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, ValidatedField, ValidatedForm, ValidatedBlobField } from 'react-jhipster';
+import { isNumber, Translate, translate, ValidatedField, ValidatedForm, ValidatedBlobField } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -86,7 +86,7 @@ export const EmployeeUpdate = () => {
       <Row className="justify-content-center">
         <Col md="8">
           <h2 id="dispatchApplicationApp.employee.home.createOrEditLabel" data-cy="EmployeeCreateUpdateHeading">
-            Create or edit a Employee
+            <Translate contentKey="dispatchApplicationApp.employee.home.createOrEditLabel">Create or edit a Employee</Translate>
           </h2>
         </Col>
       </Row>
@@ -96,24 +96,101 @@ export const EmployeeUpdate = () => {
             <p>Loading...</p>
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
-              {!isNew ? <ValidatedField name="id" required readOnly id="employee-id" label="ID" validate={{ required: true }} /> : null}
-              <ValidatedField label="Full Name" id="employee-fullName" name="fullName" data-cy="fullName" type="text" />
-              <ValidatedField label="Dob" id="employee-dob" name="dob" data-cy="dob" type="datetime-local" placeholder="YYYY-MM-DD HH:mm" />
-              <ValidatedField label="Gender" id="employee-gender" name="gender" data-cy="gender" type="text" />
-              <ValidatedField label="Mobile" id="employee-mobile" name="mobile" data-cy="mobile" type="text" />
-              <ValidatedBlobField label="Photo" id="employee-photo" name="photo" data-cy="photo" isImage accept="image/*" />
-              <ValidatedField label="Citizenship No" id="employee-citizenshipNo" name="citizenshipNo" data-cy="citizenshipNo" type="text" />
-              <ValidatedField label="Pan No" id="employee-panNo" name="panNo" data-cy="panNo" type="text" />
-              <ValidatedField label="Category" id="employee-category" name="category" data-cy="category" type="text" />
-              <ValidatedField label="Detail" id="employee-detail" name="detail" data-cy="detail" type="text" />
-              <ValidatedField label="Status" id="employee-status" name="status" data-cy="status" type="select">
+              {!isNew ? (
+                <ValidatedField
+                  name="id"
+                  required
+                  readOnly
+                  id="employee-id"
+                  label={translate('global.field.id')}
+                  validate={{ required: true }}
+                />
+              ) : null}
+              <ValidatedField
+                label={translate('dispatchApplicationApp.employee.fullName')}
+                id="employee-fullName"
+                name="fullName"
+                data-cy="fullName"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('dispatchApplicationApp.employee.dob')}
+                id="employee-dob"
+                name="dob"
+                data-cy="dob"
+                type="datetime-local"
+                placeholder="YYYY-MM-DD HH:mm"
+              />
+              <ValidatedField
+                label={translate('dispatchApplicationApp.employee.gender')}
+                id="employee-gender"
+                name="gender"
+                data-cy="gender"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('dispatchApplicationApp.employee.mobile')}
+                id="employee-mobile"
+                name="mobile"
+                data-cy="mobile"
+                type="text"
+              />
+              <ValidatedBlobField
+                label={translate('dispatchApplicationApp.employee.photo')}
+                id="employee-photo"
+                name="photo"
+                data-cy="photo"
+                isImage
+                accept="image/*"
+              />
+              <ValidatedField
+                label={translate('dispatchApplicationApp.employee.citizenshipNo')}
+                id="employee-citizenshipNo"
+                name="citizenshipNo"
+                data-cy="citizenshipNo"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('dispatchApplicationApp.employee.panNo')}
+                id="employee-panNo"
+                name="panNo"
+                data-cy="panNo"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('dispatchApplicationApp.employee.category')}
+                id="employee-category"
+                name="category"
+                data-cy="category"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('dispatchApplicationApp.employee.detail')}
+                id="employee-detail"
+                name="detail"
+                data-cy="detail"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('dispatchApplicationApp.employee.status')}
+                id="employee-status"
+                name="status"
+                data-cy="status"
+                type="select"
+              >
                 {statusValues.map(status => (
                   <option value={status} key={status}>
-                    {status}
+                    {translate('dispatchApplicationApp.Status.' + status)}
                   </option>
                 ))}
               </ValidatedField>
-              <ValidatedField id="employee-user" name="user" data-cy="user" label="User" type="select">
+              <ValidatedField
+                id="employee-user"
+                name="user"
+                data-cy="user"
+                label={translate('dispatchApplicationApp.employee.user')}
+                type="select"
+              >
                 <option value="" key="0" />
                 {users
                   ? users.map(otherEntity => (
@@ -126,12 +203,15 @@ export const EmployeeUpdate = () => {
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/employee" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
-                <span className="d-none d-md-inline">Back</span>
+                <span className="d-none d-md-inline">
+                  <Translate contentKey="entity.action.back">Back</Translate>
+                </span>
               </Button>
               &nbsp;
               <Button color="primary" id="save-entity" data-cy="entityCreateSaveButton" type="submit" disabled={updating}>
                 <FontAwesomeIcon icon="save" />
-                &nbsp; Save
+                &nbsp;
+                <Translate contentKey="entity.action.save">Save</Translate>
               </Button>
             </ValidatedForm>
           )}

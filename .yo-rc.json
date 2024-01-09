@@ -14,8 +14,8 @@
     "devDatabaseType": "mysql",
     "devServerPort": 9060,
     "enableHibernateCache": false,
-    "enableSwaggerCodegen": false,
-    "enableTranslation": false,
+    "enableSwaggerCodegen": true,
+    "enableTranslation": true,
     "entities": [
       "ServiceProvider",
       "Branch",

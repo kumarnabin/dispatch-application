@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, ValidatedField, ValidatedForm, ValidatedBlobField } from 'react-jhipster';
+import { isNumber, Translate, translate, ValidatedField, ValidatedForm, ValidatedBlobField } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -79,7 +79,7 @@ export const DocumentUpdate = () => {
       <Row className="justify-content-center">
         <Col md="8">
           <h2 id="dispatchApplicationApp.document.home.createOrEditLabel" data-cy="DocumentCreateUpdateHeading">
-            Create or edit a Document
+            <Translate contentKey="dispatchApplicationApp.document.home.createOrEditLabel">Create or edit a Document</Translate>
           </h2>
         </Col>
       </Row>
@@ -89,10 +89,38 @@ export const DocumentUpdate = () => {
             <p>Loading...</p>
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
-              {!isNew ? <ValidatedField name="id" required readOnly id="document-id" label="ID" validate={{ required: true }} /> : null}
-              <ValidatedField label="Name" id="document-name" name="name" data-cy="name" type="text" />
-              <ValidatedBlobField label="File" id="document-file" name="file" data-cy="file" isImage accept="image/*" />
-              <ValidatedField id="document-employee" name="employee" data-cy="employee" label="Employee" type="select">
+              {!isNew ? (
+                <ValidatedField
+                  name="id"
+                  required
+                  readOnly
+                  id="document-id"
+                  label={translate('global.field.id')}
+                  validate={{ required: true }}
+                />
+              ) : null}
+              <ValidatedField
+                label={translate('dispatchApplicationApp.document.name')}
+                id="document-name"
+                name="name"
+                data-cy="name"
+                type="text"
+              />
+              <ValidatedBlobField
+                label={translate('dispatchApplicationApp.document.file')}
+                id="document-file"
+                name="file"
+                data-cy="file"
+                isImage
+                accept="image/*"
+              />
+              <ValidatedField
+                id="document-employee"
+                name="employee"
+                data-cy="employee"
+                label={translate('dispatchApplicationApp.document.employee')}
+                type="select"
+              >
                 <option value="" key="0" />
                 {employees
                   ? employees.map(otherEntity => (
@@ -105,12 +133,15 @@ export const DocumentUpdate = () => {
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/document" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
-                <span className="d-none d-md-inline">Back</span>
+                <span className="d-none d-md-inline">
+                  <Translate contentKey="entity.action.back">Back</Translate>
+                </span>
               </Button>
               &nbsp;
               <Button color="primary" id="save-entity" data-cy="entityCreateSaveButton" type="submit" disabled={updating}>
                 <FontAwesomeIcon icon="save" />
-                &nbsp; Save
+                &nbsp;
+                <Translate contentKey="entity.action.save">Save</Translate>
               </Button>
             </ValidatedForm>
           )}

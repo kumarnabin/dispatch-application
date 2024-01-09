@@ -1,0 +1,40 @@
+{
+  "dispatchApplicationApp": {
+    "dispatch": {
+      "home": {
+        "title": "Dispatches",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Dispatch बनाएँ",
+        "createOrEditLabel": "Dispatch बनाएँ या संपादित करें",
+        "notFound": "No Dispatches found"
+      },
+      "created": "एक नया Dispatch [identifier: {{ param }}] तैयार है",
+      "updated": "एक Dispatch [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Dispatch [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Dispatch [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Dispatch"
+      },
+      "id": "ID",
+      "voice": "Voice",
+      "data": "Data",
+      "iptv": "Iptv",
+      "customerName": "Customer Name",
+      "contactNo": "Contact No",
+      "oltPort": "Olt Port",
+      "regDate": "Reg Date",
+      "fapPort": "Fap Port",
+      "cpeSn": "Cpe Sn",
+      "cpeRx": "Cpe Rx",
+      "complain": "Complain",
+      "remark": "Remark",
+      "status": "Status",
+      "location": "Location",
+      "printDate": "Print Date",
+      "publicationDate": "Publication Date",
+      "team": "Team"
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -92,7 +92,7 @@ export const DispatchRecordUpdate = () => {
       <Row className="justify-content-center">
         <Col md="8">
           <h2 id="dispatchApplicationApp.dispatchRecord.home.createOrEditLabel" data-cy="DispatchRecordCreateUpdateHeading">
-            Create or edit a Dispatch Record
+            <Translate contentKey="dispatchApplicationApp.dispatchRecord.home.createOrEditLabel">Create or edit a DispatchRecord</Translate>
           </h2>
         </Col>
       </Row>
@@ -103,25 +103,50 @@ export const DispatchRecordUpdate = () => {
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
               {!isNew ? (
-                <ValidatedField name="id" required readOnly id="dispatch-record-id" label="ID" validate={{ required: true }} />
+                <ValidatedField
+                  name="id"
+                  required
+                  readOnly
+                  id="dispatch-record-id"
+                  label={translate('global.field.id')}
+                  validate={{ required: true }}
+                />
               ) : null}
-              <ValidatedField label="Remark" id="dispatch-record-remark" name="remark" data-cy="remark" type="text" />
-              <ValidatedField label="Status" id="dispatch-record-status" name="status" data-cy="status" type="select">
+              <ValidatedField
+                label={translate('dispatchApplicationApp.dispatchRecord.remark')}
+                id="dispatch-record-remark"
+                name="remark"
+                data-cy="remark"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('dispatchApplicationApp.dispatchRecord.status')}
+                id="dispatch-record-status"
+                name="status"
+                data-cy="status"
+                type="select"
+              >
                 {statusValues.map(status => (
                   <option value={status} key={status}>
-                    {status}
+                    {translate('dispatchApplicationApp.Status.' + status)}
                   </option>
                 ))}
               </ValidatedField>
               <ValidatedField
-                label="Publication Date"
+                label={translate('dispatchApplicationApp.dispatchRecord.publicationDate')}
                 id="dispatch-record-publicationDate"
                 name="publicationDate"
                 data-cy="publicationDate"
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
               />
-              <ValidatedField id="dispatch-record-dispatch" name="dispatch" data-cy="dispatch" label="Dispatch" type="select">
+              <ValidatedField
+                id="dispatch-record-dispatch"
+                name="dispatch"
+                data-cy="dispatch"
+                label={translate('dispatchApplicationApp.dispatchRecord.dispatch')}
+                type="select"
+              >
                 <option value="" key="0" />
                 {dispatches
                   ? dispatches.map(otherEntity => (
@@ -131,7 +156,13 @@ export const DispatchRecordUpdate = () => {
                     ))
                   : null}
               </ValidatedField>
-              <ValidatedField id="dispatch-record-employee" name="employee" data-cy="employee" label="Employee" type="select">
+              <ValidatedField
+                id="dispatch-record-employee"
+                name="employee"
+                data-cy="employee"
+                label={translate('dispatchApplicationApp.dispatchRecord.employee')}
+                type="select"
+              >
                 <option value="" key="0" />
                 {employees
                   ? employees.map(otherEntity => (
@@ -144,12 +175,15 @@ export const DispatchRecordUpdate = () => {
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/dispatch-record" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
-                <span className="d-none d-md-inline">Back</span>
+                <span className="d-none d-md-inline">
+                  <Translate contentKey="entity.action.back">Back</Translate>
+                </span>
               </Button>
               &nbsp;
               <Button color="primary" id="save-entity" data-cy="entityCreateSaveButton" type="submit" disabled={updating}>
                 <FontAwesomeIcon icon="save" />
-                &nbsp; Save
+                &nbsp;
+                <Translate contentKey="entity.action.save">Save</Translate>
               </Button>
             </ValidatedForm>
           )}

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
-import { openFile, byteSize, TextFormat } from 'react-jhipster';
+import { Translate, openFile, byteSize, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
@@ -22,30 +22,44 @@ export const EmployeeDetail = () => {
   return (
     <Row>
       <Col md="8">
-        <h2 data-cy="employeeDetailsHeading">Translation missing for dispatchApplicationApp.employee.detail.title</h2>
+        <h2 data-cy="employeeDetailsHeading">
+          <Translate contentKey="dispatchApplicationApp.employee.detail.title">Employee</Translate>
+        </h2>
         <dl className="jh-entity-details">
           <dt>
-            <span id="id">ID</span>
+            <span id="id">
+              <Translate contentKey="global.field.id">ID</Translate>
+            </span>
           </dt>
           <dd>{employeeEntity.id}</dd>
           <dt>
-            <span id="fullName">Full Name</span>
+            <span id="fullName">
+              <Translate contentKey="dispatchApplicationApp.employee.fullName">Full Name</Translate>
+            </span>
           </dt>
           <dd>{employeeEntity.fullName}</dd>
           <dt>
-            <span id="dob">Dob</span>
+            <span id="dob">
+              <Translate contentKey="dispatchApplicationApp.employee.dob">Dob</Translate>
+            </span>
           </dt>
           <dd>{employeeEntity.dob ? <TextFormat value={employeeEntity.dob} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
-            <span id="gender">Gender</span>
+            <span id="gender">
+              <Translate contentKey="dispatchApplicationApp.employee.gender">Gender</Translate>
+            </span>
           </dt>
           <dd>{employeeEntity.gender}</dd>
           <dt>
-            <span id="mobile">Mobile</span>
+            <span id="mobile">
+              <Translate contentKey="dispatchApplicationApp.employee.mobile">Mobile</Translate>
+            </span>
           </dt>
           <dd>{employeeEntity.mobile}</dd>
           <dt>
-            <span id="photo">Photo</span>
+            <span id="photo">
+              <Translate contentKey="dispatchApplicationApp.employee.photo">Photo</Translate>
+            </span>
           </dt>
           <dd>
             {employeeEntity.photo ? (
@@ -62,34 +76,52 @@ export const EmployeeDetail = () => {
             ) : null}
           </dd>
           <dt>
-            <span id="citizenshipNo">Citizenship No</span>
+            <span id="citizenshipNo">
+              <Translate contentKey="dispatchApplicationApp.employee.citizenshipNo">Citizenship No</Translate>
+            </span>
           </dt>
           <dd>{employeeEntity.citizenshipNo}</dd>
           <dt>
-            <span id="panNo">Pan No</span>
+            <span id="panNo">
+              <Translate contentKey="dispatchApplicationApp.employee.panNo">Pan No</Translate>
+            </span>
           </dt>
           <dd>{employeeEntity.panNo}</dd>
           <dt>
-            <span id="category">Category</span>
+            <span id="category">
+              <Translate contentKey="dispatchApplicationApp.employee.category">Category</Translate>
+            </span>
           </dt>
           <dd>{employeeEntity.category}</dd>
           <dt>
-            <span id="detail">Detail</span>
+            <span id="detail">
+              <Translate contentKey="dispatchApplicationApp.employee.detail">Detail</Translate>
+            </span>
           </dt>
           <dd>{employeeEntity.detail}</dd>
           <dt>
-            <span id="status">Status</span>
+            <span id="status">
+              <Translate contentKey="dispatchApplicationApp.employee.status">Status</Translate>
+            </span>
           </dt>
           <dd>{employeeEntity.status}</dd>
-          <dt>User</dt>
+          <dt>
+            <Translate contentKey="dispatchApplicationApp.employee.user">User</Translate>
+          </dt>
           <dd>{employeeEntity.user ? employeeEntity.user.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/employee" replace color="info" data-cy="entityDetailsBackButton">
-          <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>
+          <FontAwesomeIcon icon="arrow-left" />{' '}
+          <span className="d-none d-md-inline">
+            <Translate contentKey="entity.action.back">Back</Translate>
+          </span>
         </Button>
         &nbsp;
         <Button tag={Link} to={`/employee/${employeeEntity.id}/edit`} replace color="primary">
-          <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+          <FontAwesomeIcon icon="pencil-alt" />{' '}
+          <span className="d-none d-md-inline">
+            <Translate contentKey="entity.action.edit">Edit</Translate>
+          </span>
         </Button>
       </Col>
     </Row>

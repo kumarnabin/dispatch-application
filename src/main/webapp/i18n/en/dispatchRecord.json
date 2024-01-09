@@ -1,0 +1,28 @@
+{
+  "dispatchApplicationApp": {
+    "dispatchRecord": {
+      "home": {
+        "title": "Dispatch Records",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Dispatch Record",
+        "createOrEditLabel": "Create or edit a Dispatch Record",
+        "notFound": "No Dispatch Records found"
+      },
+      "created": "A new Dispatch Record is created with identifier {{ param }}",
+      "updated": "A Dispatch Record is updated with identifier {{ param }}",
+      "deleted": "A Dispatch Record is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Dispatch Record {{ id }}?"
+      },
+      "detail": {
+        "title": "Dispatch Record"
+      },
+      "id": "ID",
+      "remark": "Remark",
+      "status": "Status",
+      "publicationDate": "Publication Date",
+      "dispatch": "Dispatch",
+      "employee": "Employee"
+    }
+  }
+}

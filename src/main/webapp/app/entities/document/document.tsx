@@ -92,14 +92,16 @@ export const Document = () => {
   return (
     <div>
       <h2 id="document-heading" data-cy="DocumentHeading">
-        Documents
+        <Translate contentKey="dispatchApplicationApp.document.home.title">Documents</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
+            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
+            <Translate contentKey="dispatchApplicationApp.document.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to="/document/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp; Create a new Document
+            &nbsp;
+            <Translate contentKey="dispatchApplicationApp.document.home.createLabel">Create new Document</Translate>
           </Link>
         </div>
       </h2>
@@ -109,16 +111,19 @@ export const Document = () => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
+                  <Translate contentKey="dispatchApplicationApp.document.id">ID</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
                 <th className="hand" onClick={sort('name')}>
-                  Name <FontAwesomeIcon icon={getSortIconByFieldName('name')} />
+                  <Translate contentKey="dispatchApplicationApp.document.name">Name</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('name')} />
                 </th>
                 <th className="hand" onClick={sort('file')}>
-                  File <FontAwesomeIcon icon={getSortIconByFieldName('file')} />
+                  <Translate contentKey="dispatchApplicationApp.document.file">File</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('file')} />
                 </th>
                 <th>
-                  Employee <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="dispatchApplicationApp.document.employee">Employee</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -151,7 +156,10 @@ export const Document = () => {
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/document/${document.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                        <FontAwesomeIcon icon="eye" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
                       </Button>
                       <Button
                         tag={Link}
@@ -160,7 +168,10 @@ export const Document = () => {
                         size="sm"
                         data-cy="entityEditButton"
                       >
-                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+                        <FontAwesomeIcon icon="pencil-alt" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.edit">Edit</Translate>
+                        </span>
                       </Button>
                       <Button
                         onClick={() =>
@@ -170,7 +181,10 @@ export const Document = () => {
                         size="sm"
                         data-cy="entityDeleteButton"
                       >
-                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
+                        <FontAwesomeIcon icon="trash" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.delete">Delete</Translate>
+                        </span>
                       </Button>
                     </div>
                   </td>
@@ -179,13 +193,17 @@ export const Document = () => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No Documents found</div>
+          !loading && (
+            <div className="alert alert-warning">
+              <Translate contentKey="dispatchApplicationApp.document.home.notFound">No Documents found</Translate>
+            </div>
+          )
         )}
       </div>
       {totalItems ? (
         <div className={documentList && documentList.length > 0 ? '' : 'd-none'}>
           <div className="justify-content-center d-flex">
-            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} />
+            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} i18nEnabled />
           </div>
           <div className="justify-content-center d-flex">
             <JhiPagination
