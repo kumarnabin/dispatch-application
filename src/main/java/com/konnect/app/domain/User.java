@@ -2,6 +2,7 @@ package com.konnect.app.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.konnect.app.config.Constants;
+import com.konnect.app.repository.EmployeeRepository;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -223,5 +224,18 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
             ", langKey='" + langKey + '\'' +
             ", activationKey='" + activationKey + '\'' +
             "}";
+    }
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
+    private Employee employee;
+
+    // Getters and setters for other fields
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }
