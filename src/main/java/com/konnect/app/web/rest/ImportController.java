@@ -13,14 +13,19 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/api")
@@ -28,10 +33,6 @@ public class ImportController {
 
     private final Logger log = LoggerFactory.getLogger(ExcelDataResource.class);
 
-    @Value("${jhipster.clientApp.name}")
-    private String applicationName;
-
-    private static final String ENTITY_NAME = "excelData";
     private final ExcelDataService excelDataService;
 
     private static ExcelDataRepository excelDataRepository;
@@ -41,14 +42,24 @@ public class ImportController {
         this.excelDataRepository = excelDataRepository;
     }
 
-    @PostMapping("/csv")
+    @PostMapping("/upload-file")
     public List<ExcelDataDTO> parseFile(MultipartFile file) {
         String filename = file.getOriginalFilename();
         if (filename != null && (filename.endsWith(".xlsx") || filename.endsWith(".xls"))) {
             List<ExcelDataDTO> excelData = parseExcel(file);
+            if (excelData.isEmpty()) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No data found in Excel file or data here is already existed");
+            }
+            // Additional criteria check if needed for excelData
+
             return excelData;
         } else if (filename != null && filename.endsWith(".csv")) {
             List<ExcelDataDTO> csvData = parseCSV(file);
+            if (csvData == null || csvData.isEmpty()) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No data found in CSV file or data here is already existed");
+            }
+            // Additional criteria check if needed for csvData
+
             return csvData;
         } else {
             throw new IllegalArgumentException("Unsupported file format");
@@ -57,9 +68,10 @@ public class ImportController {
 
     private List<ExcelDataDTO> parseExcel(MultipartFile file) {
         List<ExcelDataDTO> savedRecords = new ArrayList<>();
-        System.out.println("Parsing file: " + file);
+        int valueIndex = 24; // Adjust indices based on the positions in the list
+        int timestampIndex = 17; // Adjust indices based on the positions in the list
         try (InputStream is = file.getInputStream()) {
-            Workbook workbook = WorkbookFactory.create(is);
+            XSSFWorkbook workbook = new XSSFWorkbook(is);
             Sheet sheet = workbook.getSheetAt(0); // Assuming the data is in the first sheet
 
             for (Row row : sheet) {
@@ -68,8 +80,7 @@ public class ImportController {
                     record.add(getCellValueAsString(cell));
                 }
 
-                boolean conditionsMet = checkConditions(record);
-                System.out.println("Parsing condition: " + conditionsMet);
+                boolean conditionsMet = checkConditions(record, valueIndex, timestampIndex);
                 if (conditionsMet) {
                     try {
                         ExcelDataDTO excelDataDTO = getExcelDataDTO(record);
@@ -112,13 +123,15 @@ public class ImportController {
 
     public List<ExcelDataDTO> parseCSV(MultipartFile file) {
         List<ExcelDataDTO> savedRecords = new ArrayList<>();
+        int valueIndex = 24; // Adjust indices based on the positions in the list
+        int timestampIndex = 17; // Adjust indices based on the positions in the list
         try {
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
                 try (CSVReader csvReader = new CSVReader(reader)) {
                     String[] values;
                     while ((values = csvReader.readNext()) != null) {
                         List<String> record = Arrays.asList(values);
-                        boolean conditionsMet = checkConditions(record);
+                        boolean conditionsMet = checkConditions(record, valueIndex, timestampIndex);
                         if (conditionsMet) {
                             try {
                                 ExcelDataDTO excelDataDTO = getExcelDataDTO(record);
@@ -174,29 +187,26 @@ public class ImportController {
         return excelDataDTO;
     }
 
-    public static boolean checkConditions(List<String> record) {
-        int valueIndex = 24; // Adjust indices based on the positions in the list
-        int timestampIndex = 17; // Adjust indices based on the positions in the list
+    public static boolean checkConditions(List<String> record, int valueIndex, int timestampIndex) {
+        if (record.size() > Math.max(valueIndex, timestampIndex)) {
+            String value = record.get(valueIndex);
+            String timestampValue = record.get(timestampIndex);
+            boolean exists = excelDataRepository.existsByColumn18AndColumn25(timestampValue, value);
+            if (exists) {
+                return false;
+            }
 
-        String value = record.get(valueIndex);
-        String timestampValue = record.get(timestampIndex);
-        boolean exists = excelDataRepository.existsByColumn18AndColumn25(timestampValue, value);
-
-        if (exists) {
-            return false;
-        }
-        if (
-            !isEmptyOrNull(value) &&
-            !isEmptyOrNull(timestampValue) &&
-            (value.contains("SCTY") || timestampValue.matches(".*\\s[a-zA-Z]$") || timestampValue.matches("^\\d{5}\\.\\d+$"))
-        ) {
-            return true; // If found once, return true
+            return (
+                isEmptyOrNull(value) &&
+                isEmptyOrNull(timestampValue) &&
+                (value.contains("SCTYE") || timestampValue.matches(".*\\s[a-zA-Z]$") || timestampValue.matches("^\\d{5}\\.\\d+$"))
+            ); // If found once, return true
         }
 
         return false;
     }
 
     private static boolean isEmptyOrNull(String value) {
-        return value == null || value.isEmpty() || value.trim().equalsIgnoreCase("NULL");
+        return value != null && !value.isEmpty() && !value.trim().equalsIgnoreCase("NULL");
     }
 }
