@@ -1,7 +1,9 @@
 package com.konnect.app.web.rest;
 
 import com.konnect.app.repository.ExcelDataRepository;
+import com.konnect.app.service.DispatchService;
 import com.konnect.app.service.ExcelDataService;
+import com.konnect.app.service.dto.DispatchDTO;
 import com.konnect.app.service.dto.ExcelDataDTO;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
@@ -34,11 +36,13 @@ public class ImportController {
     private final Logger log = LoggerFactory.getLogger(ExcelDataResource.class);
 
     private final ExcelDataService excelDataService;
+    private final DispatchService dispatchService;
 
     private static ExcelDataRepository excelDataRepository;
 
-    public ImportController(ExcelDataService excelDataService, ExcelDataRepository excelDataRepository) {
+    public ImportController(ExcelDataService excelDataService, ExcelDataRepository excelDataRepository, DispatchService dispatchService) {
         this.excelDataService = excelDataService;
+        this.dispatchService = dispatchService;
         this.excelDataRepository = excelDataRepository;
     }
 
@@ -84,7 +88,14 @@ public class ImportController {
                 if (conditionsMet) {
                     try {
                         ExcelDataDTO excelDataDTO = getExcelDataDTO(record);
-                        savedRecords.add(excelDataService.save(excelDataDTO));
+                        DispatchDTO dispatchDTO = getDipatchDTO(record);
+
+                        // Save ExcelData entity
+                        ExcelDataDTO savedExcelData = excelDataService.save(excelDataDTO);
+                        savedRecords.add(savedExcelData);
+
+                        // Save Dispatch entity
+                        DispatchDTO savedDispatch = dispatchService.save(dispatchDTO);
                     } catch (Exception e) {
                         log.error("Error occurred while saving record: {}", e.getMessage());
                         // Handle save exceptions or skip problematic records
@@ -135,7 +146,14 @@ public class ImportController {
                         if (conditionsMet) {
                             try {
                                 ExcelDataDTO excelDataDTO = getExcelDataDTO(record);
-                                savedRecords.add(excelDataService.save(excelDataDTO));
+                                DispatchDTO dispatchDTO = getDipatchDTO(record);
+
+                                // Save ExcelData entity
+                                ExcelDataDTO savedExcelData = excelDataService.save(excelDataDTO);
+                                savedRecords.add(savedExcelData);
+
+                                // Save Dispatch entity
+                                DispatchDTO savedDispatch = dispatchService.save(dispatchDTO);
                             } catch (Exception e) {
                                 log.error("Error occurred while saving record: {}", e.getMessage());
                                 // Handle save exceptions or skip problematic records
@@ -153,6 +171,22 @@ public class ImportController {
         }
 
         return savedRecords;
+    }
+
+    private DispatchDTO getDipatchDTO(List<String> record) {
+        DispatchDTO dispatchDTO = new DispatchDTO();
+        dispatchDTO.setVoice(record.get(0));
+        dispatchDTO.setData(record.get(3));
+        dispatchDTO.setIptv(record.get(6));
+        dispatchDTO.setCustomerName(record.get(8));
+        dispatchDTO.setContactNo(record.get(14));
+        dispatchDTO.setOltPort(record.get(16));
+        dispatchDTO.setRegDate(record.get(17));
+        dispatchDTO.setFapPort(record.get(19));
+        dispatchDTO.setCpeSn(record.get(24));
+        dispatchDTO.setCpeRx(record.get(25));
+        dispatchDTO.setComplain(record.get(26));
+        return dispatchDTO;
     }
 
     private static ExcelDataDTO getExcelDataDTO(List<String> record) {
